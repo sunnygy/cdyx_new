@@ -1,7 +1,6 @@
 package com.cdyx.entity;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.math.BigDecimal;
 import java.util.Date;
 

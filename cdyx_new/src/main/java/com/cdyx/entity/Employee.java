@@ -14,7 +14,7 @@ public class Employee {
     @Column(name="user_id")
     private Integer  id;
 
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Position.class )
+    @ManyToOne(targetEntity=Position.class )
     @JoinColumn(name="pos_id")
     private Position  pos;
 

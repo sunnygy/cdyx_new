@@ -19,6 +19,7 @@ public interface BaseDao <T, ID extends Serializable>{
      * @param t 实体
      */
     public  void saveOrUpdate(T t);
+    
 
     public Serializable save(T t);
 
@@ -118,7 +119,8 @@ public interface BaseDao <T, ID extends Serializable>{
      * @param values
      * @return List
      */
-    public List findListBySql(final String sql, final RowMapper map, final Object... values);
+    @SuppressWarnings("rawtypes")
+	public List findListBySql(final String sql, final RowMapper map, final Object... values);
 
     /**
      * <refresh>

@@ -13,16 +13,16 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
-        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
-        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
-        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-contex.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
    ">
 
     <!-- 默认的注解映射的支持 -->
@@ -32,9 +32,9 @@
     <!--对于静态资源的访问-->
     <mvc:default-servlet-handler/>
 
-    <!-- 定时任务注解映射的支持 -->
+    <!-- 定时任务注解映射的支持 
     <task:annotation-driven/>
-    <context:component-scan base-package="com.cdyx.common"/>
+    <context:component-scan base-package="com.cdyx.common"/> -->
 
 
 
@@ -163,19 +163,19 @@
                 如果当前没有事务，就新建一个事务。
                 这是默认值。
              -->
-            <tx:method name="create*" propagation="REQUIRED" />
-            <tx:method name="save*" propagation="REQUIRED" />
-            <tx:method name="add*" propagation="REQUIRED" />
-            <tx:method name="update*" propagation="REQUIRED" />
-            <tx:method name="remove*" propagation="REQUIRED" />
-            <tx:method name="del*" propagation="REQUIRED" />
-            <tx:method name="import*" propagation="REQUIRED" />
+            <tx:method name="testcreate*" propagation="REQUIRED" />
+            <tx:method name="testsave*" propagation="REQUIRED" />
+            <tx:method name="testadd*" propagation="REQUIRED" />
+            <tx:method name="testupdate*" propagation="REQUIRED" />
+            <tx:method name="testremove*" propagation="REQUIRED" />
+            <tx:method name="testdel*" propagation="REQUIRED" />
+            <tx:method name="testimport*" propagation="REQUIRED" />
             <!--
                 指定当前方法以非事务方式执行操作，如果当前存在事务，就把当前事务挂起，等我以非事务的状态运行完，再继续原来的事务。
                 查询定义即可
                 read-only="true"  表示只读
-             -->
-            <tx:method name="*" propagation="NOT_SUPPORTED" read-only="true" />
+             
+            <tx:method name="*" propagation="REQUIRED" read-only="true" />-->
         </tx:attributes>
     </tx:advice>
 
@@ -185,11 +185,10 @@
 
     <!-- 定义切面，在 * tdxy.*.service.*ServiceImpl.*(..) 中执行有关的hibernate session的事务操作 -->
     <aop:config>
-        <aop:pointcut id="serviceOperation" expression="execution(* com.cdyx.service.impl.*.*(..))" />
+        <aop:pointcut id="serviceOperation" expression="execution(* com.cdyx.dao.impl.*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
     </aop:config>
-
-    <!--   IOC延迟加载-->
+	 
     <mvc:interceptors>
         <bean class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
             <property name="sessionFactory">
@@ -200,6 +199,7 @@
             </property>
         </bean>
     </mvc:interceptors>
+	
 
 
 </beans>

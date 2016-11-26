@@ -10,22 +10,25 @@ import org.springframework.stereotype.Service;
  * Created by guyu on 2016/10/4.
  */
 @Service
-public class EmpoyServiceImpl  implements EmployService {
+public class EmpoyServiceImpl implements EmployService {
 
     @Autowired
     private EmployDao employDao;
 
-    public void saveEmployee(Employee employee) {
+    @SuppressWarnings("unchecked")
+	public void saveEmployee(Employee employee) {
 
         employDao.saveOrUpdate(employee);
 
     }
 
-    public void deleteEmployee(Integer id) {
+    @SuppressWarnings("unchecked")
+	public void deleteEmployee(Integer id) {
         employDao.deleteById(id);
     }
 
-    public void updateEmployee(Employee employee){
+    @SuppressWarnings("unchecked")
+	public void updateEmployee(Employee employee){
 
         employDao.saveOrUpdate(employee);
 

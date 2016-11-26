@@ -15,10 +15,10 @@ public class EmployDaoTest  extends BaseTest{
 
     @Autowired
     private EmployDao employDao;
-
+    
     @Autowired
     private EmployService employService;
-
+    
     @Autowired
     private PositionDao positionDao;
 
@@ -35,8 +35,22 @@ public class EmployDaoTest  extends BaseTest{
         employee.setPassword("13214231321");
         employee.setSex(true);
         employee.setPos(pos);
-       employDao.saveOrUpdate(employee);
+        employDao.saveOrUpdate(employee);
 
 
+    }
+    
+    @Test
+    public void testupdate(){
+    	Employee employee=new Employee();
+    	
+    	employee.setId(5); 
+    	
+    	employee.setFirstName("dsauhdgashdghasd");
+    	
+    	employDao.update(employee);
+    	
+    	
+    	
     }
 }

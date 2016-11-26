@@ -1,7 +1,11 @@
 package com.cdyx.controller;
 
 import com.cdyx.common.util.UserPool;
+import com.cdyx.entity.Employee;
+import com.cdyx.service.EmployService;
 import com.cdyx.websocket.MyWebSocket;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,6 +18,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/test")
 public class TestController {
+	
+	@Autowired
+	private EmployService employService;
 
     @RequestMapping(value = "/callback")
     public Object receiveMessage() {
@@ -32,6 +39,24 @@ public class TestController {
                 e.printStackTrace();
             }
         }
+        System.out.println("访问成功............................");
+
+        return null;
+
+    }
+    
+    @RequestMapping(value = "/delete")
+    public Object delete() {
+    	
+        Employee employee=new Employee();
+    	
+    	employee.setId(3); 
+    	
+    	employee.setFirstName("dsauhdgashdghasd");
+    	
+    	employService.updateEmployee(employee);
+
+      
         System.out.println("访问成功............................");
 
         return null;

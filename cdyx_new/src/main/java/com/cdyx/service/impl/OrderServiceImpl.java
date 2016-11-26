@@ -29,7 +29,8 @@ public class OrderServiceImpl implements OrderService {
     private TableListDao tableListDao;
 
 
-    public Integer saveNewOrder(Order order, OrderDetail detail, Integer tableId) {
+    @SuppressWarnings("unchecked")
+	public Integer saveNewOrder(Order order, OrderDetail detail, Integer tableId) {
         TableList tableList=new TableList();
         tableList.setId(tableId);
         tableList.setStatus(true);

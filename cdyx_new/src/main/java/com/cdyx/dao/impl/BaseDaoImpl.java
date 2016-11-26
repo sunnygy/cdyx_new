@@ -16,10 +16,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
 import org.hibernate.*;
 import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 
 
@@ -43,8 +43,10 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
 
 
     protected Class<T> entityClass;
-
-    protected Class getEntityClass() {
+    
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	protected Class getEntityClass() {
         if (entityClass == null) {
             entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         }
@@ -77,9 +79,9 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      * @return 查询出来的实体
      * @see com.itv.launcher.util.IBaseDao#load(java.io.Serializable)
      */
-   
-    public T load(ID id) {
-        T load = (T) this.getSession().load(getEntityClass(), id);
+    @SuppressWarnings("unchecked")
+    public T load(ID id) {        
+		T load = (T) this.getSession().load(getEntityClass(), id);
         return load;
     }
 
@@ -90,7 +92,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      * @return 查询出来的实体
      * @see com.itv.launcher.util.IBaseDao#get(java.io.Serializable)
      */
-   
+    @SuppressWarnings("unchecked")
     public T get(ID id) {
         T load = (T) this.getSession().get(getEntityClass(), id);
         return load;
@@ -192,7 +194,8 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      * @see com.itv.launcher.util.IBaseDao#getByHQL(java.lang.String, java.lang.Object[])
      */
     
-    public T getByHQL(String hqlString, Object... values) {
+    @SuppressWarnings("unchecked")
+	public T getByHQL(String hqlString, Object... values) {
         Query query = this.getSession().createQuery(hqlString);
         if (values != null)
         {
@@ -211,7 +214,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      * @return 查询实体
      * @see com.itv.launcher.util.IBaseDao#getBySQL(java.lang.String, java.lang.Object[])
      */
-  
+    @SuppressWarnings("unchecked")
     public T getBySQL(String sqlString, Object... values) {
         Query query = this.getSession().createSQLQuery(sqlString);
         if (values != null)
@@ -231,7 +234,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      * @return 查询多个实体的List集合
      * @see com.itv.launcher.util.IBaseDao#getListByHQL(java.lang.String, java.lang.Object[])
      */
-    
+    @SuppressWarnings("unchecked")
     public List<T> getListByHQL(String hqlString, Object... values) {
         Query query = this.getSession().createQuery(hqlString);
         if (values != null)
@@ -251,7 +254,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      * @return 查询多个实体的List集合
      * @see com.itv.launcher.util.IBaseDao#getListBySQL(java.lang.String, java.lang.Object[])
      */
-
+    @SuppressWarnings("unchecked")
     public List<T> getListBySQL(String sqlString, Object... values ) {
         Query query = this.getSession().createSQLQuery(sqlString);
         if (values != null)
@@ -272,7 +275,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      * @return List
      * @see com.itv.launcher.util.IBaseDao#findListBySql(java.lang.String, com.itv.launcher.util.RowMapper, java.lang.Object[])
      */
-
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public List findListBySql(final String sql, final RowMapper map, final Object... values) {
         final List list = new ArrayList();
         // 执行JDBC的数据批量保存
@@ -369,7 +372,8 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      * @see com.itv.launcher.util.IBaseDao#findPageByFetchedHql(java.lang.String, java.lang.String, int, int, java.lang.Object[])
      */
     
-    public PageResults<T> findPageByFetchedHql(String hql, String countHql,
+    @SuppressWarnings("unchecked")
+	public PageResults<T> findPageByFetchedHql(String hql, String countHql,
                                                int pageNo, int pageSize, Object... values) {
         PageResults<T> retValue = new PageResults<T>();
         Query query = this.getSession().createQuery(hql);
@@ -414,6 +418,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      * @throws SQLException
      * @see [类、类#方法、类#成员]
      */
+    @SuppressWarnings("rawtypes")
     private void setParameter(PreparedStatement ps, int pos, Object data)
             throws SQLException
     {
@@ -422,7 +427,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
             ps.setNull(pos + 1, Types.VARCHAR);
             return;
         }
-        Class dataCls = data.getClass();
+		Class dataCls = data.getClass();
         if (String.class.equals(dataCls))
         {
             ps.setString(pos + 1, (String)data);

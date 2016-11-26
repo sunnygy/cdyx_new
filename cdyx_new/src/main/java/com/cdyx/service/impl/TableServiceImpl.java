@@ -22,7 +22,8 @@ public class TableServiceImpl implements TableService {
     @Autowired
     private OrderDao orderDao;
 
-    public List<TableList> getAllTablesStatus(){
+    @SuppressWarnings("unchecked")
+	public List<TableList> getAllTablesStatus(){
 
         String hql="FROM TableList";
 
@@ -32,7 +33,8 @@ public class TableServiceImpl implements TableService {
 
     }
 
-    public TableList getTableById(Integer id) {
+    @SuppressWarnings({ "unchecked", "unused" })
+	public TableList getTableById(Integer id) {
 
         TableList table=(TableList) tableListDao.get(id);
 
@@ -40,7 +42,8 @@ public class TableServiceImpl implements TableService {
     }
 
 
-    public Integer saveOrUpdateTable(TableList table) {
+    @SuppressWarnings("unchecked")
+	public Integer saveOrUpdateTable(TableList table) {
 
         //TODO update get Table Id
         Integer tableId=null;
@@ -50,7 +53,8 @@ public class TableServiceImpl implements TableService {
         return tableId;
     }
 
-    public void deleteTable(Integer id) {
+    @SuppressWarnings("unchecked")
+	public void deleteTable(Integer id) {
 
         tableListDao.deleteById(id);
 
