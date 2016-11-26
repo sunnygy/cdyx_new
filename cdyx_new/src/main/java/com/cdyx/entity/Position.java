@@ -9,17 +9,6 @@ import javax.persistence.*;
 @Table(name="position")
 public class Position {
 
-    /*
-    *`position_id` int(11) NOT NULL AUTO_INCREMENT,
-  `en_name_pos` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cn_name_pos` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `desc＿position` char(128) COLLATE utf8_unicode_ci DEFAULT NULL,
-    *
-    *
-    *
-    *
-    * */
-
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="position_id")
@@ -31,7 +20,7 @@ public class Position {
     @Column(name="cn_name_pos")
     private String cnName;
 
-    @Column(name="desc＿position")
+    @Column(name="desc_position")
     private String description;
 
     public Integer getId() {

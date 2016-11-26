@@ -1,282 +1,140 @@
-/*==============================================================*/
-/* DBMS name:      PostgreSQL 9.x                               */
-/* Created on:     2016/11/21 10:52:27                          */
-/*==============================================================*/
+/*
+Navicat MySQL Data Transfer
 
+Source Server         : cdyx_new_remote
+Source Server Version : 50553
+Source Host           : 45.63.50.137:3306
+Source Database       : cdyx_new
 
-/*drop index Relationship_7_FK;
+Target Server Type    : MYSQL
+Target Server Version : 50553
+File Encoding         : 65001
 
-drop index menu_PK;
+Date: 2016-11-26 22:00:22
+*/
 
-drop table menu;
+SET FOREIGN_KEY_CHECKS=0;
 
-drop index menu_parent_PK;
+-- ----------------------------
+-- Table structure for menu
+-- ----------------------------
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu` (
+  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_parent_id` int(11) DEFAULT NULL,
+  `en_name_menu` varchar(64) DEFAULT NULL,
+  `cn_name_menu` varchar(64) DEFAULT NULL,
+  `desc_menu` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`menu_id`),
+  KEY `FK_Relationship_7` (`menu_parent_id`),
+  CONSTRAINT `FK_Relationship_7` FOREIGN KEY (`menu_parent_id`) REFERENCES `menu_parent` (`menu_parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop table menu_parent;
+-- ----------------------------
+-- Table structure for menu_parent
+-- ----------------------------
+DROP TABLE IF EXISTS `menu_parent`;
+CREATE TABLE `menu_parent` (
+  `menu_parent_id` int(11) NOT NULL AUTO_INCREMENT,
+  `en_name_menu_parent` varchar(64) DEFAULT NULL,
+  `cn_name_menu_parent` varchar(64) DEFAULT NULL,
+  `desc_menu_parent` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`menu_parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop index Relationship_4_FK;
+-- ----------------------------
+-- Table structure for order
+-- ----------------------------
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `table__id` int(11) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `discount` smallint(6) DEFAULT NULL,
+  `total_price` float(6,2) DEFAULT NULL,
+  `desc_order` varchar(64) DEFAULT NULL,
+  `order_status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `FK_Relationship_4` (`table__id`),
+  CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table__id`) REFERENCES `table_list` (`table__id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop index order_PK;
+-- ----------------------------
+-- Table structure for order_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `order_detail`;
+CREATE TABLE `order_detail` (
+  `order_detail_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sub_menu_id` int(11) DEFAULT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `end_time_detail` datetime DEFAULT NULL,
+  `order_detail_price` float(6,2) DEFAULT NULL,
+  `order_detail_status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`order_detail_id`),
+  KEY `FK_Relationship_3` (`order_id`),
+  KEY `FK_Relationship_5` (`sub_menu_id`),
+  CONSTRAINT `FK_Relationship_3` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`),
+  CONSTRAINT `FK_Relationship_5` FOREIGN KEY (`sub_menu_id`) REFERENCES `sub_menu` (`sub_menu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop table "order";
+-- ----------------------------
+-- Table structure for position
+-- ----------------------------
+DROP TABLE IF EXISTS `position`;
+CREATE TABLE `position` (
+  `pos_id` int(11) NOT NULL AUTO_INCREMENT,
+  `en_name_pos` varchar(64) DEFAULT NULL,
+  `cn_name_pos` varchar(64) DEFAULT NULL,
+  `desc＿position` char(128) DEFAULT NULL,
+  PRIMARY KEY (`pos_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-drop index Relationship_5_FK;
+-- ----------------------------
+-- Table structure for sub_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `sub_menu`;
+CREATE TABLE `sub_menu` (
+  `sub_menu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) DEFAULT NULL,
+  `en_name_sub_menu` varchar(64) DEFAULT NULL,
+  `cn_name_sub_menu` varchar(64) DEFAULT NULL,
+  `desc_sub_menu` varchar(128) DEFAULT NULL,
+  `price_sub_menu` float(6,2) DEFAULT NULL,
+  `sub_menu_pic` varchar(256) DEFAULT NULL,
+  `sub_menu_status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`sub_menu_id`),
+  KEY `FK_Relationship_6` (`menu_id`),
+  CONSTRAINT `FK_Relationship_6` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop index Relationship_3_FK;
+-- ----------------------------
+-- Table structure for table_list
+-- ----------------------------
+DROP TABLE IF EXISTS `table_list`;
+CREATE TABLE `table_list` (
+  `table__id` int(11) NOT NULL AUTO_INCREMENT,
+  `table_code` char(4) NOT NULL,
+  `table_desc` varchar(16) DEFAULT NULL,
+  `table_status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`table__id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop index order_detail_PK;
-
-drop table order_detail;
-
-drop index position_PK;
-
-drop table "position";
-
-drop index Relationship_6_FK;
-
-drop index sub_menu_PK;
-
-drop table sub_menu;
-
-drop index table_list_PK;
-
-drop table table_list;
-
-drop index Relationship_1_FK;
-
-drop index user_PK;
-
-drop table "user";*/
-
-/*==============================================================*/
-/* Table: menu                                                  */
-/*==============================================================*/
-create table menu (
-   menu_id              INT4                 not null,
-   menu_parent_id       INT4                 null,
-   en_name_menu         VARCHAR(64)          null,
-   cn_name_menu         VARCHAR(64)          null,
-   desc_menu            VARCHAR(128)         null,
-   constraint PK_MENU primary key (menu_id)
-);
-
-/*==============================================================*/
-/* Index: menu_PK                                               */
-/*==============================================================*/
-create unique index menu_PK on menu (
-menu_id
-);
-
-/*==============================================================*/
-/* Index: Relationship_7_FK                                     */
-/*==============================================================*/
-create  index Relationship_7_FK on menu (
-menu_parent_id
-);
-
-/*==============================================================*/
-/* Table: menu_parent                                           */
-/*==============================================================*/
-create table menu_parent (
-   menu_parent_id       INT4                 not null,
-   en_name_menu_parent  VARCHAR(64)          null,
-   "cn_name_menu-parent" VARCHAR(64)          null,
-   desc_menu_parent     VARCHAR(128)         null,
-   constraint PK_MENU_PARENT primary key (menu_parent_id)
-);
-
-/*==============================================================*/
-/* Index: menu_parent_PK                                        */
-/*==============================================================*/
-create unique index menu_parent_PK on menu_parent (
-menu_parent_id
-);
-
-/*==============================================================*/
-/* Table: "order"                                               */
-/*==============================================================*/
-create table "order" (
-   order_id             INT4                 not null,
-   table__id            INT4                 null,
-   create_time          DATE                 null,
-   end_time             DATE                 null,
-   discount             INT2                 null,
-   total_price          MONEY                null,
-   desc_order           VARCHAR(64)          null,
-   order_status         BOOL                 null,
-   constraint PK_ORDER primary key (order_id)
-);
-
-/*==============================================================*/
-/* Index: order_PK                                              */
-/*==============================================================*/
-create unique index order_PK on "order" (
-order_id
-);
-
-/*==============================================================*/
-/* Index: Relationship_4_FK                                     */
-/*==============================================================*/
-create  index Relationship_4_FK on "order" (
-table__id
-);
-
-/*==============================================================*/
-/* Table: order_detail                                          */
-/*==============================================================*/
-create table order_detail (
-   order_detail_id      INT4                 not null,
-   sub_menu_id          INT4                 null,
-   order_id             INT4                 null,
-   end_time_detail      DATE                 null,
-   order_detail_price   MONEY                null,
-   order_detail_status  BOOL                 null,
-   constraint PK_ORDER_DETAIL primary key (order_detail_id)
-);
-
-/*==============================================================*/
-/* Index: order_detail_PK                                       */
-/*==============================================================*/
-create unique index order_detail_PK on order_detail (
-order_detail_id
-);
-
-/*==============================================================*/
-/* Index: Relationship_3_FK                                     */
-/*==============================================================*/
-create  index Relationship_3_FK on order_detail (
-order_id
-);
-
-/*==============================================================*/
-/* Index: Relationship_5_FK                                     */
-/*==============================================================*/
-create  index Relationship_5_FK on order_detail (
-sub_menu_id
-);
-
-/*==============================================================*/
-/* Table: "position"                                            */
-/*==============================================================*/
-create table "position" (
-   pos_id               INT4                 not null,
-   en_name_pos          VARCHAR(64)          null,
-   cn_name_pos          VARCHAR(64)          null,
-   desc＿position        CHAR(128)            null,
-   constraint PK_POSITION primary key (pos_id)
-);
-
-/*==============================================================*/
-/* Index: position_PK                                           */
-/*==============================================================*/
-create unique index position_PK on "position" (
-pos_id
-);
-
-/*==============================================================*/
-/* Table: sub_menu                                              */
-/*==============================================================*/
-create table sub_menu (
-   sub_menu_id          INT4                 not null,
-   menu_id              INT4                 null,
-   en_name_sub_menu     VARCHAR(64)          null,
-   cn_name_sub_menu     VARCHAR(64)          null,
-   desc_sub_menu        VARCHAR(128)         null,
-   price_sub_menu       MONEY                null,
-   sub_menu_pic         VARCHAR(256)         null,
-   sub_menu_status      BOOL                 null,
-   constraint PK_SUB_MENU primary key (sub_menu_id)
-);
-
-/*==============================================================*/
-/* Index: sub_menu_PK                                           */
-/*==============================================================*/
-create unique index sub_menu_PK on sub_menu (
-sub_menu_id
-);
-
-/*==============================================================*/
-/* Index: Relationship_6_FK                                     */
-/*==============================================================*/
-create  index Relationship_6_FK on sub_menu (
-menu_id
-);
-
-/*==============================================================*/
-/* Table: table_list                                            */
-/*==============================================================*/
-create table table_list (
-   table__id            INT4                 not null,
-   table_code           CHAR(4)              not null,
-   table_desc           VARCHAR(16)          null,
-   table_status         BOOL                 null,
-   constraint PK_TABLE_LIST primary key (table__id)
-);
-
-/*==============================================================*/
-/* Index: table_list_PK                                         */
-/*==============================================================*/
-create unique index table_list_PK on table_list (
-table__id
-);
-
-/*==============================================================*/
-/* Table: "user"                                                */
-/*==============================================================*/
-create table "user" (
-   user_id              INT4                 not null,
-   pos_id               INT4                 null,
-   username             VARCHAR(16)          null,
-   firstname            VARCHAR(16)          null,
-   lastname             VARCHAR(16)          null,
-   password             VARCHAR(128)         null,
-   age                  INT2                 null,
-   sex                  BOOL                 null,
-   status_user          BOOL                 null,
-   constraint PK_USER primary key (user_id)
-);
-
-/*==============================================================*/
-/* Index: user_PK                                               */
-/*==============================================================*/
-create unique index user_PK on "user" (
-user_id
-);
-
-/*==============================================================*/
-/* Index: Relationship_1_FK                                     */
-/*==============================================================*/
-create  index Relationship_1_FK on "user" (
-pos_id
-);
-
-alter table menu
-   add constraint FK_MENU_RELATIONS_MENU_PAR foreign key (menu_parent_id)
-      references menu_parent (menu_parent_id)
-      on delete restrict on update restrict;
-
-alter table "order"
-   add constraint FK_ORDER_RELATIONS_TABLE_LI foreign key (table__id)
-      references table_list (table__id)
-      on delete restrict on update restrict;
-
-alter table order_detail
-   add constraint FK_ORDER_DE_RELATIONS_ORDER foreign key (order_id)
-      references "order" (order_id)
-      on delete restrict on update restrict;
-
-alter table order_detail
-   add constraint FK_ORDER_DE_RELATIONS_SUB_MENU foreign key (sub_menu_id)
-      references sub_menu (sub_menu_id)
-      on delete restrict on update restrict;
-
-alter table sub_menu
-   add constraint FK_SUB_MENU_RELATIONS_MENU foreign key (menu_id)
-      references menu (menu_id)
-      on delete restrict on update restrict;
-
-alter table "user"
-   add constraint FK_USER_RELATIONS_POSITION foreign key (pos_id)
-      references "position" (pos_id)
-      on delete restrict on update restrict;
-
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pos_id` int(11) DEFAULT NULL,
+  `username` varchar(16) DEFAULT NULL,
+  `firstname` varchar(16) DEFAULT NULL,
+  `lastname` varchar(16) DEFAULT NULL,
+  `password` varchar(128) DEFAULT NULL,
+  `age` smallint(6) DEFAULT NULL,
+  `sex` bit(1) DEFAULT NULL,
+  `status_user` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  KEY `FK_Relationship_1` (`pos_id`),
+  CONSTRAINT `FK_Relationship_1` FOREIGN KEY (`pos_id`) REFERENCES `position` (`pos_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
