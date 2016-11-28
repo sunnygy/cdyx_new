@@ -27,7 +27,7 @@ public class TableServiceImpl implements TableService {
 
         String hql="FROM TableList";
 
-        List<TableList> tables=tableListDao.getListByHQL(hql,null);
+        List<TableList> tables=tableListDao.getListByHQL(hql);
 
         return tables;
 
@@ -68,4 +68,10 @@ public class TableServiceImpl implements TableService {
 
         return order;
     }
+
+	@SuppressWarnings("unchecked")
+	public Integer addTable(TableList table) {
+		
+		return (Integer)tableListDao.save(table);
+	}
 }

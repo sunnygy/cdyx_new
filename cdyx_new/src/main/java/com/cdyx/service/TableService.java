@@ -20,4 +20,6 @@ public interface TableService {
 
     Order getOrderByTableId(Integer tableId);
 
+	Integer addTable(TableList table);
+
 }
