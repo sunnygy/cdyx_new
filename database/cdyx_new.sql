@@ -48,7 +48,7 @@ CREATE TABLE `menu_parent` (
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
-  `table__id` int(11) DEFAULT NULL,
+  `table_id` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   `discount` smallint(6) DEFAULT NULL,
@@ -56,8 +56,8 @@ CREATE TABLE `order` (
   `desc_order` varchar(64) DEFAULT NULL,
   `order_status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
-  KEY `FK_Relationship_4` (`table__id`),
-  CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table__id`) REFERENCES `table_list` (`table__id`)
+  KEY `FK_Relationship_4` (`table_id`),
+  CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table_id`) REFERENCES `table_list` (`table_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -113,11 +113,11 @@ CREATE TABLE `sub_menu` (
 -- ----------------------------
 DROP TABLE IF EXISTS `table_list`;
 CREATE TABLE `table_list` (
-  `table__id` int(11) NOT NULL AUTO_INCREMENT,
+  `table_id` int(11) NOT NULL AUTO_INCREMENT,
   `table_code` char(4) NOT NULL,
   `table_desc` varchar(16) DEFAULT NULL,
   `table_status` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`table__id`)
+  PRIMARY KEY (`table_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

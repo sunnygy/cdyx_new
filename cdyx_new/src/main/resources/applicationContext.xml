@@ -114,7 +114,7 @@
         <property name="hibernateProperties">
             <value>
                 <!-- 设置数据库方言 -->
-                hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+                hibernate.dialect=org.hibernate.dialect.MySQLDialect
                 <!-- 设置自动创建|更新|验证数据库表结构
                 hibernate.hbm2ddl.auto=update-->
                 <!-- 是否在控制台显示sql -->
@@ -144,6 +144,7 @@
             <list>
                 <value>com.cdyx.entity.Employee</value>
                 <value>com.cdyx.entity.Position</value>
+                <value>com.cdyx.entity.TableList</value>
             </list>
         </property>
     </bean>
@@ -190,7 +191,7 @@
     </aop:config>
 
 	<mvc:interceptors>
-        <bean class="org.springframework.orm.hibernate4.support.OpenSessionInViewInterceptor">
+        <bean class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
             <property name="sessionFactory">
                 <ref bean="sessionFactory" />
             </property>

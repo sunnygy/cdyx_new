@@ -9,17 +9,9 @@ import javax.persistence.*;
 @Table(name="table_list")
 public class TableList {
 
-    /*
-    * `table_list_id` int(11) NOT NULL AUTO_INCREMENT,
-  `table_code` char(4) COLLATE utf8_unicode_ci NOT NULL,
-  `table_desc` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
-    *
-    *
-    * */
-
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="table_list_id")
+    @Column(name="table_id")
     private Integer id;
 
     @Column(name="table_code")

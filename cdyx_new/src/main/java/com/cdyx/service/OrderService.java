@@ -21,6 +21,7 @@ public interface OrderService {
 	Order getOrderByTableId(Integer tableId);
 
 	List<Order> getAllOrder();
-   
+
+	
 
 }
