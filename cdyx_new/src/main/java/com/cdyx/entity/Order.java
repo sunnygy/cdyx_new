@@ -8,7 +8,7 @@ import java.util.*;
  * Created by guyu on 2016/10/3.
  */
 @Entity
-@Table(name="order")
+@Table(name="`order`")
 public class Order {
 
     @Id
@@ -17,7 +17,7 @@ public class Order {
     private Integer id;
 
     @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER )
-    @JoinColumn(name = "table_list_id",unique = true)
+    @JoinColumn(name = "table_id",unique = true)
     private TableList tab;
 
     @Column(name="order_code")
@@ -41,9 +41,9 @@ public class Order {
     @Column(name="order_status")
     private boolean status=false;
 
-    @OneToMany(cascade = {CascadeType.REFRESH,CascadeType.REMOVE},fetch = FetchType.LAZY)
+   /* @OneToMany(cascade = {CascadeType.REFRESH,CascadeType.REMOVE},fetch = FetchType.LAZY)
     private Set<OrderDetail> details=new HashSet<OrderDetail>();
-
+*/
     public Integer getId() {
         return id;
     }
@@ -108,13 +108,13 @@ public class Order {
         this.description = description;
     }
 
-    public Set<OrderDetail> getDetails() {
+  /*  public Set<OrderDetail> getDetails() {
         return details;
     }
 
     public void setDetails(Set<OrderDetail> details) {
         this.details = details;
-    }
+    }*/
 
     public boolean isStatus() {
         return status;

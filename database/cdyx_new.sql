@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : cdyx_new_remote
+Source Server         : localhost
 Source Server Version : 50553
-Source Host           : 45.63.50.137:3306
+Source Host           : localhost:3306
 Source Database       : cdyx_new
 
 Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2016-11-26 22:00:22
+Date: 2016-11-28 23:30:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -55,10 +55,11 @@ CREATE TABLE `order` (
   `total_price` float(6,2) DEFAULT NULL,
   `desc_order` varchar(64) DEFAULT NULL,
   `order_status` tinyint(1) DEFAULT NULL,
+  `order_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   KEY `FK_Relationship_4` (`table_id`),
   CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table_id`) REFERENCES `table_list` (`table_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for order_detail
@@ -71,12 +72,13 @@ CREATE TABLE `order_detail` (
   `end_time_detail` datetime DEFAULT NULL,
   `order_detail_price` float(6,2) DEFAULT NULL,
   `order_detail_status` tinyint(1) DEFAULT NULL,
+  `copies_number` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`order_detail_id`),
   KEY `FK_Relationship_3` (`order_id`),
   KEY `FK_Relationship_5` (`sub_menu_id`),
   CONSTRAINT `FK_Relationship_3` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`),
   CONSTRAINT `FK_Relationship_5` FOREIGN KEY (`sub_menu_id`) REFERENCES `sub_menu` (`sub_menu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for position
@@ -114,11 +116,11 @@ CREATE TABLE `sub_menu` (
 DROP TABLE IF EXISTS `table_list`;
 CREATE TABLE `table_list` (
   `table_id` int(11) NOT NULL AUTO_INCREMENT,
-  `table_code` char(4) NOT NULL,
+  `table_code` varchar(16) NOT NULL,
   `table_desc` varchar(16) DEFAULT NULL,
   `table_status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`table_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user

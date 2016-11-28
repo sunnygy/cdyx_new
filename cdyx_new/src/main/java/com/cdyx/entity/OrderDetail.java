@@ -32,7 +32,7 @@ public class OrderDetail {
     private  Order order;
 
     @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER )
-    @JoinColumn(name = "menu_id",unique = true)
+    @JoinColumn(name = "sub_menu_id",unique = true)
     private Menu menu;
 
     @Column(name="end_time_detail")

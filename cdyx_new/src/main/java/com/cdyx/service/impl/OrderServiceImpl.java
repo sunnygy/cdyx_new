@@ -36,17 +36,18 @@ public class OrderServiceImpl implements OrderService {
         TableList tableList=new TableList();
         tableList.setId(tableId);
         tableList.setStatus(true);
-        tableListDao.update(tableId);
+        tableList.setCode("01");
+        tableListDao.update(tableList);
 
         order.setTab(tableList);
         order.setStatus(true);
-        order.setCode("");//TODO
+        order.setCode("aaaaa");//TODO
         order.setCreateTimer(new Date());
         Integer orderId=(Integer) orderDao.save(order);
         
         for (OrderDetail orderDetail : details) {
         	 orderDetail.setOrder(order);
-        	 detailDao.save(order);
+        	 detailDao.save(orderDetail);
 		}       
 
         //TODO send message to table and ckechin Today order and  ALL order
