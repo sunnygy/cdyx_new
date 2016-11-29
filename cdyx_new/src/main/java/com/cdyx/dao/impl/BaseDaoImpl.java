@@ -44,8 +44,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
 
     protected Class<T> entityClass;
     
-    
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+
 	protected Class getEntityClass() {
         if (entityClass == null) {
             entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];

@@ -63,12 +63,13 @@ public class OrderServiceImpl implements OrderService {
 			TableList tableList=new TableList();
 	        tableList.setId(tableId);
 	        tableList.setStatus(true);
-	        tableListDao.update(tableId);
+	        tableListDao.update(tableList);
 	        order.setTab(tableList);
 		}
-		
-	    orderDao.update(order);
-	    
+		if(order!=null){
+			orderDao.update(order);
+		}
+
 	    for (OrderDetail orderDetail : details) {
         	orderDetail.setOrder(order);
         	detailDao.update(orderDetail);
@@ -81,31 +82,40 @@ public class OrderServiceImpl implements OrderService {
 	public void deleteOrder(Integer orderId) {
 		
 		//set table status
-		
+
+		Order order=orderDao.get(9);
+
+
+		System.out.println(order.getTab().getId());
 		
 	}
 
 
 	public Order getOrderByTableId(Integer tableId) {		
 		
-		String sql="SELECT * FROM order a LEFT　JOIN table_list b ON a.table_id=b.table_id WHERE b.status=true AND a.order_status=true AND b.table_id=? ";
+		String hql="SELECT a.* FROM Order as a  LEFT JOIN TableList as b ON a.table_id=b.table_id " +
+				"WHERE b.table_status=true AND a.order_status=true AND b.table_id=? ";
 		
-		Order order=(Order) orderDao.getBySQL(sql, tableId);
+		Order order=orderDao.getByHQL(hql, tableId);
 		
 		return order;
 	}
 
 
-	
-	@SuppressWarnings("unchecked")
+
 	public List<Order> getAllOrder() {
 		
-		String sql="SELECT * FROM order WHERE order_status=true";
+		String sql="SELECT * FROM `order` WHERE order_status=true";
 		
 		List<Order>orders=orderDao.getListBySQL(sql);
+
+		System.out.println(orders.get(0).getTab().getId());
 		
 		return orders;
 	}
+
+
+
 
 
 

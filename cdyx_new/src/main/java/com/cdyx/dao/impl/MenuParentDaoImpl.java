@@ -1,6 +1,7 @@
 package com.cdyx.dao.impl;
 
 import com.cdyx.dao.MenuParentDao;
+import com.cdyx.entity.MenuParent;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,6 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("rawtypes")
 @Repository
-public class MenuParentDaoImpl extends BaseDaoImpl implements MenuParentDao{
+public class MenuParentDaoImpl extends BaseDaoImpl<MenuParent,Integer> implements MenuParentDao{
 
 }

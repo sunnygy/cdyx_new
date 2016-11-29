@@ -2,6 +2,7 @@ package com.cdyx.dao.impl;
 
 
 import com.cdyx.dao.EmployDao;
+import com.cdyx.entity.Employee;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("rawtypes")
 @Repository
-public class EmployeeDaoImpl extends BaseDaoImpl implements EmployDao{
+public class EmployeeDaoImpl extends BaseDaoImpl<Employee,Integer> implements EmployDao{
 
 }

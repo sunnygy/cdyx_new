@@ -2,6 +2,7 @@ package com.cdyx.dao.impl;
 
 
 import com.cdyx.dao.TableListDao;
+import com.cdyx.entity.TableList;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("rawtypes")
 @Repository
-public class TableListDaoImpl extends BaseDaoImpl implements TableListDao{
+public class TableListDaoImpl extends BaseDaoImpl<TableList,Integer> implements TableListDao{
 }

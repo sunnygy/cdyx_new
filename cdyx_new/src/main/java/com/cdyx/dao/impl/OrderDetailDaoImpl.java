@@ -3,6 +3,7 @@ package com.cdyx.dao.impl;
 
 
 import com.cdyx.dao.OrderDetailDao;
+import com.cdyx.entity.OrderDetail;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,5 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("rawtypes")
 @Repository
-public class OrderDetailDaoImpl extends BaseDaoImpl implements OrderDetailDao {
+public class OrderDetailDaoImpl extends BaseDaoImpl<OrderDetail,Integer> implements OrderDetailDao {
 }

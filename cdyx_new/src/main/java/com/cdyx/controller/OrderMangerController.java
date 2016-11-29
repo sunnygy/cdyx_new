@@ -47,11 +47,10 @@ public class OrderMangerController {
 	}
 	
 	@RequestMapping(value = "/deleteOrder.htm",method = RequestMethod.POST)
-	public Object updateOrder(@RequestBody Integer orderId){	
-		
-		     orderService.deleteOrder(orderId);			
-		
-	   return null;
+	public Object deleteOrder(@RequestBody Integer orderId){
+
+		orderService.deleteOrder(orderId);
+	    return null;
 		
 	}
 	

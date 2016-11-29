@@ -1,8 +1,8 @@
 package com.cdyx.dao;
 
+import com.cdyx.entity.Employee;
 /**
  * Created by guyu on 2016/10/3.
  */
-@SuppressWarnings("rawtypes")
-public interface EmployDao  extends  BaseDao{
+public interface EmployDao  extends  BaseDao<Employee,Integer>{
 }

@@ -1,0 +1,5 @@
+http://case.quamae.com/demo/canting/ordermenu.html 点餐界面
+http://case.quamae.com/demo/canting/todaymenu.html今日菜单
+http://case.quamae.com/demo/canting/menudetail.html菜单详情
+http://case.quamae.com/demo/canting/allmenu.html 所有菜单
+http://case.quamae.com/demo/canting/login.html注册

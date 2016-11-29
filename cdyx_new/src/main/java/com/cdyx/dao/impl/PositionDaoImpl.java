@@ -2,6 +2,7 @@ package com.cdyx.dao.impl;
 
 
 import com.cdyx.dao.PositionDao;
+import com.cdyx.entity.Position;
 import org.springframework.stereotype.Repository;
 
 
@@ -10,5 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("rawtypes")
 @Repository
-public class PositionDaoImpl extends BaseDaoImpl implements PositionDao {
+public class PositionDaoImpl extends BaseDaoImpl<Position,Integer> implements PositionDao {
 }

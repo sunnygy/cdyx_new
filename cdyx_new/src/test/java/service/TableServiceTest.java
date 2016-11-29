@@ -30,8 +30,8 @@ public class TableServiceTest extends BaseTest{
 	
 	@Test
 	public void getTableById(){
-		
-		
+
+		TableList table=tableService.getTableById(11);
 		
 		
 	}

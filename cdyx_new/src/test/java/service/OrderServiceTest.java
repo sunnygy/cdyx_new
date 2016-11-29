@@ -16,13 +16,8 @@ import com.cdyx.service.OrderService;
 import dao.BaseTest;
 public class OrderServiceTest extends BaseTest{
 	
-	
-	
 	@Autowired
 	private OrderService orderService;
-	
-	
-	
 	
 	@Test
 	public void  testsaveNewOrder(){		
@@ -33,53 +28,52 @@ public class OrderServiceTest extends BaseTest{
 		order.setDescription("fhsdjhfjsdf");
 		order.setDiscount((short)110);
 		order.setStatus(true);
-		
 		List<OrderDetail>list=new ArrayList<OrderDetail>();
-		
 		for(int i=0;i<10;++i){			
 			OrderDetail detail=new OrderDetail();			
 			detail.setNumbers((short)5);			
 			list.add(detail);
-			
 		}
-	
 		
-		
-		Integer orderId=orderService.saveNewOrder(order,list , 1);
-		
-		
-		
-		
+		Integer orderId=orderService.saveNewOrder(order,list , 11);
 		
 	}
 	
 	@Test
 	public void testupdateOrder(){
-		
-		
-		
-		
+
+		Order order=new Order();
+		order.setId(5);
+		order.setStatus(false);
+
+		OrderDetail detail=new OrderDetail();
+
+
+
+
 	}
 	
 	@Test
 	public void deleteOrder(){
-		
-		
+
+		orderService.deleteOrder(5);
+
 		
 	}
 	
 	@Test
 	public void getOrderByTableId(){
-		
-		
-		
-		
+
+		Order order=orderService.getOrderByTableId(11);
+
+
+
 	}
 	
 	@Test
 	public void getAllOrder(){
-		
-		
+
+		List<Order>order=orderService.getAllOrder();
 		
 		
 	}

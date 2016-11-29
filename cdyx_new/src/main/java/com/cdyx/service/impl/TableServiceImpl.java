@@ -22,7 +22,7 @@ public class TableServiceImpl implements TableService {
     @Autowired
     private OrderDao orderDao;
 
-    @SuppressWarnings("unchecked")
+
 	public List<TableList> getAllTablesStatus(){
 
         String hql="FROM TableList";
@@ -33,16 +33,16 @@ public class TableServiceImpl implements TableService {
 
     }
 
-    @SuppressWarnings({ "unchecked", "unused" })
+
 	public TableList getTableById(Integer id) {
 
-        TableList table=(TableList) tableListDao.get(id);
+        TableList table= tableListDao.get(id);
 
-        return null;
+        return table;
     }
 
 
-    @SuppressWarnings("unchecked")
+
 	public Integer saveOrUpdateTable(TableList table) {
 
         //TODO update get Table Id
@@ -53,7 +53,7 @@ public class TableServiceImpl implements TableService {
         return tableId;
     }
 
-    @SuppressWarnings("unchecked")
+
 	public void deleteTable(Integer id) {
 
         tableListDao.deleteById(id);
@@ -64,12 +64,11 @@ public class TableServiceImpl implements TableService {
 
         String hql="SELECT * FROM TableList as a LEFT JOIN Order as b  ON a.id=b.table_list_id WHERE a.id=? AND b.status=? ";
 
-        Order order=(Order) orderDao.getByHQL(hql,tableId,false);
+        Order order= orderDao.getByHQL(hql,tableId,false);
 
         return order;
     }
 
-	@SuppressWarnings("unchecked")
 	public Integer addTable(TableList table) {
 		
 		return (Integer)tableListDao.save(table);
