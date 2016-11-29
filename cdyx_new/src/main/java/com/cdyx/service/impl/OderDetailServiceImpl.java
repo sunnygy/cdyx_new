@@ -17,7 +17,7 @@ public class OderDetailServiceImpl implements OrderDetailService{
 	private OrderDetailDao detailDao;
 
 
-	@SuppressWarnings("unchecked")
+	
 	public List<OrderDetail> getAllDetailsByOrderId(Integer orderId) {
 		
 		

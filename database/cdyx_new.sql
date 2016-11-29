@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2016-11-28 23:30:51
+Date: 2016-11-29 23:25:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,25 +43,6 @@ CREATE TABLE `menu_parent` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for order
--- ----------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order` (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT,
-  `table_id` int(11) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `end_time` datetime DEFAULT NULL,
-  `discount` smallint(6) DEFAULT NULL,
-  `total_price` float(6,2) DEFAULT NULL,
-  `desc_order` varchar(64) DEFAULT NULL,
-  `order_status` tinyint(1) DEFAULT NULL,
-  `order_code` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`order_id`),
-  KEY `FK_Relationship_4` (`table_id`),
-  CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table_id`) REFERENCES `table_list` (`table_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
--- ----------------------------
 -- Table structure for order_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `order_detail`;
@@ -76,9 +57,28 @@ CREATE TABLE `order_detail` (
   PRIMARY KEY (`order_detail_id`),
   KEY `FK_Relationship_3` (`order_id`),
   KEY `FK_Relationship_5` (`sub_menu_id`),
-  CONSTRAINT `FK_Relationship_3` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`),
+  CONSTRAINT `FK_Relationship_3` FOREIGN KEY (`order_id`) REFERENCES `order_info` (`order_id`),
   CONSTRAINT `FK_Relationship_5` FOREIGN KEY (`sub_menu_id`) REFERENCES `sub_menu` (`sub_menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for order_info
+-- ----------------------------
+DROP TABLE IF EXISTS `order_info`;
+CREATE TABLE `order_info` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `table_id` int(11) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `discount` smallint(6) DEFAULT NULL,
+  `total_price` float(6,2) DEFAULT NULL,
+  `desc_order` varchar(64) DEFAULT NULL,
+  `order_status` tinyint(1) DEFAULT NULL,
+  `order_code` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `FK_Relationship_4` (`table_id`),
+  CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table_id`) REFERENCES `table_list` (`table_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for position
@@ -90,7 +90,7 @@ CREATE TABLE `position` (
   `cn_name_pos` varchar(64) DEFAULT NULL,
   `desc＿position` char(128) DEFAULT NULL,
   PRIMARY KEY (`pos_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for sub_menu
@@ -120,7 +120,7 @@ CREATE TABLE `table_list` (
   `table_desc` varchar(16) DEFAULT NULL,
   `table_status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`table_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user
@@ -139,4 +139,4 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`),
   KEY `FK_Relationship_1` (`pos_id`),
   CONSTRAINT `FK_Relationship_1` FOREIGN KEY (`pos_id`) REFERENCES `position` (`pos_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

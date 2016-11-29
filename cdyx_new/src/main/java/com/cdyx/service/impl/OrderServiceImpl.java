@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     private TableListDao tableListDao;
 
 
-    @SuppressWarnings("unchecked")
+    
 	public Integer saveNewOrder(Order order, List<OrderDetail> details, Integer tableId) {
         TableList tableList=new TableList();
         tableList.setId(tableId);
@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-	@SuppressWarnings("unchecked")
+	
 	public void updateOrder(Order order, List<OrderDetail> details, Integer tableId) {
 		
 		if(tableId!=null){

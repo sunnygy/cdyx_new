@@ -15,19 +15,19 @@ public class EmpoyServiceImpl implements EmployService {
     @Autowired
     private EmployDao employDao;
 
-    @SuppressWarnings("unchecked")
+ 
 	public void saveEmployee(Employee employee) {
 
         employDao.saveOrUpdate(employee);
 
     }
 
-    @SuppressWarnings("unchecked")
+   
 	public void deleteEmployee(Integer id) {
         employDao.deleteById(id);
     }
 
-    @SuppressWarnings("unchecked")
+    
 	public void updateEmployee(Employee employee){
 
         employDao.saveOrUpdate(employee);
