@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
         tableList.setCode("01");
         tableListDao.update(tableList);
 
-        order.setTab(tableList);
+        order.setTabId(tableId);
         order.setStatus(true);
         order.setCode("aaaaa");//TODO
         order.setCreateTimer(new Date());
@@ -64,9 +64,10 @@ public class OrderServiceImpl implements OrderService {
 	        tableList.setId(tableId);
 	        tableList.setStatus(true);
 	        tableListDao.update(tableList);
-	        order.setTab(tableList);
+	        
 		}
 		if(order!=null){
+			order.setTabId(tableId);
 			orderDao.update(order);
 		}
 
@@ -82,21 +83,27 @@ public class OrderServiceImpl implements OrderService {
 	public void deleteOrder(Integer orderId) {
 		
 		//set table status
+		
+		String  hql="FROM Order";
 
-		Order order=orderDao.get(9);
+	    List<Order>orders=orderDao.getListByHQL(hql);
+	    
+	    System.out.println(orders.size());
 
-
-		System.out.println(order.getTab().getId());
+	
 		
 	}
 
 
 	public Order getOrderByTableId(Integer tableId) {		
 		
-		String hql="SELECT a.* FROM Order as a  LEFT JOIN TableList as b ON a.table_id=b.table_id " +
+		String sql="SELECT a.* FROM order_info as a  LEFT JOIN table_list as b ON a.table_id=b.table_id " +
 				"WHERE b.table_status=true AND a.order_status=true AND b.table_id=? ";
 		
-		Order order=orderDao.getByHQL(hql, tableId);
+		Order order=orderDao.getBySQL(sql, tableId);
+		
+		System.out.println(order.getTabId());
+		
 		
 		return order;
 	}
@@ -105,11 +112,15 @@ public class OrderServiceImpl implements OrderService {
 
 	public List<Order> getAllOrder() {
 		
-		String sql="SELECT * FROM `order` WHERE order_status=true";
+		/*String hql="FROM Order WHERE order_status=true";
+		
+		List<Order>orders=orderDao.getListByHQL(hql);*/
+		
+		String sql="SELECT * FROM order_info WHERE order_status=true";
 		
 		List<Order>orders=orderDao.getListBySQL(sql);
 
-		System.out.println(orders.get(0).getTab().getId());
+		System.out.println(orders.get(0).getTabId());
 		
 		return orders;
 	}

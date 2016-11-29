@@ -215,7 +215,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      */
     @SuppressWarnings("unchecked")
     public T getBySQL(String sqlString, Object... values) {
-        Query query = this.getSession().createSQLQuery(sqlString);
+        SQLQuery query = this.getSession().createSQLQuery(sqlString).addEntity(getEntityClass());
         if (values != null)
         {
             for (int i = 0; i < values.length; i++)
@@ -255,7 +255,8 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      */
     @SuppressWarnings("unchecked")
     public List<T> getListBySQL(String sqlString, Object... values ) {
-        Query query = this.getSession().createSQLQuery(sqlString);
+        SQLQuery query = this.getSession().createSQLQuery(sqlString).addEntity(getEntityClass());
+        
         if (values != null)
         {
             for (int i = 0; i < values.length; i++)

@@ -1,6 +1,8 @@
 package com.cdyx.entity;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -8,17 +10,21 @@ import java.util.*;
  * Created by guyu on 2016/10/3.
  */
 @Entity
-@Table(name="`order`")
-public class Order {
+@Table(name="order_info")
+public class Order implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="order_id")
     private Integer id;
-
-    @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER )
-    @JoinColumn(name = "table_id",unique = true)
-    private TableList tab;
+    
+    @Column(name="table_id")
+    private Integer tabId;
 
     @Column(name="order_code")
     private String code;
@@ -52,15 +58,17 @@ public class Order {
         this.id = id;
     }
 
-    public TableList getTab() {
-        return tab;
-    }
+      
 
-    public void setTab(TableList tab) {
-        this.tab = tab;
-    }
+	public Integer getTabId() {
+		return tabId;
+	}
 
-    public String getCode() {
+	public void setTabId(Integer tabId) {
+		this.tabId = tabId;
+	}
+
+	public String getCode() {
         return code;
     }
 
