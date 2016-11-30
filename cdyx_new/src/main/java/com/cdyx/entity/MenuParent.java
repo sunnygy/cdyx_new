@@ -1,6 +1,18 @@
 package com.cdyx.entity;
 
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Created by guyu on 2016/10/3.
@@ -8,16 +20,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="menu_parent")
 public class MenuParent {
-    /*
-    *
-    * `menu_parent_id` int(11) NOT NULL AUTO_INCREMENT,
-  `en_name_menu_parent` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cn_name_menu_parent` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `desc_menu_parent` varchar(64)
-    *
-    *
-    *
-    * */
+   
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -31,7 +34,10 @@ public class MenuParent {
     private String cnName;
 
     @Column(name="desc_menu_parent")
-    private String description;
+    private String description;    
+    
+    @OneToMany(targetEntity =MenuType.class,cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)   
+    private List<MenuType> types=new ArrayList<MenuType>();
 
 
     public Integer getId() {
@@ -65,4 +71,13 @@ public class MenuParent {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public List<MenuType> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<MenuType> types) {
+		this.types = types;
+	}
+    
 }

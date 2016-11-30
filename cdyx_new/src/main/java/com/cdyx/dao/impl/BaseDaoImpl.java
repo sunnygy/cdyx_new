@@ -235,7 +235,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
      * @see com.itv.launcher.util.IBaseDao#getListByHQL(java.lang.String, java.lang.Object[])
      */
     @SuppressWarnings("unchecked")
-    public List<T> getListByHQL(String hqlString, Object... values) {
+    public List<T> getListByHQL(String hqlString, Object... values) {    
         Query query = this.getSession().createQuery(hqlString);
         if (values != null)
         {

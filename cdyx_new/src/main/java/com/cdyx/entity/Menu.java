@@ -14,13 +14,9 @@ public class Menu {
     @Column(name="menu_id")
     private Integer id;
 
-    @ManyToOne( cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY,targetEntity= MenuType.class )
-    //@JoinColumn(name="menu_type_id")
-    private MenuType type;
-
-    @ManyToOne( cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY,targetEntity=MenuParent.class )
-    //@JoinColumn(name="menu_parent_id")
-    private MenuParent parent;
+    @ManyToOne( cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY,targetEntity= MenuType.class )  
+    @JoinColumn(name="menu_type_id")
+    private MenuType type;   
 
     @Column(name="en_name_menu")
     private String enName;
@@ -31,10 +27,12 @@ public class Menu {
     @Column(name="desc_menu")
     private String description;
 
-    @Column(name="menu_price")
+    @Column(name="price_menu")
     private BigDecimal price;
 
-    @Column(name="path")
+    @Column(name="path_menu_pic")
+    
+    
     private String picPath;
 
     public Integer getId() {
@@ -53,13 +51,6 @@ public class Menu {
         this.type = type;
     }
 
-    public MenuParent getParent() {
-        return parent;
-    }
-
-    public void setParent(MenuParent parent) {
-        this.parent = parent;
-    }
 
     public String getEnName() {
         return enName;

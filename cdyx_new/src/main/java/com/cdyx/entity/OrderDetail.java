@@ -12,26 +12,13 @@ import java.util.Date;
 public class OrderDetail {
 
 
-    /*
-    *order_detail_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) DEFAULT NULL,
-  `menu_id` int(11) DEFAULT NULL,
-  `end_time_detail` datetime DEFAULT NULL,
-  `copies_number` smallint(6) NOT NULL,
-  `order_detail_price` float(6,2) DEFAULT NULL,
-    *
-    *
-    * */
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="order_detail_id")
-    private Integer id;
-
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Order.class )
-    private  Order order;
+    private Integer id;   
 
     @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER )
-    @JoinColumn(name = "sub_menu_id",unique = true)
+    @JoinColumn(name = "menu_id",unique = true)
     private Menu menu;
 
     @Column(name="end_time_detail")
@@ -42,6 +29,10 @@ public class OrderDetail {
 
     @Column(name="order_detail_price")
     private BigDecimal detailPrice;
+    
+    @ManyToOne( cascade = CascadeType.ALL, targetEntity=Order.class)
+    @JoinColumn(name = "order_id",unique = true)
+    private  Order order;
 
     public Integer getId() {
         return id;

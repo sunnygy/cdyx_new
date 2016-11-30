@@ -1,16 +1,40 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : localhost
+Source Server Version : 50553
+Source Host           : localhost:3306
+Source Database       : cdyx_new
+
+Target Server Type    : MYSQL
+Target Server Version : 50553
+File Encoding         : 65001
+
+Date: 2016-11-30 22:36:09
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for menu
+-- ----------------------------
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `menu_id` int(11) NOT NULL AUTO_INCREMENT,
-  `menu_parent_id` int(11) DEFAULT NULL,
+  `menu_type_id` int(11) DEFAULT NULL,
   `en_name_menu` varchar(64) DEFAULT NULL,
   `cn_name_menu` varchar(64) DEFAULT NULL,
   `desc_menu` varchar(128) DEFAULT NULL,
+  `price_menu` decimal(5,0) DEFAULT NULL,
+  `path_menu_pic` varchar(255) NOT NULL,
   PRIMARY KEY (`menu_id`),
-  KEY `FK_Relationship_7` (`menu_parent_id`),
-  CONSTRAINT `FK_Relationship_7` FOREIGN KEY (`menu_parent_id`) REFERENCES `menu_parent` (`menu_parent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `FK_Relationship_7` (`menu_type_id`),
+  CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`menu_type_id`) REFERENCES `menu_type` (`menu_type_id`) ON DELETE SET NULL ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-
+-- ----------------------------
+-- Table structure for menu_parent
+-- ----------------------------
 DROP TABLE IF EXISTS `menu_parent`;
 CREATE TABLE `menu_parent` (
   `menu_parent_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -18,12 +42,30 @@ CREATE TABLE `menu_parent` (
   `cn_name_menu_parent` varchar(64) DEFAULT NULL,
   `desc_menu_parent` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`menu_parent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for menu_type
+-- ----------------------------
+DROP TABLE IF EXISTS `menu_type`;
+CREATE TABLE `menu_type` (
+  `menu_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_parent_id` int(11) DEFAULT NULL,
+  `en_name_menu_type` varchar(64) DEFAULT NULL,
+  `cn_name_nemu_type` varchar(64) DEFAULT NULL,
+  `desc_menu_type` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`menu_type_id`),
+  KEY `menu_parent_id` (`menu_parent_id`),
+  CONSTRAINT `menu_type_ibfk_1` FOREIGN KEY (`menu_parent_id`) REFERENCES `menu_parent` (`menu_parent_id`) ON DELETE SET NULL ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for order_detail
+-- ----------------------------
 DROP TABLE IF EXISTS `order_detail`;
 CREATE TABLE `order_detail` (
   `order_detail_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sub_menu_id` int(11) DEFAULT NULL,
+  `menu_id` int(11) DEFAULT NULL,
   `order_id` int(11) DEFAULT NULL,
   `end_time_detail` datetime DEFAULT NULL,
   `order_detail_price` float(6,2) DEFAULT NULL,
@@ -31,11 +73,14 @@ CREATE TABLE `order_detail` (
   `copies_number` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`order_detail_id`),
   KEY `FK_Relationship_3` (`order_id`),
-  KEY `FK_Relationship_5` (`sub_menu_id`),
-  CONSTRAINT `FK_Relationship_3` FOREIGN KEY (`order_id`) REFERENCES `order_info` (`order_id`),
-  CONSTRAINT `FK_Relationship_5` FOREIGN KEY (`sub_menu_id`) REFERENCES `sub_menu` (`sub_menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+  KEY `FK_Relationship_5` (`menu_id`),
+  CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  CONSTRAINT `FK_Relationship_3` FOREIGN KEY (`order_id`) REFERENCES `order_info` (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for order_info
+-- ----------------------------
 DROP TABLE IF EXISTS `order_info`;
 CREATE TABLE `order_info` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -50,8 +95,11 @@ CREATE TABLE `order_info` (
   PRIMARY KEY (`order_id`),
   KEY `FK_Relationship_4` (`table_id`),
   CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table_id`) REFERENCES `table_list` (`table_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for position
+-- ----------------------------
 DROP TABLE IF EXISTS `position`;
 CREATE TABLE `position` (
   `pos_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -61,21 +109,9 @@ CREATE TABLE `position` (
   PRIMARY KEY (`pos_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `sub_menu`;
-CREATE TABLE `sub_menu` (
-  `sub_menu_id` int(11) NOT NULL AUTO_INCREMENT,
-  `menu_id` int(11) DEFAULT NULL,
-  `en_name_sub_menu` varchar(64) DEFAULT NULL,
-  `cn_name_sub_menu` varchar(64) DEFAULT NULL,
-  `desc_sub_menu` varchar(128) DEFAULT NULL,
-  `price_sub_menu` float(6,2) DEFAULT NULL,
-  `sub_menu_pic` varchar(256) DEFAULT NULL,
-  `sub_menu_status` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`sub_menu_id`),
-  KEY `FK_Relationship_6` (`menu_id`),
-  CONSTRAINT `FK_Relationship_6` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+-- ----------------------------
+-- Table structure for table_list
+-- ----------------------------
 DROP TABLE IF EXISTS `table_list`;
 CREATE TABLE `table_list` (
   `table_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -85,6 +121,9 @@ CREATE TABLE `table_list` (
   PRIMARY KEY (`table_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,

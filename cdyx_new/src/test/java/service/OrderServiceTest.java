@@ -35,7 +35,7 @@ public class OrderServiceTest extends BaseTest{
 			list.add(detail);
 		}
 		
-		Integer orderId=orderService.saveNewOrder(order,list , 31);
+		Integer orderId=orderService.saveNewOrder(order,list , 10);
 		
 	}
 	
@@ -65,6 +65,10 @@ public class OrderServiceTest extends BaseTest{
 	public void getOrderByTableId(){
 
 		Order order=orderService.getOrderByTableId(11);
+		
+		List<OrderDetail>details=order.getDetails();
+		
+		System.out.println(details.size());
 
 
 

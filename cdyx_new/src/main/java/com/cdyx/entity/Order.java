@@ -22,10 +22,9 @@ public class Order implements Serializable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="order_id")
     private Integer id;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "table_id", unique = true)
-    private TableList table;
+	
+	@Column(name="table_id")
+    private Integer tabId;
 
     @Column(name="order_code")
     private String code;
@@ -48,9 +47,10 @@ public class Order implements Serializable {
     @Column(name="order_status")
     private boolean status=false;
 
-   /* @OneToMany(cascade = {CascadeType.REFRESH,CascadeType.REMOVE},fetch = FetchType.LAZY)
-    private Set<OrderDetail> details=new HashSet<OrderDetail>();
-*/
+    @OneToMany(targetEntity =OrderDetail.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name="order_id")
+    private List<OrderDetail> details=new ArrayList<OrderDetail>();
+
     public Integer getId() {
         return id;
     }
@@ -59,15 +59,17 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public TableList getTable() {
-        return table;
-    }
+    
 
-    public void setTable(TableList table) {
-        this.table = table;
-    }
+    public Integer getTabId() {
+		return tabId;
+	}
 
-    public String getCode() {
+	public void setTabId(Integer tabId) {
+		this.tabId = tabId;
+	}
+
+	public String getCode() {
         return code;
     }
 
@@ -115,15 +117,21 @@ public class Order implements Serializable {
         this.description = description;
     }
 
-  /*  public Set<OrderDetail> getDetails() {
-        return details;
-    }
+    
 
-    public void setDetails(Set<OrderDetail> details) {
-        this.details = details;
-    }*/
+    public List<OrderDetail> getDetails() {
+		return details;
+	}
 
-    public boolean isStatus() {
+	public void setDetails(List<OrderDetail> details) {
+		this.details = details;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public boolean isStatus() {
         return status;
     }
 

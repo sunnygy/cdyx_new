@@ -23,6 +23,10 @@ public class TableList {
     @Column(name="table_status")
     private boolean status=false;//false:empty true:full
     
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "table_id", unique = true)
+    private Order order;
+    
 
 
 
@@ -57,6 +61,16 @@ public class TableList {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+    
+    
 
 
     
