@@ -1,23 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : localhost
-Source Server Version : 50553
-Source Host           : localhost:3306
-Source Database       : cdyx_new
-
-Target Server Type    : MYSQL
-Target Server Version : 50553
-File Encoding         : 65001
-
-Date: 2016-11-29 23:25:00
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for menu
--- ----------------------------
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `menu_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -30,9 +10,7 @@ CREATE TABLE `menu` (
   CONSTRAINT `FK_Relationship_7` FOREIGN KEY (`menu_parent_id`) REFERENCES `menu_parent` (`menu_parent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for menu_parent
--- ----------------------------
+
 DROP TABLE IF EXISTS `menu_parent`;
 CREATE TABLE `menu_parent` (
   `menu_parent_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -42,9 +20,6 @@ CREATE TABLE `menu_parent` (
   PRIMARY KEY (`menu_parent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for order_detail
--- ----------------------------
 DROP TABLE IF EXISTS `order_detail`;
 CREATE TABLE `order_detail` (
   `order_detail_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -61,9 +36,6 @@ CREATE TABLE `order_detail` (
   CONSTRAINT `FK_Relationship_5` FOREIGN KEY (`sub_menu_id`) REFERENCES `sub_menu` (`sub_menu_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for order_info
--- ----------------------------
 DROP TABLE IF EXISTS `order_info`;
 CREATE TABLE `order_info` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -80,9 +52,6 @@ CREATE TABLE `order_info` (
   CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table_id`) REFERENCES `table_list` (`table_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for position
--- ----------------------------
 DROP TABLE IF EXISTS `position`;
 CREATE TABLE `position` (
   `pos_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -92,9 +61,6 @@ CREATE TABLE `position` (
   PRIMARY KEY (`pos_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for sub_menu
--- ----------------------------
 DROP TABLE IF EXISTS `sub_menu`;
 CREATE TABLE `sub_menu` (
   `sub_menu_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -110,9 +76,6 @@ CREATE TABLE `sub_menu` (
   CONSTRAINT `FK_Relationship_6` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for table_list
--- ----------------------------
 DROP TABLE IF EXISTS `table_list`;
 CREATE TABLE `table_list` (
   `table_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -122,9 +85,6 @@ CREATE TABLE `table_list` (
   PRIMARY KEY (`table_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,

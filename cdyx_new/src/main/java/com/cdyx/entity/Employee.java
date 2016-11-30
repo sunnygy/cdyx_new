@@ -15,7 +15,7 @@ public class Employee {
     private Integer  id;
 
     @ManyToOne(targetEntity=Position.class )
-    @JoinColumn(name="pos_id")
+    //@JoinColumn(name="pos_id")
     private Position  pos;
 
     @Column(name="username")

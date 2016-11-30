@@ -22,9 +22,10 @@ public class Order implements Serializable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="order_id")
     private Integer id;
-    
-    @Column(name="table_id")
-    private Integer tabId;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "table_id", unique = true)
+    private TableList table;
 
     @Column(name="order_code")
     private String code;
@@ -58,17 +59,15 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-      
+    public TableList getTable() {
+        return table;
+    }
 
-	public Integer getTabId() {
-		return tabId;
-	}
+    public void setTable(TableList table) {
+        this.table = table;
+    }
 
-	public void setTabId(Integer tabId) {
-		this.tabId = tabId;
-	}
-
-	public String getCode() {
+    public String getCode() {
         return code;
     }
 

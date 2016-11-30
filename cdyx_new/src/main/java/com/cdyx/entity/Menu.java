@@ -15,11 +15,11 @@ public class Menu {
     private Integer id;
 
     @ManyToOne( cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY,targetEntity= MenuType.class )
-    @JoinColumn(name="menu_type_id")
+    //@JoinColumn(name="menu_type_id")
     private MenuType type;
 
     @ManyToOne( cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY,targetEntity=MenuParent.class )
-    @JoinColumn(name="menu_parent_id")
+    //@JoinColumn(name="menu_parent_id")
     private MenuParent parent;
 
     @Column(name="en_name_menu")

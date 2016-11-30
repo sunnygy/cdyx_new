@@ -1,73 +1,63 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE HTML>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/common.jsp"%>
+<!DOCTYPE html>
 <html>
 <head>
-    <base href="<%=basePath%>">
-    <title>My WebSocket</title>
+    <meta charset="utf-8" />
+    <title>餐厅管理-登录</title>
+    <meta name="description" content="">
+    <meta name="author" content="Administrator">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+    <link href="<%=root%>/web/css/ionicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <link href="<%=root%>/web/css/login.css" rel="stylesheet" />
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+
+
+
 </head>
 
-<body>
-Welcome<br/>
-<input id="text" type="text" /><button onclick="send()">Send</button>    <button onclick="closeWebSocket()">Close</button>
-<div id="message">
+<body class="loginbg">
+<div class="clearfix">
+    <div class="loginlogo pull-left">
+        <img src="<%=root%>/web/img/loginlogo.png" />
+    </div>
+    <div class="language pull-right">
+        <i class="active">中文</i>
+        <i>English</i>
+    </div>
+</div>
+<div class="login_container">
+    <img src="<%=root%>/web/img/loginname.png" />
+    <div class="loginlate">
+        <i></i>Restaurant Management System<i></i>
+    </div>
+    <form role="form" class="login_box">
+        <div class="form-group">
+            <input type="text" class="form-input"  placeholder="请输入用户名">
+            <i class="icon ion-ios-checkmark-outline"></i>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-input"  placeholder="请输入密码">
+            <i class="icon ion-ios-close-outline"></i>
+        </div>
+        <div class="checkbox clearfix">
+            <label class="pull-left">
+                <input type="checkbox">记住密码
+            </label>
+            <a href="">忘记密码</a>
+        </div>
+        <button type="submit" class="btn btn-warning">登录</button>
+    </form>
+    <span class="lginbott">还没有注册？<a href="#">点击我要注册</a></span>
+    <div class="sidefooter">
+        copyright©成都印象餐饮系统2015-2016
+    </div>
 </div>
 </body>
 
-<script type="text/javascript">
-    var websocket = null;
-
-    //判断当前浏览器是否支持WebSocket
-    if('WebSocket' in window){
-        websocket = new WebSocket("ws://localhost/websocket");
-    }
-    else{
-        alert('Not support websocket')
-    }
-
-    //连接发生错误的回调方法
-    websocket.onerror = function(){
-        setMessageInnerHTML("error");
-    };
-
-    //连接成功建立的回调方法
-    websocket.onopen = function(event){
-        setMessageInnerHTML("open");
-    }
-
-    //接收到消息的回调方法
-    websocket.onmessage = function(event){
-        setMessageInnerHTML(event.data);
-    }
-
-    //连接关闭的回调方法
-    websocket.onclose = function(){
-        setMessageInnerHTML("close");
-    }
-
-    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-    window.onbeforeunload = function(){
-        websocket.close();
-    }
-
-    //将消息显示在网页上
-    function setMessageInnerHTML(innerHTML){
-        document.getElementById('message').innerHTML += innerHTML + '<br/>';
-    }
-
-    //关闭连接
-    function closeWebSocket(){
-        websocket.close();
-    }
-
-    //发送消息
-    function send(){
-        var message = document.getElementById('text').value;
-        websocket.send(message);
-    }
-</script>
 </html>
+

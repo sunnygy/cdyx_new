@@ -28,7 +28,6 @@ public class OrderDetail {
     private Integer id;
 
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Order.class )
-    @JoinColumn(name="order_id")
     private  Order order;
 
     @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER )

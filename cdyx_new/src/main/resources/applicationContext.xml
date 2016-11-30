@@ -76,7 +76,7 @@
           class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/cdyx_new?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="url" value="jdbc:mysql://173.254.236.16:3306/cdyx_new?useUnicode=true&amp;characterEncoding=UTF-8"/>
         <property name="username" value="root"/>
         <property name="password" value="rootroot"/>
         <!--maxActive: 最大连接数量-->
@@ -194,7 +194,7 @@
         <aop:pointcut id="serviceOperation" expression="execution(* com.cdyx.service..*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
     </aop:config>
-
+<!--
 	<mvc:interceptors>
         <bean class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
             <property name="sessionFactory">
@@ -204,7 +204,7 @@
                 <value>1</value>
             </property>
         </bean>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
 
 
 </beans>

@@ -1,0 +1,371 @@
+.momule_box {
+	width: 300px;
+	position: absolute;
+}
+.momule_search {
+	padding: 0 20px;
+	margin-top: 30px;
+	position: relative;
+}
+.momule_search .btn-group>.btn:first-child {
+    border-radius: 24px;
+    line-height: 24px;
+}
+.momule_search .form-control {
+	height: 40px;
+	font-size: 14px;
+	color: #b0b5bf;
+	border: 1px solid #ddd;
+	border-radius: 38px;
+	padding-left: 0px;
+}
+.momule_search i {
+	position: absolute;
+	top: 10px;
+	left: 34px;
+	color: #b0b5bf;
+	z-index: 4;
+}
+.momule_search .bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    text-align: left;
+    padding-left: 43px;
+}
+.momule_search .trangle {
+	right: 38px;
+	top: 16px;
+}
+ul.momule_list {
+	padding: 0;
+	margin-top: 20px;
+	overflow-y: scroll;
+	height: 500px;
+}
+.momule_list li {
+	line-height: 56px;
+	padding-left: 20px;
+	color: #796c74;
+	overflow: hidden;
+}
+.momule_list strong {
+	font-size: 16px;
+	float: left;
+	width: 215px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.momule_list span {
+	font-size: 14px;
+	color: #b4b7c4;
+	float: right;
+	padding-right: 20px;
+}
+.momule_list li:hover, .momule_list li.active {
+	background: #fba378;
+	color: #fff;
+	cursor: pointer;
+}
+.momule_list li.active span {
+	color: #fff;
+}
+.allmenu {
+	background: none;
+	height: 68px;
+	color: #6caaf7;
+	font-size: 20px;
+	padding-top: 14px;
+	margin-bottom: 0px;
+}
+.allmenu i {
+	display: block;
+	height: 2px;
+	width: 42px;
+	background: #ddd;
+	margin-top: 8px;
+}
+.momule_content {
+
+	/*float: left;*/
+	margin-left: 330px;
+}
+.momule_selesingle {
+	position: relative;
+	width: 140px;
+	float: left;
+	margin-right: 20px;
+	margin-top: 12px;
+}
+.momule_selesingle i {
+	position: absolute;
+	left: 14px;
+	top: 7px;
+	color: #919ab7;
+	font-size: 15px;
+	z-index: 4;
+}
+.btn:focus{
+	outline: 0;
+}
+select, option {
+	-webkit-appearance: none;    /* To gain control over the appearance on WebKit */
+	-moz-appearance: none;    /* To gain control over the appearance on Gecko */
+
+	/* To gain control over the appearance on Presto (Opera) and Trident (IE)
+		     Note that it also work on Gecko and has partial effects on WebKit */
+	background: none;
+}
+.momule_selesingle .form-control {
+	height: 36px;
+	border-radius: 10px;   
+	 /*text-indent:55px;*/
+	color: #6caaf7;
+}
+.momule_selesingle .form-controlA {
+
+
+	color: #4a4a4a;
+}
+.momule_selesingle .form-controlB {
+	width: 160px;
+	margin-right: 20px;
+}
+.momule_selesingle .controlA{
+	text-indent:55px;	
+}
+.btn-group>.btn:first-child:focus{
+	outline: 0;
+}
+.bootstrap-select > .dropdown-toggle:focus{
+	outline: 0;
+}
+.mar_20 {
+	margin-right: 40px;
+}
+.hselect {
+	border: 1px solid #ddd;
+	border-left: 2px solid #6caaf7;
+	width: 500px;
+	line-height: 40px;
+	color: #919ab7;
+	font-size: 16px;
+	padding: 0 17px;
+	margin: 13px 0 16px 0px;
+}
+.hselect span {
+	float: left;
+	width: 150px;
+	height: 100%;
+}
+.hselect strong {
+	color: #6caaf7;
+	display: block;
+}
+.line {
+	width: 100%;
+	height: 1px;
+	background: #DDD;
+}
+.motbn .btn {
+	float: right;
+	margin: 10px 10px;
+	padding: 6px 23px;
+	font-size: 17px;
+	border-radius: 8px;
+	outline: none;
+	border:0;
+}
+.motbn .btn:focus{
+	outline: 0;
+}
+.munolsbtn .btn:focus{
+	outline:0;
+}
+.motbn .btn:nth-child(1) {
+	background: #ff8665;
+	border:0;
+}
+.motbn .btn:nth-child(2) {
+	background: #50c14e;
+	border:0;
+}
+.motbn .btn:nth-child(2):hover{
+	background: #39a937;
+	border:0;
+}
+.motbn .btn:nth-child(1):hover {
+	background: #ea7251;
+	border:0;
+}
+.munolsbtn .btn {
+	float: right;
+	margin: 10px 10px;
+	padding: 8px 23px;
+	font-size: 15px;
+	border-radius: 8px;
+	margin-bottom: 0;
+	outline: none;
+}
+.munolsbtn .btn:nth-child(1) {
+	background: #fff;
+	border: 1px solid #ddd;
+	color: #a09eb4;
+	margin-right: 20px;
+}
+.munolsbtn .btn:nth-child(2) {
+	background: #fff;
+	border: 1px solid #ddd;
+	color: #1778df;
+}
+.munolsbtn .btn:hover{
+	background: #ddd;
+}
+.allmenusd {
+	color: #4a4a4a;
+	font-size: 17px;
+	margin-bottom: 0px;
+	height: 51px;
+	padding-top: 0;
+}
+.toptable {
+	margin-bottom: 10px;
+}
+.toptable span {
+	color: #666;
+	font-size: 15px;
+	margin-right: 34px;
+	margin-bottom: 10px;
+}
+.table>thead:first-child>tr:first-child>th {
+	border-top: 1px solid #ddd;
+	padding-top: 10px;
+}
+.table>thead>tr>th {
+	font-weight: normal;
+	color: #a59fb4;
+	border-bottom: 1px solid #ddd;
+	text-align: center;
+}
+.table>tbody>tr>td {
+	padding: 8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-bottom: 1px solid #ddd;
+	color: #4a4a4a;
+	line-height: 41px;
+	text-align: center;
+}
+.momutotal {
+	font-size: 15px;
+	color: #4a4a4a;
+	padding: 0 15px 0 0;
+}
+.table>tbody>tr>td.cpr {
+	color: #256cd4;
+}
+.momule_now {
+	color: #a59fb4;
+	font-size: 16px;
+	cursor: pointer;
+}
+.momule_now span {
+	background: #6caaf7;
+	border-radius: 12px;
+	padding: 4px 12px;
+	color: #fff;
+	display: inline-block;
+	margin-left: 8px;
+	letter-spacing: 2px;
+}
+.momule_now strong {
+	background: #ffc365;
+	border-radius: 16px;
+	padding: 3px 12px;
+	color: #fff;
+	display: inline-block;
+	margin-left: 8px;
+	font-size: 16px;
+	letter-spacing: 2px;
+}
+.webg {
+	background: url(../img/webg.png) no-repeat right;
+}
+.trangle {
+	border-top: 5px solid #999;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	display: inline-block;
+	margin: 1px 0 0 7px;
+	padding-top: -3px;
+	line-height: 28px;
+	vertical-align: middle;
+	position: absolute;
+	right: 13px;
+	top: 14px;
+}
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    text-align: center;
+    padding-left: 22px;
+}
+.momule_search span{
+	color: #b0b5bf;
+}
+.btn-group>.btn:first-child {
+    border-radius: 10px;
+}
+.hselectmenu img{
+	float: right;
+	margin-top: 11px;
+	cursor: pointer;
+	padding-left: 10px;
+}
+.table {
+    width: 99%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+@media screen and (max-width:1360px) {
+	.toptable span {
+		font-size: 14px;
+		margin-right: 10px;
+	}
+	.header-magement .header-time {
+	    margin-left: 5%;
+	}
+}
+@media screen and (max-width:1323px){
+	.header-magement .header-time {
+	    margin-left: 2%;
+	    font-size: 12px;
+	    padding-top: 8px;
+	}
+	.header-login {
+	    font-size: 14px;
+	    margin-left: 12px;
+	}
+}
+@media screen and (max-width:1200px) {
+	.boxcon {
+		width: 1000px;
+		overflow-x: scroll;
+	}
+	.header-magement .header-time {
+	    margin-left: 5%;
+	    font-size: 14px;
+    	padding-top: 6px;
+	}
+	.sidebar {
+		display: none;
+	}
+	.page-wrapper {
+		margin-left: 0px;
+	}
+	.header-login {
+		font-size: 14px;
+		margin-left: 12px;
+	}
+	.header-magement .header-time {
+		float: left;
+		margin-left: 3%;
+	}
+}

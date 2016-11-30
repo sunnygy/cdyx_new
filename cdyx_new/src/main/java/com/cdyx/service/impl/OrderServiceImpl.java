@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
         tableList.setCode("01");
         tableListDao.update(tableList);
 
-        order.setTabId(tableId);
+        order.setTable(tableList);
         order.setStatus(true);
         order.setCode("aaaaa");//TODO
         order.setCreateTimer(new Date());
@@ -64,10 +64,12 @@ public class OrderServiceImpl implements OrderService {
 	        tableList.setId(tableId);
 	        tableList.setStatus(true);
 	        tableListDao.update(tableList);
+			if(order!=null)
+				order.setTable(tableList);
 	        
 		}
 		if(order!=null){
-			order.setTabId(tableId);
+
 			orderDao.update(order);
 		}
 
@@ -102,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
 		
 		Order order=orderDao.getBySQL(sql, tableId);
 		
-		System.out.println(order.getTabId());
+		System.out.println(order.getTable().getId());
 		
 		
 		return order;
@@ -120,7 +122,7 @@ public class OrderServiceImpl implements OrderService {
 		
 		List<Order>orders=orderDao.getListBySQL(sql);
 
-		System.out.println(orders.get(0).getTabId());
+		System.out.println(orders.get(0).getTable().getId());
 		
 		return orders;
 	}
