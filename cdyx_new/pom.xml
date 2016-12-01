@@ -142,6 +142,15 @@
       <version>4.3.5.Final</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.hibernate.javax.persistence</groupId>
+      <artifactId>hibernate-jpa-2.1-api</artifactId>
+      <version>1.0.0.Final</version>
+    </dependency>
+
+
+
+
 
     <!-- 为了让Hibernate使用代理模式，需要javassist -->
     <dependency>

@@ -9,6 +9,7 @@
 <!doctype html>
 <link rel="stylesheet" type="text/css" href="<%=root%>/web/common/css/base.css">
 <link href="<%=root%>/web/css/bootstrap.min.css" rel="stylesheet" />
+<link href="<%=root%>/web/css/ionicons.min.css" rel="stylesheet" />
 <script src="<%=root%>/web/js/lib/jquery-1.11.3.min.js" type="text/javascript"></script>
 <script src="<%=root%>/web/js/lib/bootstrap.min.js" type="text/javascript"></script>
 <script src="<%=root%>/web/js/function.js" type="text/javascript"></script>

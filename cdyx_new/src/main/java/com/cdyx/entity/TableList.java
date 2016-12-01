@@ -2,9 +2,6 @@ package com.cdyx.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by guyu on 2016/10/3.
- */
 @Entity
 @Table(name="table_list")
 public class TableList {
@@ -26,9 +23,6 @@ public class TableList {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "table_id", unique = true)
     private Order order;
-    
-
-
 
     public Integer getId() {
         return id;
