@@ -31,7 +31,7 @@ public class LoginController {
        if(employee!=null){
            HttpSession session=request.getSession();
            session.setAttribute(employee.getId().toString(),employee);
-           view.setViewName("/table/goTableList.htm");
+           view.setViewName("redirect:/table/goTableList.htm");
 
        }else {
            view.setViewName("/index");

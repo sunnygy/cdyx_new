@@ -30,12 +30,11 @@
     <div class="wrapper">
     	<jsp:include page="/WEB-INF/views/common/navigate.jsp"/>
         <div class="page-wrapper">
-            <div class="container-fluid">
-                <div class="row-fluid header-magement clearfix">
+            <div class="row-fluid header-magement clearfix" style="background-color: rgb(246, 244, 236);">
                     <button class="pull-left" id="buttonright">
-                        <i class="glyphicon glyphicon-align-justify fontsize20"></i>
+                        <i class="glyphicon glyphicon-align-justify fontsize20" style="background-color: rgb(246, 244, 236);"></i>
                     </button>
-                    <ul class="breadcrumb">
+                    <ul class="breadcrumb" style="background-color: rgb(246, 244, 236);">
                         <li class="breadname">
                             点餐ORDER <span>|</span>
                         </li>
@@ -44,11 +43,11 @@
                             <a href="#">首页</a>
                         </li>
                         <li>
-                            <span class="divider">></span>
-                            <a href="#"></a>
+                            <span class="divider">&gt;</span>
+                            <a href="#">菜单管理</a>
                         </li>
                         <li class="active">
-                            <span class="divider">午餐</span> 
+                            <span class="divider">&gt;</span> 午餐
                         </li>
                     </ul>
                     <span class="header-time">2016年10月28日 18:17:25</span>
@@ -69,6 +68,7 @@
                     <div class="">
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active clearfix" id="home">
+                            <c:out value="${request.getContextPath()}"></c:out>
                             	<c:forEach items="${tables}" var="table" >
 	                                <div class="col-md-3 col-sm-4 col-xs-6 col-lg-2dot4">
 	                                    <div class="orderboxline">
@@ -76,6 +76,7 @@
 	                                            <h3>Table number</h3>
 	                                            <i></i>
 	                                            <p>${table.code}</p>
+	                                            <input type="hidden" id="orderId" name="orderId" value="${table.order.id}"/>
 	                                            <span>桌号</span>
 	                                        </div>
 	                                    </div>

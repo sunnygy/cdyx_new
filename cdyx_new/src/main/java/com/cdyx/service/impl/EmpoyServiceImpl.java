@@ -36,9 +36,9 @@ public class EmpoyServiceImpl implements EmployService {
 
     public Employee loginCheck(String name, String password){
 
-        String sql="SELECT * FROM employee WHERE name=?";
+        String hql="FROM Employee WHERE name=?";
 
-        Employee employee=(Employee)employDao.getBySQL(sql,name);
+        Employee employee=(Employee)employDao.getByHQL(hql,name);
 
         if(employee!=null){
             if(employee.getPassword().equals(password)){

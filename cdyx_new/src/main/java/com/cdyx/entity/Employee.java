@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by guyu on 2016/10/3.
  */
 @Entity
-@Table(name="user")
+@Table(name="`user`")
 public class Employee {
 
     @Id
@@ -22,10 +22,10 @@ public class Employee {
     private String name;
 
     @Column(name="sex")
-    private boolean sex;
+    private Boolean sex;
 
     @Column(name="age")
-    private short age;
+    private Short age;
 
     @Column(name="password")
     private String password;
@@ -61,19 +61,19 @@ public class Employee {
         this.name = name;
     }
 
-    public boolean isSex() {
+    public Boolean isSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(Boolean sex) {
         this.sex = sex;
     }
 
-    public short getAge() {
+    public Short getAge() {
         return age;
     }
 
-    public void setAge(short age) {
+    public void setAge(Short age) {
         this.age = age;
     }
 

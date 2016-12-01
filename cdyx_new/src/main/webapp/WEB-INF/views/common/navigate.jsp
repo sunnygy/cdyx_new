@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 		<div class="sidebar">
             <div class="photoperson">
                 <strong>FASHABLE</strong>
-                <img src="img/photo.png" />
+                <img src="<%=request.getContextPath()%>/web/img/photo.png" />
                 <div class="photoperson_le"><i>园宝的爱</i><span></span></div>
             </div>
             <div class="navbar">

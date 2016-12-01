@@ -9,20 +9,18 @@
     <meta name="description" content="">
     <meta name="author" content="Administrator">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-    <meta name="format-detection" content="telephone=no">    
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-    <link href="<%=root%>/web/css/login.css" rel="stylesheet" />
-    <script src="assets/js/html5shiv.min.js"></script>
-    <script src="assets/js/respond.min.js"></script>
-    <script src="text/javascript">
+    <meta name="format-detection" content="telephone=no">   
+    <link href="<%=root%>/web/css/login.css" rel="stylesheet" />   
+   <!--  <script type="text/javascript">
         $(function(){
             function login(){
+            	console.debug(aaaaaaaaaaaaa);
                 var userName=$("#userName").val();
                 var password=$("#password").val();
                 location.href=root+"/login/userlogin.htm?name="+userName+"&password="+password;
             }
         })
-    </script>
+    </script> -->
 </head>
 
 <body class="loginbg">
@@ -40,13 +38,13 @@
     <div class="loginlate">
         <i></i>Restaurant Management System<i></i>
     </div>
-    <form role="form" class="login_box">
+    <form role="form" action="<%=root%>/login/userlogin.htm"  class="login_box">
         <div class="form-group">
-            <input type="text" id="userName" class="form-input"  placeholder="请输入用户名">
+            <input type="text" name="name" class="form-input"  placeholder="请输入用户名">
             <i class="icon ion-ios-checkmark-outline"></i>
         </div>
         <div class="form-group">
-            <input type="password" id="password" class="form-input"  placeholder="请输入密码">
+            <input type="password" name="password" class="form-input"  placeholder="请输入密码">
             <i class="icon ion-ios-close-outline"></i>
         </div>
         <div class="checkbox clearfix">
@@ -55,7 +53,7 @@
             </label>
             <a href="">忘记密码</a>
         </div>
-        <button type="submit"  onclick="login()" class="btn btn-warning">登录</button>
+        <button type="submit" class="btn btn-warning">登录</button>
     </form>
    <!-- <span class="lginbott">还没有注册？<a href="#">点击我要注册</a></span>-->
     <div class="sidefooter">

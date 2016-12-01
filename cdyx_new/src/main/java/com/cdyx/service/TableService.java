@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface TableService {
 
-    List<TableList> getAllTablesStatus();
+    List<TableList> getAllTables();
 
     TableList getTableById(Integer id);
 

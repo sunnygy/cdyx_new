@@ -23,7 +23,7 @@ public class TableServiceImpl implements TableService {
     private OrderDao orderDao;
 
 
-	public List<TableList> getAllTablesStatus(){
+	public List<TableList> getAllTables(){
 
         String hql="FROM TableList";
 
