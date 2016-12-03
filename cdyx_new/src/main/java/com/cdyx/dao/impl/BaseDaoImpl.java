@@ -1,7 +1,6 @@
 package com.cdyx.dao.impl;
 
 import com.cdyx.common.util.PageResults;
-import com.cdyx.common.util.RowMapper;
 import com.cdyx.dao.BaseDao;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -19,6 +18,7 @@ import java.util.List;
 import org.hibernate.*;
 import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 
 
 
@@ -461,5 +461,10 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao<T, ID> 
         }
 
     }
+
+	public List findListBySql(String sql, com.cdyx.common.util.RowMapper map, Object... values) {
+		// TODO Auto-generated method stub
+		return null;
+	}
    
 }

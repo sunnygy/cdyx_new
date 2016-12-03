@@ -6,12 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cdyx.common.util.DateUtil;
+import com.cdyx.common.util.PageResults;
 import com.cdyx.dao.OrderDao;
 import com.cdyx.dao.OrderDetailDao;
 import com.cdyx.dao.TableListDao;
 import com.cdyx.entity.Order;
 import com.cdyx.entity.OrderDetail;
 import com.cdyx.entity.TableList;
+import com.cdyx.model.OrderModel;
 import com.cdyx.service.OrderService;
 
 /**
@@ -39,12 +42,11 @@ public class OrderServiceImpl implements OrderService {
         tableList.setCode("01");
         tableListDao.update(tableList);
 
-        order.setTabId(tableId);
+        order.setTable(tableList);
         order.setStatus(true);
         order.setCode("aaaaa");//TODO
         order.setCreateTimer(new Date());
-        order.setDetails(details);
-        
+        order.setDetails(details);       
         
             
 
@@ -62,12 +64,13 @@ public class OrderServiceImpl implements OrderService {
 	        tableList.setId(tableId);
 	        tableList.setStatus(true);
 	        tableListDao.update(tableList);
-			
+	        if(order!=null)
+				order.setTable(tableList);
 				
 	        
 		}
 		if(order!=null){
-			order.setTabId(tableId);
+		
 			orderDao.update(order);
 		}
 
@@ -102,27 +105,41 @@ public class OrderServiceImpl implements OrderService {
 		
 		Order order=orderDao.getBySQL(sql, tableId);
 		
-		System.out.println(order.getTabId());
+		System.out.println(order.getTable().getId());
 		
 		
 		return order;
 	}
 
+	public PageResults<Order> getOrderByDate(Date beginDay, Date endDay, int pageSize,int currentPage) {
+		
+		String hql="FROM Order o WHERE o.createTimer >=?  AND o.createTimer <=? ";
+		
+		String countHql="SELECT COUNT(*) FROM Order o WHERE o.createTimer >=?  AND o.createTimer <=? ";	
+		
+		endDay=DateUtil.addDay(endDay, 1);
+		
+		PageResults<Order>result=orderDao.findPageByFetchedHql(hql, countHql, currentPage, pageSize,beginDay,endDay);	
+		
+		
+				
+		
+		return result;
+	}
 
 
-	public List<Order> getAllOrder() {
-		
-		/*String hql="FROM Order WHERE order_status=true";
-		
-		List<Order>orders=orderDao.getListByHQL(hql);*/
+
+	public List<Order> getAllOrder() {	
+	
 		
 		String sql="SELECT * FROM order_info WHERE order_status=true";
 		
 		List<Order>orders=orderDao.getListBySQL(sql);
-
-		System.out.println(orders.get(0).getTabId());
 		
-		return orders;
+		if(orders.size()>0)
+			return orders;	
+		
+		return null;
 	}
 
 

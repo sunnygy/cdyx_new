@@ -2,10 +2,14 @@ package service;
 
 
 
+import java.util.List;
+
+import org.hibernate.tool.hbm2ddl.TableMetadata;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cdyx.entity.TableList;
+import com.cdyx.model.TableListModel;
 import com.cdyx.service.TableService;
 
 import dao.BaseTest;
@@ -23,6 +27,13 @@ public class TableServiceTest extends BaseTest{
 	public void  getAllTablesStatus(){
 		
 		
+		List<TableListModel>tables=tableService.getAllTables();
+		
+		for (TableListModel tableListModel : tables) {
+			
+			System.out.println(tableListModel);
+		
+		}
 		
 		
 		

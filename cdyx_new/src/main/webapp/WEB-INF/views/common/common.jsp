@@ -11,9 +11,11 @@
 <link rel="stylesheet" type="text/css" href="<%=root%>/web/css/base.css">
 <link href="<%=root%>/web/css/bootstrap.min.css" rel="stylesheet" />
 <link href="<%=root%>/web/css/ionicons.min.css" rel="stylesheet" />
+<link href="<%=root%>/web/css/styletable.css" rel="stylesheet" />
 <script src="<%=root%>/web/js/lib/jquery-1.11.3.min.js" type="text/javascript"></script>
 <script src="<%=root%>/web/js/lib/bootstrap.min.js" type="text/javascript"></script>
 <script src="<%=root%>/web/js/function.js" type="text/javascript"></script>
+<script src="<%=root%>/web/js/talk.js" type="text/javascript"></script>
 <script type="text/javascript">
 	<!--定义js引用的root-->
 	var root = "<%=root%>"

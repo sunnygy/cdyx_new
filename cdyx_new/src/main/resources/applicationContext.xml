@@ -146,6 +146,7 @@
                 <value>com.cdyx.entity.Position</value>
                 <value>com.cdyx.entity.TableList</value>
                 <value>com.cdyx.entity.Order</value>
+                 <value>com.cdyx.entity.OrderType</value>
                 <value>com.cdyx.entity.OrderDetail</value>
                 <value>com.cdyx.entity.Menu</value>
                 <value>com.cdyx.entity.MenuParent</value>

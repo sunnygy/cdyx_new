@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2016-11-30 22:36:09
+Date: 2016-12-03 23:33:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -74,9 +74,9 @@ CREATE TABLE `order_detail` (
   PRIMARY KEY (`order_detail_id`),
   KEY `FK_Relationship_3` (`order_id`),
   KEY `FK_Relationship_5` (`menu_id`),
-  CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  CONSTRAINT `FK_Relationship_3` FOREIGN KEY (`order_id`) REFERENCES `order_info` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK_Relationship_3` FOREIGN KEY (`order_id`) REFERENCES `order_info` (`order_id`),
+  CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE SET NULL ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for order_info
@@ -92,10 +92,26 @@ CREATE TABLE `order_info` (
   `desc_order` varchar(64) DEFAULT NULL,
   `order_status` tinyint(1) DEFAULT NULL,
   `order_code` varchar(255) DEFAULT NULL,
+  `people_num` smallint(6) DEFAULT NULL,
+  `people_type` varchar(255) DEFAULT NULL,
+  `order_type_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   KEY `FK_Relationship_4` (`table_id`),
-  CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table_id`) REFERENCES `table_list` (`table_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+  KEY `order_type_id` (`order_type_id`),
+  CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table_id`) REFERENCES `table_list` (`table_id`),
+  CONSTRAINT `order_info_ibfk_1` FOREIGN KEY (`order_type_id`) REFERENCES `order_type` (`order_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for order_type
+-- ----------------------------
+DROP TABLE IF EXISTS `order_type`;
+CREATE TABLE `order_type` (
+  `order_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_type_name` varchar(255) DEFAULT NULL,
+  `order_type_desc` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`order_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for position
@@ -118,8 +134,9 @@ CREATE TABLE `table_list` (
   `table_code` varchar(16) NOT NULL,
   `table_desc` varchar(16) DEFAULT NULL,
   `table_status` tinyint(1) DEFAULT NULL,
+  `table_type` tinyint(255) DEFAULT NULL,
   PRIMARY KEY (`table_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user
@@ -138,4 +155,4 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`),
   KEY `FK_Relationship_1` (`pos_id`),
   CONSTRAINT `FK_Relationship_1` FOREIGN KEY (`pos_id`) REFERENCES `position` (`pos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;

@@ -5,6 +5,12 @@ import javax.persistence.*;
 @Entity
 @Table(name="table_list")
 public class TableList {
+	
+	private static final Integer hall_TYPE=1;
+	
+	private static final Integer Box_TYPE=2;	
+	
+	private static final Integer OUT_TYPE=3;
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -18,11 +24,12 @@ public class TableList {
     private String description;
 
     @Column(name="table_status")
-    private boolean status=false;//false:empty true:full
+    private Boolean status=false;//false:empty true:full
     
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "table_id", unique = true)
-    private Order order;
+    @Column(name="table_type")
+    private Integer type=0; 
+    
+  
 
     public Integer getId() {
         return id;
@@ -48,21 +55,23 @@ public class TableList {
         this.description = description;
     }
 
-    public boolean isStatus() {
+    public Boolean isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
-	public Order getOrder() {
-		return order;
+	public Integer getType() {
+		return type;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setType(Integer type) {
+		this.type = type;
 	}
+
+	
     
     
 

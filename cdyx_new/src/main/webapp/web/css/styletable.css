@@ -24,6 +24,7 @@
 	font-size: 16px;
 	color: #666666;
 	border-bottom: 1px solid #ddd;
+	cursor: pointer;
 }
 .tabl_colume {
 	width: 18px;
@@ -95,6 +96,7 @@
 .menu_time {
 	padding-left: 20px;
 	margin-top: 8px;
+	margin-bottom: 8px;
 	float: left;
 }
 .input-sm {
@@ -167,6 +169,22 @@
 		margin-bottom:15px;
 	}
 }
+@media screen and (max-width:1360px) {
+	.header-magement .header-time {
+	    margin-left: 5%;
+	}
+}
+@media screen and (max-width:1323px){
+	.header-magement .header-time {
+	    margin-left: 2%;
+	    font-size: 12px;
+	    padding-top: 8px;
+	}
+	.header-login {
+	    font-size: 14px;
+	    margin-left: 12px;
+	}
+}
 @media screen and (max-width:1200px) {
 	.sidebar {
 		display: none;
@@ -204,6 +222,17 @@
 	#buttonright{
 		display: block;
 	}
+	.header-magement .header-time {
+		float: left;
+		margin-left: 3%;
+		    font-size: 14px;
+    padding-top: 6px;
+	}
+	.header-login {
+    font-size: 14px;
+    margin-left: 12px;
+    float: right;
+}
 }
 @media screen and  (max-width:767px) {
 	.header-magement {
@@ -216,8 +245,9 @@
 		font-size: 14px;
 	}
 	.header-login {
-		font-size: 14px;
-		margin-left: 12px;
+	    font-size: 14px;
+	    margin-left: 0;
+	    float: left;
 	}
 	.mr_10 {
 		margin-left: 25px;

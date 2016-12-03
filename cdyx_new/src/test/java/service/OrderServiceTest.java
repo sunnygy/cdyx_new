@@ -2,6 +2,8 @@ package service;
 
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.cdyx.common.util.PageResults;
 import com.cdyx.entity.Order;
 import com.cdyx.entity.OrderDetail;
 import com.cdyx.service.OrderService;
@@ -77,7 +80,42 @@ public class OrderServiceTest extends BaseTest{
 	@Test
 	public void getAllOrder(){
 
-		List<Order>order=orderService.getAllOrder();
+		List<Order>orders=orderService.getAllOrder();
+		
+		for (Order order : orders) {			
+			
+			System.out.println(order.getTable().getCode());
+		}
+	
+		
+		
+	}
+	
+	
+	@Test
+	public void getOrderByDate() throws ParseException{
+		SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+		
+		String beginStr="2016-11-10 00:00:00";
+		
+		String endStr="2016-11-28 00:00:00";
+		
+		Date begin=sdf.parse(beginStr);
+		
+		Date end=sdf.parse(endStr);
+	
+		
+		PageResults<Order>result=orderService.getOrderByDate(begin, end, 1, 1);
+		
+		List<Order>order=result.getResults();
+		
+		System.out.println("order size:="+order.size());
+		
+		System.out.println(order.get(0));
+		
+		System.out.println(result.getTotalCount());
+		
+		
 		
 		
 	}

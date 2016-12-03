@@ -66,6 +66,8 @@ i {
 	-webkit-box-shadow: 0 0 20px rgba(255, 162, 64, 0.4);
 	-moz-box-shadow: 0 0 20px rgba(255, 162, 64, 0.4);
 	margin-top: 20px;
+	outline: 0;
+	border:0;
 }
 .form-input {
 	width: 100%;
@@ -86,6 +88,11 @@ i {
 	right: 0;
 	font-size: 30px;
 	color: #28ca5f
+}
+.login_box span {
+    color: red;
+    padding-top: 7px;
+    display: inherit;
 }
 .login_box .ion-ios-close-outline {
 	color: #f76967;

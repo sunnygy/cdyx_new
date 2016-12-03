@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cdyx.entity.Order;
 import com.cdyx.entity.OrderDetail;
@@ -63,12 +64,16 @@ public class OrderMangerController {
 		
 	}
 	
-	@RequestMapping(value = "/getAllOrder.htm",method = RequestMethod.GET)
-	public Object getOrderByTableId(){	
+	@RequestMapping(value = "/getAllOrder.htm")
+	public ModelAndView getOrderByTableId(){	
 		
-		  orderService.getAllOrder();			
+		ModelAndView view=new ModelAndView("/allOrder");
 		
-	   return null;
+		List<Order>orders=orderService.getAllOrder();
+		
+		view.addObject("orders", orders);
+		
+	   return view;
 		
 	}
 	

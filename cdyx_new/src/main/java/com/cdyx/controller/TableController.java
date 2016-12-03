@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cdyx.entity.Order;
 import com.cdyx.entity.TableList;
+import com.cdyx.model.TableListModel;
 import com.cdyx.service.TableService;
 
 @Controller
@@ -30,18 +30,8 @@ public class TableController {
 	public ModelAndView goTableListPage(HttpServletRequest request, HttpServletResponse response){
 		
 		ModelAndView model=new ModelAndView("/table");		
-		
-		List<TableList> tables=tableService.getAllTables();
-		
-		for (TableList tableList : tables) {
-			Order order=tableList.getOrder();
-			
-			if(order!=null)			
-			System.out.println("tableId:"+tableList.getId()+" orderId:"+order.getId());
-		}
-		
-		model.addObject("tables",tables);		
-				
+		List<TableListModel> tables=tableService.getAllTables();		
+		model.addObject("tables",tables);						
 		return model;		
 	}
 	

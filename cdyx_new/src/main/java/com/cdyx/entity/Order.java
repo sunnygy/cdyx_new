@@ -1,10 +1,23 @@
 package com.cdyx.entity;
 
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * Created by guyu on 2016/10/3.
@@ -16,21 +29,28 @@ public class Order implements Serializable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;	
 
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="order_id")
     private Integer id;
-	
-	@Column(name="table_id")
-    private Integer tabId;
 
     @Column(name="order_code")
     private String code;
+    
+    @Column(name="people_num")
+    private Integer peopleNum;
 
     @Column(name="create_time")
     private Date createTimer;
+    
+    @Column(name="people_type")
+    private String peopleType="C";    
+    
+    @ManyToOne( cascade = CascadeType.ALL, targetEntity=OrderType.class)
+    @JoinColumn(name = "order_type_id",unique = true)
+    private OrderType orderType;
 
     @Column(name="end_time")
     private Date endTimer;
@@ -50,6 +70,10 @@ public class Order implements Serializable {
     @OneToMany(targetEntity =OrderDetail.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name="order_id")
     private List<OrderDetail> details=new ArrayList<OrderDetail>();
+    
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @JoinColumn(name="table_id",unique=true)
+    private TableList table;
 
     public Integer getId() {
         return id;
@@ -58,16 +82,7 @@ public class Order implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    
-
-    public Integer getTabId() {
-		return tabId;
-	}
-
-	public void setTabId(Integer tabId) {
-		this.tabId = tabId;
-	}
+  
 
 	public String getCode() {
         return code;
@@ -138,4 +153,44 @@ public class Order implements Serializable {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+	public Integer getPeopleNum() {
+		return peopleNum;
+	}
+
+	public void setPeopleNum(Integer peopleNum) {
+		this.peopleNum = peopleNum;
+	}
+
+	public String getPeopleType() {
+		return peopleType;
+	}
+
+	public void setPeopleType(String peopleType) {
+		this.peopleType = peopleType;
+	}
+
+	public OrderType getOrderType() {
+		return orderType;
+	}
+
+	public void setOrderType(OrderType orderType) {
+		this.orderType = orderType;
+	}
+
+	public TableList getTable() {
+		return table;
+	}
+
+	public void setTable(TableList table) {
+		this.table = table;
+	}
+	
+	
+
+	
+	
+	
+    
+    
 }

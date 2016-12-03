@@ -29,6 +29,7 @@ ul{
 	background: linear-gradient(top, rgba(10, 116, 176, 1), rgba(49, 172, 188, 1));
 	color: #fff;
 	z-index: 999;
+	min-height: 760px;
 	/*height: 100%;*/
 }
 .page-wrapper{
