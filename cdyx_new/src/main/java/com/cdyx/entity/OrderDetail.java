@@ -30,9 +30,9 @@ public class OrderDetail {
     @Column(name="order_detail_price")
     private BigDecimal detailPrice;
     
-    @ManyToOne( cascade = CascadeType.ALL, targetEntity=Order.class)
-    @JoinColumn(name = "order_id",unique = true)
-    private  Order order;
+  
+    @Column(name="order_id")
+    private  Integer orderId;
 
     public Integer getId() {
         return id;
@@ -42,15 +42,17 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public Order getOrder() {
-        return order;
-    }
+    
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+    public Integer getOrderId() {
+		return orderId;
+	}
 
-    public Menu getMenu() {
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+
+	public Menu getMenu() {
         return menu;
     }
 

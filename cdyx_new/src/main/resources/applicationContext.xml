@@ -40,38 +40,63 @@
 
     <!--spring 首页处理-->
     <mvc:view-controller path="/" view-name="index"/>
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
-    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-        <property name="mediaTypes">
-            <value>
-                html=text/html
-                json=application/json
-            </value>
-        </property>
-        <property name="defaultContentType" value="text/html"/>
-    </bean>
 
-    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-        <property name="order" value="0"/>
-        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
-        <property name="viewResolvers">
-            <list>
-                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-                    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-                    <property name="prefix" value="/WEB-INF/views/"/>
-                    <property name="suffix" value=".jsp"></property>
-                </bean>
-            </list>
-        </property>
-        <property name="defaultViews">
-            <list>
-                <bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView">
-                    <property name="charset" value="UTF-8"/>
-                </bean>
-            </list>
-        </property>
-    </bean>
 
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="defaultContentType" value="text/html" />
+		<!--使用ContentNegotiatingViewResolver这个视图解析器允许你用同样的内容数据来呈现不同的view -->
+		<property name="mediaTypes"><!--相同的数据不同的返回类型 -->
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="jsonp" value="application/javascript" />
+				<entry key="xml" value="application/xml" />
+				<entry key="xls" value="application/vnd.ms-excel" />
+			</map>
+		</property>
+		<property name="favorParameter" value="true" />
+		<property name="viewResolvers">
+			<list>
+				<!--JSP视图 -->
+				<bean
+					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" 
+						/> -->
+					<property name="prefix" value="/WEB-INF/views/" />
+					<property name="suffix" value=".jsp"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+
+	<!-- json转换 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<util:list id="beanList">
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</util:list>
+		</property>
+	</bean>
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="objectMapper" ref="customObjectMapper"/>
+		<property name="supportedMediaTypes">
+			<list>
+				 <value>text/html;charset=UTF-8</value> 
+				<value>apolication/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="customObjectMapper" class="com.cdyx.common.util.CustomObjectMapper"/>
+	
     <bean id="dataSource"
           class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">

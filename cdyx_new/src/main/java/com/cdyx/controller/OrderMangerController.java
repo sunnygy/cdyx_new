@@ -2,17 +2,20 @@ package com.cdyx.controller;
 
 
 
-import java.util.List;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cdyx.common.util.PageResults;
 import com.cdyx.entity.Order;
 import com.cdyx.entity.OrderDetail;
+import com.cdyx.model.PageRequestModel;
 import com.cdyx.service.OrderService;
 
 
@@ -64,16 +67,30 @@ public class OrderMangerController {
 		
 	}
 	
-	@RequestMapping(value = "/getAllOrder.htm")
-	public ModelAndView getOrderByTableId(){	
+	@RequestMapping(value = "/goAllOrder.htm")
+	public ModelAndView goAllOrder(){	
 		
 		ModelAndView view=new ModelAndView("/allOrder");
 		
-		List<Order>orders=orderService.getAllOrder();
+		PageResults<Order>result=orderService.getOrderByDate(null, null, null, null);	
+	
 		
-		view.addObject("orders", orders);
+		view.addObject("result", result);
 		
 	   return view;
+		
+	}
+	
+	@RequestMapping(value = "/getOrderPage.json",method = RequestMethod.POST)
+	@ResponseBody
+	public Object getOrderPage (@RequestBody PageRequestModel page){
+		
+		
+		PageResults<Order>result=orderService.getOrderByDate(page.getBeginDate(), page.getEndDate(),null,page.getCuurentPage());	
+		
+		
+		
+	   return result;
 		
 	}
 	

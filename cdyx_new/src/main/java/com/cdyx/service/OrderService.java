@@ -23,7 +23,7 @@ public interface OrderService {
 
 	Order getOrderByTableId(Integer tableId);
 	
-	PageResults<Order> getOrderByDate(Date beginDay,Date endDay,int pageSize,int currentPage);
+	PageResults<Order> getOrderByDate(Date beginDay,Date endDay,Integer pageSize,Integer currentPage);
 
 	List<Order> getAllOrder();
 

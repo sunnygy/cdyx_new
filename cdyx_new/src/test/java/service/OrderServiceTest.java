@@ -23,22 +23,26 @@ public class OrderServiceTest extends BaseTest{
 	private OrderService orderService;
 	
 	@Test
-	public void  testsaveNewOrder(){		
+	public void  testsaveNewOrder(){	
+		
+		for(int j=0;j<10;++j){
 		
 		Order order=new Order();		
-		order.setCode("01");
+		order.setCode("0888");
 		order.setCreateTimer(new Date());
 		order.setDescription("fhsdjhfjsdf");
 		order.setDiscount((short)110);
 		order.setStatus(true);
 		List<OrderDetail>list=new ArrayList<OrderDetail>();
-		for(int i=0;i<10;++i){			
+		for(int i=0;i<2;++i){			
 			OrderDetail detail=new OrderDetail();			
 			detail.setNumbers((short)5);			
 			list.add(detail);
 		}
 		
-		Integer orderId=orderService.saveNewOrder(order,list , 10);
+		Integer orderId=orderService.saveNewOrder(order,list , 10+j);
+		
+		}
 		
 	}
 	
@@ -94,7 +98,7 @@ public class OrderServiceTest extends BaseTest{
 	
 	@Test
 	public void getOrderByDate() throws ParseException{
-		SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+		/*SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 		
 		String beginStr="2016-11-10 00:00:00";
 		
@@ -102,16 +106,15 @@ public class OrderServiceTest extends BaseTest{
 		
 		Date begin=sdf.parse(beginStr);
 		
-		Date end=sdf.parse(endStr);
+		Date end=sdf.parse(endStr);*/
 	
 		
-		PageResults<Order>result=orderService.getOrderByDate(begin, end, 1, 1);
+		PageResults<Order>result=orderService.getOrderByDate(null, null, null, null);
 		
 		List<Order>order=result.getResults();
 		
-		System.out.println("order size:="+order.size());
+		System.out.println("order size:="+order.size());	
 		
-		System.out.println(order.get(0));
 		
 		System.out.println(result.getTotalCount());
 		

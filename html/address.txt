@@ -4,3 +4,11 @@ http://case.quamae.com/demo/canting/menudetail.html菜单详情
 http://case.quamae.com/demo/canting/allmenu.html 所有菜单
 http://case.quamae.com/demo/canting/login.html注册
 http://case.quamae.com/demo/canting/menu.html 点餐详细
+
+
+http://173.254.236.16/canting/ordermenu.html 点餐界面
+http://173.254.236.16/canting/todaymenu.html今日菜单
+http://173.254.236.16/canting/menudetail.html菜单详情
+http://173.254.236.16/canting/allmenu.html 所有菜单
+http://173.254.236.16/canting/login.html注册
+http://173.254.236.16/canting/menu.html 点餐详细

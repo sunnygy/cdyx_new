@@ -1,0 +1,502 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>表格排序-www.jbxue.com</title>
+    <script src="js/lib/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+    $(function() {
+        $('th').click(function() {
+            var date1 = (new Date()).getTime()
+            var dataType = $(this).attr('dataType');
+            var index = $('th').index(this) + 1;
+            var arr = [];
+            var row = $('tbody tr');
+            $.each(row, function(i) {
+                arr[i] = row[i]
+            })
+            if ($(this).hasClass('select')) {
+                arr.reverse()
+            } else {
+                arr.sort(sortStr(index, dataType))
+                $('.select').removeClass();
+                $('td:nth-child(' + index + ')').addClass('select');
+                $(this).addClass('select')
+            }
+            var fragment = document.createDocumentFragment()
+            $.each(arr, function(i) {
+                    fragment.appendChild(arr[i])
+                })
+            $('tbody').append(fragment)
+            var date2 = (new Date()).getTime()
+            $('th span').text(date2 - date1)
+        })
+    })
+
+    function sortStr(index, dataType) {
+        return function(a, b) {
+            var aText = $(a).find('td:nth-child(' + index + ')').text();
+            var bText = $(b).find('td:nth-child(' + index + ')').text();
+            if (dataType != 'roomType') {
+                aText = Parse(aText, dataType)
+                bText = Parse(bText, dataType)
+                return aText > bText ? -1 : bText > aText ? 1 : 0;
+            } else return aText.localeCompare(bText)
+        }
+    }
+
+    function Parse(data, dataType) {
+        switch (dataType) {
+            case 'num':
+                return parseFloat(data) || 0
+            case 'date':
+                return Date.parse(data) || 0
+            default:
+                return splitStr(data)
+        }
+    }
+
+    function splitStr(data) {
+        var re = /^[\$a-zA-z\u4e00-\u9fa5 ]*(.*?)[a-zA-z\u4e00-\u9fa5 ]*$/
+        data = data.replace(re, '$1')
+        return parseFloat(data)
+    }
+    </script>
+    <style type="text/css">
+	    table {
+	        text-align: center;
+	        border: 1px #ccc solid;
+	        border-collapse: collapse;
+	        width: 700px;
+	        font-size: 12px;
+	        font-family: Arial, Helvetica, sans-serif;
+	        color: #666;
+	    }
+	    
+	    tr {
+	        border-bottom: 1px #ccc solid;
+	    }
+	    
+	    td {
+	        padding: .3em 0 .3em 0;
+	    }
+	    
+	    th {
+	        cursor: pointer;
+	        background: url(room-bg.gif) 0 -13px repeat-x;
+	        height: 30px;
+	        color: #009;
+	    }
+	    
+	    td.select {
+	        color: #000;
+	    }
+	    
+	    th.select {
+	        background-image: none;
+	        background-color: #C4D5D9;
+	    }
+    
+    span {}
+    </style>
+</head>
+
+<body>
+    <a href="http://www.jbxue.com" style="font-size:14px; color:#F60">返回文章</a>
+    <table>
+        <thead>
+            <tr>
+                <th dataType="roomNum">房号</th>
+                <th dataType="date">日期</th>
+                <th dataType="roomType">房间类型<span></span></th>
+                <th dataType="num">床位</th>
+                <th dataType="container">容量</th>
+                <th dataType="Float">价格/晚</th>
+                <th dataType="Float">合计</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>u0628</td>
+                <td>9/14/2008</td>
+                <td>Std Hotel Room 2 Double (27 left)</td>
+                <td>2</td>
+                <td>4 人</td>
+                <td>$109.00</td>
+                <td>$436.00</td>
+            </tr>
+            <tr>
+                <td>u0631</td>
+                <td>10/4/2008</td>
+                <td>Lodge Rm/Shared Bath Q (4 left)</td>
+                <td>1</td>
+                <td>2 人</td>
+                <td>$109.00</td>
+                <td>$436.00</td>
+            </tr>
+            <tr>
+                <td>u0636</td>
+                <td>9/18/2008</td>
+                <td>Std Hotel Room Q (34 left)</td>
+                <td>1</td>
+                <td>2 人</td>
+                <td>$117.00</td>
+                <td>$466.00</td>
+            </tr>
+            <tr>
+                <td>u0638</td>
+                <td>9/19/2008</td>
+                <td>Std Hotel Room 2 Q (28 left)</td>
+                <td>2</td>
+                <td>4 人</td>
+                <td>$117.00</td>
+                <td>$466.00</td>
+            </tr>
+            <tr>
+                <td>u0612</td>
+                <td>9/1/2008</td>
+                <td>Studio Condo (10 left)</td>
+                <td>1</td>
+                <td>4 人</td>
+                <td>$149.00</td>
+                <td>$596.00</td>
+            </tr>
+            <tr>
+                <td>u0626</td>
+                <td>9/13/2008</td>
+                <td>Hotel Jr Suite K (4 left)</td>
+                <td>1</td>
+                <td>2 人</td>
+                <td>$149.00</td>
+                <td>$596.00</td>
+            </tr>
+            <tr>
+                <td>u0641</td>
+                <td>9/22/2008</td>
+                <td>Hotel Superior K (26 left)</td>
+                <td>1</td>
+                <td>2 人</td>
+                <td>$149.00</td>
+                <td>$596.00</td>
+            </tr>
+            <tr>
+                <td>u0602</td>
+                <td>8/31/2008</td>
+                <td>1 Bdrm Condo K (96 left)</td>
+                <td>1</td>
+                <td>4 人</td>
+                <td>$169.00</td>
+                <td>$676.00</td>
+            </tr>
+            <tr>
+                <td>u0616</td>
+                <td>10/8/2008</td>
+                <td>Studio Condo Murphy (5 left)</td>
+                <td>NaN</td>
+                <td>4 人</td>
+                <td>$169.00</td>
+                <td>$676.00</td>
+            </tr>
+            <tr>
+                <td>u0623</td>
+                <td>10/2/2008</td>
+                <td>Studio Cabin Q (6 left)</td>
+                <td>1</td>
+                <td>2 人</td>
+                <td>$169.00</td>
+                <td>$676.00</td>
+            </tr>
+            <tr>
+                <td>u0633</td>
+                <td>9/16/2008</td>
+                <td>Studio Q/Murphy (6 left)</td>
+                <td>2</td>
+                <td>4 人</td>
+                <td>$169.00</td>
+                <td>$676.00</td>
+            </tr>
+            <tr>
+                <td>u0637</td>
+                <td>10/5/2008</td>
+                <td>Lodge Room Q (4 left)</td>
+                <td>1</td>
+                <td>2 人</td>
+                <td>$169.00</td>
+                <td>$676.00</td>
+            </tr>
+            <tr>
+                <td>u0622</td>
+                <td>9/11/2008</td>
+                <td>Hotel Loft Ste K/Q (3 left)</td>
+                <td>2</td>
+                <td>4 人</td>
+                <td>$179.00</td>
+                <td>$716.00</td>
+            </tr>
+            <tr>
+                <td>u0629</td>
+                <td>10/10/2008</td>
+                <td>1 Bdrm Condo K (76 left)</td>
+                <td>1</td>
+                <td>4 人</td>
+                <td>$179.00</td>
+                <td>$716.00</td>
+            </tr>
+            <tr>
+                <td>u0603</td>
+                <td>9/8/2008</td>
+                <td>Hotel Loft K/Q (16 left)</td>
+                <td>2</td>
+                <td>4 人</td>
+                <td>$189.00</td>
+                <td>$756.00</td>
+            </tr>
+            <tr>
+                <td>u0632</td>
+                <td>9/15/2008</td>
+                <td>Hotel Loft K/2T (15 left)</td>
+                <td>3</td>
+                <td>4 人</td>
+                <td>$189.00</td>
+                <td>$756.00</td>
+            </tr>
+            <tr>
+                <td>u0619</td>
+                <td>10/1/2008</td>
+                <td>Studio Cabin Firepl K (6 left)</td>
+                <td>1</td>
+                <td>2 人</td>
+                <td>$209.00</td>
+                <td>$836.00</td>
+            </tr>
+            <tr>
+                <td>u0608</td>
+                <td>10/7/2008</td>
+                <td>1 Bdrm Condo with Den K (1 left)</td>
+                <td>1</td>
+                <td>6 人</td>
+                <td>$222.00</td>
+                <td>$886.00</td>
+            </tr>
+            <tr>
+                <td>u0620</td>
+                <td>9/5/2008</td>
+                <td>2 Bdrm Condo K/K (25 left)</td>
+                <td>2</td>
+                <td>6 人</td>
+                <td>$229.00</td>
+                <td>$916.00</td>
+            </tr>
+            <tr>
+                <td>u0630</td>
+                <td>9/7/2008</td>
+                <td>2 Bdrm Condo K/2T (57 left)</td>
+                <td>3</td>
+                <td>6 人</td>
+                <td>$229.00</td>
+                <td>$916.00</td>
+            </tr>
+            <tr>
+                <td>u0634</td>
+                <td>10/11/2008</td>
+                <td>2 Bdrm Condo K/Q (88 left)</td>
+                <td>2</td>
+                <td>6 人</td>
+                <td>$229.00</td>
+                <td>$916.00</td>
+            </tr>
+            <tr>
+                <td>u0639</td>
+                <td>9/20/2008</td>
+                <td>1 Bdrm K/Murphy (19 left)</td>
+                <td>2</td>
+                <td>4 人</td>
+                <td>$229.00</td>
+                <td>$916.00</td>
+            </tr>
+            <tr>
+                <td>u0614</td>
+                <td>9/2/2008</td>
+                <td>2 Bdrm Townhome (7 left)</td>
+                <td>2</td>
+                <td>4 人</td>
+                <td>$239.00</td>
+                <td>$956.00</td>
+            </tr>
+            <tr>
+                <td>u0610</td>
+                <td>9/10/2008</td>
+                <td>1 Bdrm Loft K/Q+2T/Murphy (5 left)</td>
+                <td>5</td>
+                <td>8 人</td>
+                <td>$269.00</td>
+                <td>$1076.00</td>
+            </tr>
+            <tr>
+                <td>u0625</td>
+                <td>9/12/2008</td>
+                <td>2 Bdrm K/Q/Murphy (6 left)</td>
+                <td>3</td>
+                <td>6 人</td>
+                <td>$269.00</td>
+                <td>$1076.00</td>
+            </tr>
+            <tr>
+                <td>u0640</td>
+                <td>9/21/2008</td>
+                <td>Exec. 2 Bdrm K/2Q/Murphy (2 left)</td>
+                <td>4</td>
+                <td>8 人</td>
+                <td>$269.00</td>
+                <td>$1076.00</td>
+            </tr>
+            <tr>
+                <td>u0606</td>
+                <td>9/26/2008</td>
+                <td>2 Bdrm Cabin K/Q+T (2 left)</td>
+                <td>3</td>
+                <td>5 人</td>
+                <td>$279.00</td>
+                <td>$1116.00</td>
+            </tr>
+            <tr>
+                <td>u0613</td>
+                <td>9/29/2008</td>
+                <td>Lodge 2 Bdrm Suite Q/Q (1 left)</td>
+                <td>2</td>
+                <td>4 人</td>
+                <td>$279.00</td>
+                <td>$1116.00</td>
+            </tr>
+            <tr>
+                <td>u0624</td>
+                <td>10/3/2008</td>
+                <td>1 Bdrm Cabin Firepl K (3 left)</td>
+                <td>1</td>
+                <td>4 人</td>
+                <td>$279.00</td>
+                <td>$1116.00</td>
+            </tr>
+            <tr>
+                <td>u0618</td>
+                <td>9/4/2008</td>
+                <td>2 Bdrm Condo w/Den Custom (1 left)</td>
+                <td>2</td>
+                <td>6 人</td>
+                <td>$329.00</td>
+                <td>$1316.00</td>
+            </tr>
+            <tr>
+                <td>u0627</td>
+                <td>10/9/2008</td>
+                <td>3 Bdrm Condo K/Q/Q (6 left)</td>
+                <td>3</td>
+                <td>8 人</td>
+                <td>$339.00</td>
+                <td>$1356.00</td>
+            </tr>
+            <tr>
+                <td>u0642</td>
+                <td>9/23/2008</td>
+                <td>2 Bdrm Cabin Firepl K/Q+T (1 left)</td>
+                <td>3</td>
+                <td>7 人</td>
+                <td>$339.00</td>
+                <td>$1356.00</td>
+            </tr>
+            <tr>
+                <td>u0615</td>
+                <td>9/3/2008</td>
+                <td>3 Bdrm Condo K/Q/2T (2 left)</td>
+                <td>4</td>
+                <td>8 人</td>
+                <td>$379.00</td>
+                <td>$1516.00</td>
+            </tr>
+            <tr>
+                <td>u0607</td>
+                <td>9/9/2008</td>
+                <td>2 Bdrm. Loft K/Q/Q,3T/SS (9 left)</td>
+                <td>6</td>
+                <td>11 人</td>
+                <td>$389.00</td>
+                <td>$1556.00</td>
+            </tr>
+            <tr>
+                <td>u0609</td>
+                <td>9/27/2008</td>
+                <td>Dlx 1 Bdrm Cabin Firepl K (3 left)</td>
+                <td>1</td>
+                <td>4 人</td>
+                <td>$389.00</td>
+                <td>$1556.00</td>
+            </tr>
+            <tr>
+                <td>u0635</td>
+                <td>9/17/2008</td>
+                <td>Exec 2 Bdrm Lft K/K/2Q/SS (1 left)</td>
+                <td>4</td>
+                <td>10 人</td>
+                <td>$399.00</td>
+                <td>$1596.00</td>
+            </tr>
+            <tr>
+                <td>u0621</td>
+                <td>9/6/2008</td>
+                <td>3 Bdrm Townhome (3 left)</td>
+                <td>3</td>
+                <td>6 人</td>
+                <td>$409.00</td>
+                <td>$1636.00</td>
+            </tr>
+            <tr>
+                <td>u0601</td>
+                <td>9/24/2008</td>
+                <td>3 Bdrm Cabin K/Q+T/2T (1 left)</td>
+                <td>5</td>
+                <td>9 人</td>
+                <td>$469.00</td>
+                <td>$1876.00</td>
+            </tr>
+            <tr>
+                <td>u0605</td>
+                <td>9/25/2008</td>
+                <td>Dlx 1Bd Loft,K,Q/T firepl (1 left)</td>
+                <td>3</td>
+                <td>6 人</td>
+                <td>$469.00</td>
+                <td>$1876.00</td>
+            </tr>
+            <tr>
+                <td>u0611</td>
+                <td>9/28/2008</td>
+                <td>Dlx 2 Bdm Cbn Firepl K/2T (3 left)</td>
+                <td>2</td>
+                <td>6 人</td>
+                <td>$469.00</td>
+                <td>$1876.00</td>
+            </tr>
+            <tr>
+                <td>u0604</td>
+                <td>10/6/2008</td>
+                <td>Deluxe 3 Bdrm Condo K/Q/Q (2 left)</td>
+                <td>3</td>
+                <td>8 人</td>
+                <td>$499.00</td>
+                <td>$1996.00</td>
+            </tr>
+            <tr>
+                <td>u0617</td>
+                <td>9/30/2008</td>
+                <td>Dlx3Bdm/2Bth/FP/K/QT/QT (1 left)</td>
+                <td>5</td>
+                <td>8 人</td>
+                <td>$549.00</td>
+                <td>$2196.00</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

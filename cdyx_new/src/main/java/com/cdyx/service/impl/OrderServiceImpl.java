@@ -1,5 +1,7 @@
 package com.cdyx.service.impl;
 
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +16,6 @@ import com.cdyx.dao.TableListDao;
 import com.cdyx.entity.Order;
 import com.cdyx.entity.OrderDetail;
 import com.cdyx.entity.TableList;
-import com.cdyx.model.OrderModel;
 import com.cdyx.service.OrderService;
 
 /**
@@ -75,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 
 	    for (OrderDetail orderDetail : details) {
-        	orderDetail.setOrder(order);
+        	orderDetail.setOrderId(order.getId());
         	detailDao.update(orderDetail);
 		}    
 		
@@ -111,18 +112,29 @@ public class OrderServiceImpl implements OrderService {
 		return order;
 	}
 
-	public PageResults<Order> getOrderByDate(Date beginDay, Date endDay, int pageSize,int currentPage) {
+	public PageResults<Order> getOrderByDate(Date beginDay, Date endDay, Integer pageSize,Integer currentPage) {
 		
-		String hql="FROM Order o WHERE o.createTimer >=?  AND o.createTimer <=? ";
+			if(beginDay==null){
+				Calendar calendar = Calendar.getInstance();	
+				calendar.set(Calendar.HOUR, 0);
+				calendar.set(Calendar.MINUTE, 0);
+				calendar.set(Calendar.SECOND, 0);				
+				endDay=calendar.getTime();
+				beginDay=DateUtil.addDay(endDay, -1);
+			}
+		if(pageSize==null)
+			pageSize=10;
 		
-		String countHql="SELECT COUNT(*) FROM Order o WHERE o.createTimer >=?  AND o.createTimer <=? ";	
+		if(currentPage==null)
+			currentPage=1;		
+		
+		String hql="FROM Order o WHERE o.createTimer >=?  AND o.createTimer <? ";
+		
+		String countHql="SELECT COUNT(*) FROM Order o WHERE o.createTimer >=?  AND o.createTimer < ? ";	
 		
 		endDay=DateUtil.addDay(endDay, 1);
 		
-		PageResults<Order>result=orderDao.findPageByFetchedHql(hql, countHql, currentPage, pageSize,beginDay,endDay);	
-		
-		
-				
+		PageResults<Order>result=orderDao.findPageByFetchedHql(hql, countHql, currentPage, pageSize,beginDay,endDay);                                         				
 		
 		return result;
 	}

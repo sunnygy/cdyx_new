@@ -48,7 +48,7 @@ public class Order implements Serializable {
     @Column(name="people_type")
     private String peopleType="C";    
     
-    @ManyToOne( cascade = CascadeType.ALL, targetEntity=OrderType.class)
+    @ManyToOne( cascade = CascadeType.ALL, targetEntity=OrderType.class,fetch = FetchType.EAGER)
     @JoinColumn(name = "order_type_id",unique = true)
     private OrderType orderType;
 
@@ -67,7 +67,7 @@ public class Order implements Serializable {
     @Column(name="order_status")
     private boolean status=false;
 
-    @OneToMany(targetEntity =OrderDetail.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name="order_id")
     private List<OrderDetail> details=new ArrayList<OrderDetail>();
     
