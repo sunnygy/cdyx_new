@@ -1,6 +1,7 @@
 package com.cdyx.service.impl;
 
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import com.cdyx.dao.TableListDao;
 import com.cdyx.entity.Order;
 import com.cdyx.entity.OrderDetail;
 import com.cdyx.entity.TableList;
+import com.cdyx.model.TodayOrderModel;
 import com.cdyx.service.OrderService;
 
 /**
@@ -44,42 +46,23 @@ public class OrderServiceImpl implements OrderService {
         tableListDao.update(tableList);
 
         order.setTable(tableList);
-        order.setStatus(true);
+        order.setStatus(1);
         order.setCode("aaaaa");//TODO
         order.setCreateTimer(new Date());
-        order.setDetails(details);       
+        order.setDetails(details);
         
-            
-
-        //TODO send message to table and ckechin Today order and  ALL order
-
-        return  (Integer)orderDao.save(order);
+       return  (Integer)orderDao.save(order);
     }
 
 
 	
-	public void updateOrder(Order order, List<OrderDetail> details, Integer tableId) {
+	public void updateOrder(Order order, TableList table) {
 		
-		if(tableId!=null){
-			TableList tableList=new TableList();
-	        tableList.setId(tableId);
-	        tableList.setStatus(true);
-	        tableListDao.update(tableList);
-	        if(order!=null)
-				order.setTable(tableList);
-				
-	        
-		}
-		if(order!=null){
+		if(table!=null)			
+			order.setTable(table);
 		
-			orderDao.update(order);
-		}
-
-	    for (OrderDetail orderDetail : details) {
-        	orderDetail.setOrderId(order.getId());
-        	detailDao.update(orderDetail);
-		}    
-		
+	    orderDao.update(order);
+			
 		
 	}
 
@@ -116,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
 		
 			if(beginDay==null){
 				Calendar calendar = Calendar.getInstance();	
-				calendar.set(Calendar.HOUR, 0);
+				calendar.set(Calendar.HOUR_OF_DAY, 0);
 				calendar.set(Calendar.MINUTE, 0);
 				calendar.set(Calendar.SECOND, 0);				
 				endDay=calendar.getTime();
@@ -138,6 +121,57 @@ public class OrderServiceImpl implements OrderService {
 		
 		return result;
 	}
+	
+	
+
+
+
+	public TodayOrderModel getTodayOrder() {
+		
+		Calendar calendar = Calendar.getInstance();	
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		
+		Date today=calendar.getTime();
+		
+		Date endDay=DateUtil.addDay(today,1);
+		
+		String hql="FROM Order o WHERE o.createTimer >=?  AND o.createTimer < ? ";
+		
+		List<Order>orders=orderDao.getListByHQL(hql, today,endDay);
+		
+		if(orders.size()>0){
+			
+			TodayOrderModel model=new TodayOrderModel();
+			
+			BigDecimal processBill=new BigDecimal(0);
+			
+			BigDecimal finishedBill=new BigDecimal(0);			
+			
+			for (Order order : orders) {
+				
+				if(order.getStatus().equals(1)){					
+					model.getProcessOrders().add(order);
+					processBill=processBill.add(order.getTotalPrice());
+				}else if(order.getStatus().equals(2)){					
+					model.getFinishedOrders().add(order);	
+					finishedBill=finishedBill.add(order.getTotalPrice());
+				}				
+				
+			}			
+			
+			model.setProcessBill(processBill);			
+			model.setFinishedBill(finishedBill);
+			
+			
+			return model;
+			
+			
+		}		
+		
+		return null;
+	}
 
 
 
@@ -153,10 +187,6 @@ public class OrderServiceImpl implements OrderService {
 		
 		return null;
 	}
-
-
-
-
 
 
 }

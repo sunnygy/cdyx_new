@@ -15,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cdyx.common.util.PageResults;
 import com.cdyx.entity.Order;
 import com.cdyx.entity.OrderDetail;
+import com.cdyx.entity.TableList;
 import com.cdyx.model.PageRequestModel;
+import com.cdyx.model.TodayOrderModel;
 import com.cdyx.service.OrderService;
 
 
@@ -42,9 +44,9 @@ public class OrderMangerController {
 	
 	
 	@RequestMapping(value = "/updateOrder.htm",method = RequestMethod.POST)
-	public Object updateOrder(@RequestBody Integer  tableId,@RequestBody Order  order,@RequestBody List<OrderDetail>  orderDetails){	
+	public Object updateOrder(@RequestBody TableList  table,@RequestBody Order  order){	
 		
-		     orderService.updateOrder(order, orderDetails, tableId);			
+		  		
 		
 	   return null;
 		
@@ -76,6 +78,20 @@ public class OrderMangerController {
 	
 		
 		view.addObject("result", result);
+		
+	   return view;
+		
+	}
+	
+	@RequestMapping(value = "/goTodayOrder.htm")
+	public ModelAndView goTodayOrder(){	
+		
+		ModelAndView view=new ModelAndView("/todayOrder");
+		
+		TodayOrderModel orders=orderService.getTodayOrder();
+	
+		
+		view.addObject("orders", orders);
 		
 	   return view;
 		

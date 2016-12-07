@@ -31,8 +31,7 @@ public class OrderServiceTest extends BaseTest{
 		order.setCode("0888");
 		order.setCreateTimer(new Date());
 		order.setDescription("fhsdjhfjsdf");
-		order.setDiscount((short)110);
-		order.setStatus(true);
+		order.setDiscount((short)110);		
 		List<OrderDetail>list=new ArrayList<OrderDetail>();
 		for(int i=0;i<2;++i){			
 			OrderDetail detail=new OrderDetail();			
@@ -46,19 +45,7 @@ public class OrderServiceTest extends BaseTest{
 		
 	}
 	
-	@Test
-	public void testupdateOrder(){
-
-		Order order=new Order();
-		order.setId(5);
-		order.setStatus(false);
-
-		OrderDetail detail=new OrderDetail();
-
-
-
-
-	}
+	
 	
 	@Test
 	public void deleteOrder(){
@@ -123,6 +110,29 @@ public class OrderServiceTest extends BaseTest{
 		
 	}
 	
+	@Test
+	public void getTodayOrder(){
+		
+		
+		List<Order>orders=orderService.getTodayOrder();
+		
+		System.out.println(orders.size());
+	}
+	
+	
+	@Test
+	public void updateOrderStatus(){	
+		
+		Order order=new Order();
+		
+		order.setId(34);
+		
+		
+		orderService.updateOrder(order,null);
+		
+		
+		
+	}
 	
 	
 	

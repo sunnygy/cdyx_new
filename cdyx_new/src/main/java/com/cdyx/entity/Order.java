@@ -29,7 +29,15 @@ public class Order implements Serializable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
+	
+	public static final Integer CLOSE_ORDER=0;
+	
+	public static final Integer CURRENT_ORDER=1;
+	
+	public static final Integer FINISH_ORDER=2;
+	
+	
 
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -65,7 +73,7 @@ public class Order implements Serializable {
     private String description;
 
     @Column(name="order_status")
-    private boolean status=false;
+    private Integer status=1;
 
     @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name="order_id")
@@ -144,15 +152,15 @@ public class Order implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}	
+
+	public Integer getStatus() {
+		return status;
 	}
 
-	public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public Integer getPeopleNum() {
 		return peopleNum;
