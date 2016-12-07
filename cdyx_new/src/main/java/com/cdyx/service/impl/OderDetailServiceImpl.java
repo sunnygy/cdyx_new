@@ -21,7 +21,7 @@ public class OderDetailServiceImpl implements OrderDetailService{
 	public List<OrderDetail> getAllDetailsByOrderId(Integer orderId) {
 		
 		
-		String sql="SELECT * FROM order_detail WHERE　order_id＝？　";
+		String sql="SELECT * FROM order_detail WHERE　order_id＝?　";
 		
 		
 		List<OrderDetail>details=detailDao.getListBySQL(sql, orderId);
@@ -32,5 +32,27 @@ public class OderDetailServiceImpl implements OrderDetailService{
 		
 		return null;
 	}
+
+
+
+
+	public void addOrderDetail(List<OrderDetail> detail) {
+		
+		Integer id;
+		
+		for (OrderDetail orderDetail : detail) {			
+			id=(Integer) detailDao.save(orderDetail);
+			
+			//通知前台
+			
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
 
 }

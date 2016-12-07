@@ -30,6 +30,9 @@ public class OrderDetail {
     @Column(name="order_detail_price")
     private BigDecimal detailPrice;
     
+    @Column(name="order_detail_status")
+    private Boolean status=false;
+    
   
     @Column(name="order_id")
     private  Integer orderId;
@@ -83,4 +86,14 @@ public class OrderDetail {
     public void setDetailPrice(BigDecimal detailPrice) {
         this.detailPrice = detailPrice;
     }
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+    
+    
 }

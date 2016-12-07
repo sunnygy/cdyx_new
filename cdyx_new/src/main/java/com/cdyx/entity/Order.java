@@ -125,7 +125,11 @@ public class Order implements Serializable {
     }
 
     public BigDecimal getTotalPrice() {
-        return totalPrice;
+    	
+    	BigDecimal price=new BigDecimal(0);
+    	
+    	
+        return price;
     }
 
     public void setTotalPrice(BigDecimal totalPrice) {

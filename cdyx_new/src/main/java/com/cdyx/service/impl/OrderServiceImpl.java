@@ -51,7 +51,15 @@ public class OrderServiceImpl implements OrderService {
         order.setCreateTimer(new Date());
         order.setDetails(details);
         
-       return  (Integer)orderDao.save(order);
+        Integer id=(Integer) orderDao.save(order);
+        
+        
+        
+        
+        
+        
+        
+        return  id;
     }
 
 

@@ -55,7 +55,7 @@ public class TableList {
         this.description = description;
     }
 
-    public Boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 

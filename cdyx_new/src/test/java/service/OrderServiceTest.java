@@ -11,12 +11,17 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.cdyx.common.util.JsonUtil;
 import com.cdyx.common.util.PageResults;
 import com.cdyx.entity.Order;
 import com.cdyx.entity.OrderDetail;
+import com.cdyx.model.TodayOrderModel;
 import com.cdyx.service.OrderService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.BaseTest;
+import net.sf.json.util.JSONUtils;
 public class OrderServiceTest extends BaseTest{
 	
 	@Autowired
@@ -69,14 +74,20 @@ public class OrderServiceTest extends BaseTest{
 	}
 	
 	@Test
-	public void getAllOrder(){
+	public void getAllOrder() throws JsonProcessingException{
+		
+		 ObjectMapper mapper = new ObjectMapper(); 
 
 		List<Order>orders=orderService.getAllOrder();
 		
 		for (Order order : orders) {			
+				
+				System.out.println(JsonUtil.toJson(order));
+				
+			}
 			
-			System.out.println(order.getTable().getCode());
-		}
+			
+		
 	
 		
 		
@@ -114,9 +125,9 @@ public class OrderServiceTest extends BaseTest{
 	public void getTodayOrder(){
 		
 		
-		List<Order>orders=orderService.getTodayOrder();
+		TodayOrderModel orders=orderService.getTodayOrder();
 		
-		System.out.println(orders.size());
+		//System.out.println(orders.size());
 	}
 	
 	

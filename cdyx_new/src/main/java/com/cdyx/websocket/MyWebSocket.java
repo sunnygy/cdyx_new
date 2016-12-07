@@ -30,7 +30,7 @@ public class MyWebSocket {
     @OnOpen
     public void onOpen(Session session){
         this.session = session;//加入set中
-        addOnlineCount();           //在线数加1
+        addOnlineCount();     //在线数加1
         UserPool.add(this);
         System.out.println("有新连接加入！当前在线人数为" + getOnlineCount());
     }

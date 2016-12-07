@@ -8,6 +8,9 @@ public interface OrderDetailService {
 	
 	List<OrderDetail> getAllDetailsByOrderId(Integer orderId);
 	
+	
+	void addOrderDetail(List<OrderDetail> detail);
+	
 			
 
 }
