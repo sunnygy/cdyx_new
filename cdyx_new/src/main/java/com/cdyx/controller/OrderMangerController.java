@@ -4,6 +4,8 @@ package com.cdyx.controller;
 
 
 import java.util.List;
+
+import com.cdyx.model.OrderRquestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,15 +32,21 @@ public class OrderMangerController {
 	
 	
 	@Autowired
-	private OrderService orderService;		
-	
-	
-	@RequestMapping(value = "/addNewOrder.htm",method = RequestMethod.POST)
-	public Object addNewOrder(@RequestBody Integer  tableId,@RequestBody Order  order,@RequestBody List<OrderDetail>  orderDetails){	
+	private OrderService orderService;
+
+
+
+	@RequestMapping(value = "/addNewOrder.json",method = RequestMethod.POST)
+	@ResponseBody
+	public Object addNewOrder(@RequestBody OrderRquestModel orderModel){
+
+
 		
-		Integer orderId=orderService.saveNewOrder(order, orderDetails, tableId);			
+		Integer orderId=orderService.saveNewOrder(orderModel.getOrder(), orderModel.getDetails(), orderModel.getTableId());
 		
-	   return orderId;
+
+		
+	   return "aaaaaaaaaaaaaaaaaaaaaaaaaaa";
 		
 	}
 	

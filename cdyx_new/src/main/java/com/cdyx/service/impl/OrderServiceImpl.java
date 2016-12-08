@@ -1,6 +1,7 @@
 package com.cdyx.service.impl;
 
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cdyx.common.util.DateUtil;
+import com.cdyx.common.util.JsonUtil;
 import com.cdyx.common.util.PageResults;
+import com.cdyx.common.util.UserPool;
 import com.cdyx.dao.OrderDao;
 import com.cdyx.dao.OrderDetailDao;
 import com.cdyx.dao.TableListDao;
@@ -19,6 +22,7 @@ import com.cdyx.entity.OrderDetail;
 import com.cdyx.entity.TableList;
 import com.cdyx.model.TodayOrderModel;
 import com.cdyx.service.OrderService;
+import com.cdyx.websocket.MyWebSocket;
 
 /**
  * Created by guyu on 2016/11/19.
@@ -51,13 +55,16 @@ public class OrderServiceImpl implements OrderService {
         order.setCreateTimer(new Date());
         order.setDetails(details);
         
-        Integer id=(Integer) orderDao.save(order);
-        
-        
-        
-        
-        
-        
+        Integer id=(Integer) orderDao.save(order);        
+        List<MyWebSocket> list= UserPool.getUserPool();        
+        for (MyWebSocket myWebSocket : list) {        	
+        	try {
+				myWebSocket.sendMessage(JsonUtil.toJson(order));
+			} catch (IOException e) {				
+				e.printStackTrace();
+			}
+			
+		}     
         
         return  id;
     }

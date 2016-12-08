@@ -60,7 +60,7 @@
 
         //将消息显示在网页上
         function setMessageInnerHTML(data){
-            document.getElementById('message').innerHTML += innerHTML + '<br/>';
+            console.debug(data);
         }
 
         //关闭连接
