@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>餐厅管理-菜单</title>
+    <meta name="description" content="">
+    <meta name="author" content="Administrator">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+    <link href="css/ionicons.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/bootstrap-select.css">
+    <!--[if lte IE 8]>
+          <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+        <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <!--<script src="assets/js/ace-extra.min.js"></script>-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.min.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+    <link href="css/base.css" rel="stylesheet" />
+    <link href="css/menuselect.css" rel="stylesheet" />
+    <script src="js/lib/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="js/lib/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/talk.js" type="text/javascript"></script>
+    <script src="js/function.js" type="text/javascript"></script>
+    <!-- <script></script> -->
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="photoperson">
+                <strong>FASHABLE</strong>
+                <img src="img/photo.png" />
+                <div class="photoperson_le"><i>园宝的爱</i><span></span></div>
+            </div>
+            <div class="navbar">
+                <div class="accordion accordion2" id="accordion-1">
+                    <div class="accordion-group accordion-groupa">
+                        <div class="accordion-heading" data-toggle="collapse" data-parent="#accordion-1" href="#accordion-element-1">
+                            <a class="accordion-toggle collapsed">
+                                <i class="iconall iconmenu1"></i>
+                                <strong>餐厅管理</strong>
+                            </a>
+                            <i class="icon ion-ios-arrow-right"></i>
+                            <span class="badgecircle color_b"></span>
+                        </div>
+                        <div id="accordion-element-1" class="accordion-body collapse">
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakework">
+                                <a href="">今日菜单</a>
+                            </div>
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakejia">
+                                <a href="">历史菜单</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="accordion accordion2" id="accordion-2">
+                    <div class="accordion-group accordion-groupa">
+                        <div class="accordion-heading" data-toggle="collapse" data-parent="#accordion-2" href="#accordion-element-2">
+                            <a class="accordion-toggle collapsed">
+                                <i class="iconall iconmenu2"></i>
+                                <strong>菜品管理</strong>
+                            </a>
+                            <i class="icon ion-ios-arrow-right"></i>
+                            <span class="badgecircle color_b"></span>
+                        </div>
+                        <div id="accordion-element-2" class="accordion-body collapse">
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakework">
+                                <a href="">午餐 <i class="icon ion-ios-arrow-left"></i><span class="badge">20</span></a>
+                            </div>
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakejia">
+                                <a href="">晚餐<i class="icon ion-ios-arrow-left"></i></a>
+                            </div>
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakeout">
+                                <a href="">酒水<i class="icon ion-ios-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3>清单汇总</h3>
+                <div class="accordion accordion2" id="accordion-3">
+                    <div class="accordion-group accordion-groupa accordion-groupcolor">
+                        <div class="accordion-heading" data-toggle="collapse" data-parent="#accordion-3" href="#accordion-element-3">
+                            <a class="accordion-toggle collapsed">
+                                <i class="iconall iconmenu3"></i>
+                                <strong>看单</strong>
+                            </a>
+                            <i class="icon ion-ios-arrow-right"></i>
+                            <span class="badgecircle color_b"></span>
+                        </div>
+                        <div id="accordion-element-3" class="accordion-body collapse">
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakework">
+                                <a href="">午餐 <i class="icon ion-ios-arrow-left"></i><span class="badge">20</span></a>
+                            </div>
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakejia">
+                                <a href="">晚餐<i class="icon ion-ios-arrow-left"></i></a>
+                            </div>
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakeout">
+                                <a href="">酒水<i class="icon ion-ios-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion accordion2" id="accordion-4">
+                    <div class="accordion-group accordion-groupa accordion-groupcolor">
+                        <div class="accordion-heading" data-toggle="collapse" data-parent="#accordion-4" href="#accordion-element-4">
+                            <a class="accordion-toggle collapsed">
+                                <i class="iconall iconmenu4"></i>
+                                <strong>消费</strong>
+                            </a>
+                            <i class="icon ion-ios-arrow-right"></i>
+                            <span class="badgecircle color_b"></span>
+                        </div>
+                        <div id="accordion-element-4" class="accordion-body collapse">
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakework">
+                                <a href="">午餐 <i class="icon ion-ios-arrow-left"></i><span class="badge">20</span></a>
+                            </div>
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakejia">
+                                <a href="">晚餐<i class="icon ion-ios-arrow-left"></i></a>
+                            </div>
+                            <div class="accordion-inner" data-toggle="tab" href="#magemakeout">
+                                <a href="">酒水<i class="icon ion-ios-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-wrapper">
+            <div class="boxcon">
+                <div class="row-fluid header-magement clearfix">
+                    <button class="pull-left" id="buttonright">
+                        <i class="glyphicon glyphicon-align-justify fontsize20"></i>
+                    </button>
+                    <ul class="breadcrumb">
+                        <li class="breadname">
+                            点餐ORDER <span>|</span>
+                        </li>
+                        <i class="icon-home"></i>
+                        <li class="mr_10">
+                            <a href="#">首页</a>
+                        </li>
+                        <li>
+                            <span class="divider">></span>
+                            <a href="#">菜单管理</a>
+                        </li>
+                        <li class="active">
+                            <span class="divider">></span> 午餐
+                        </li>
+                    </ul>
+                    <span class="header-time">2016年10月28日 18:17:25</span>
+                    <div class="header-login">
+                        <i class="icon-circle"></i> 欢迎回来圆宝的爱 - 上次登录 2016/10/22
+                    </div>
+                </div>
+                <div class="webg clearfix">
+                    <div class="momule_box">
+                        <div class="momule_search">
+                            <i>分类：</i>
+                            <select class="form-control selectpicker">
+                                <option>lunch/午餐</option>
+                                <option>dinner/晚餐</option>
+                            </select>
+                        </div>
+                        <ul class="momule_list">
+                            <li class="active"><strong><i>海鲜炒面(Seafood fried...)</i></strong><span>410</span></li>
+                            <li><strong><i>成都龙抄手(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>蒜泥白肉(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>一品口水鸡(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>夫妻肺片(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>蒜泥黄瓜(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>成都龙抄手(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>蒜泥白肉(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>一品口水鸡(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>成都龙抄手(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>蒜泥白肉(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>一品口水鸡(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>夫妻肺片(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>蒜泥黄瓜(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>成都龙抄手(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>蒜泥白肉(Seafood fried noodles)</i></strong><span>410</span></li>
+                            <li><strong><i>一品口水鸡(Seafood fried noodles)</i></strong><span>410</span></li>
+                        </ul>
+
+                    </div>
+                    <div class="momule_content">
+                        <div class="allemncontent">
+                            <div class="allmenu">
+                                餐单MENU
+                                <i></i>
+                            </div>
+                            <div class="momule_now">
+                                当前桌号<span>28</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <i class="iconall icontimeome"></i>当前时间
+                                <strong id="timeget"></strong>
+                            </div>
+                            <div class="momule_sele clearfix">
+                                <div class="momule_selesingle">
+                                    <i>人数:</i>
+                                    <input type="" name="" class="form-control controlA" value="4" id="mnum">
+                                </div>
+                                <div class="momule_selesingle">
+                                    <i>客人:</i>
+                                    <select class="form-control form-controlA selectpicker">
+                                        <option>A</option>
+                                        <option>C</option>
+                                    </select>
+                                    <!-- <span class="trangle"></span> -->
+                                </div>
+                                <div class="momule_selesingle" id="mselectf">
+                                    <i>种类:</i>
+                                    <select class="form-control form-controlA selectpicker">
+                                        <option>中餐</option>
+                                        <option>晚餐</option>
+                                    </select>
+                                    <!-- <span class="trangle"></span> -->
+                                </div>
+                                <div class="momule_selesingle">
+                                    <i>辣度:</i>
+                                    <select class="form-control form-controlA selectpicker">
+                                        <option>微辣</option>
+                                        <option>中辣</option>
+                                    </select>
+                                    <!-- <span class="trangle"></span> -->
+                                </div>
+                            </div>
+                            <div class="momule_sele clearfix">
+                                <div class="momule_selesingle mar_20" id="ttnum">
+                                    <i>菜号:</i>
+                                    <input type="" name="" class="form-control form-controlB controlA" value="410">
+                                </div>
+                                <div class="momule_selesingle">
+                                    <i>份数:</i>
+                                    <select class="form-control form-controlA selectpicker">
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select>
+                                    <!-- <span class="trangle"></span> -->
+                                </div>
+                            </div>
+                            <div class="hselect clearfix">
+                                <span class="pull-left">已选菜</span>
+                                <div class="hselectmenu pull-right">
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="motbn clearfix">
+                                <button class="btn btn-danger btn-cance" type="button">取消</button>
+                                <button class="btn btn-danger btn-sure" type="button">确定</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="allmenu allmenusd">
+                            成都印象 ChengDuYinXiang
+                            <i></i>
+                        </div>
+                        <div class="toptable">
+                            <span>桌号Table:<i>23</i></span>
+                            <span>时间Time: <i>November,28,21:14PM</i></span>
+                            <span>人数People:<i>5</i></span>
+                            <span>类型Type:<i>dinenr</i></span>
+                        </div>
+                        <table class="table tablescrol">
+                            <thead>
+                                <tr>
+                                    <th>Menu</th>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Charge</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tshowtmenu" style="overflow: scroll;">
+                                <tr>
+                                    <td class="cpr" id="tmenu">410</td>
+                                    <td id="tname">海鲜炒面</td>
+                                    <td id="tquantuty">1</td>
+                                    <td>$6.50</td>
+                                    <td><i class="iconall icontimetable"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="momutotal clearfix">
+                            <span class="pull-left">共计Total：</span>
+                            <span class="pull-right">$6.50</span>
+                        </div>
+                        <div class="munolsbtn">
+                            <button class="btn" id="checkout">CHECK OUT</button>
+                            <button class="btn">PRINT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script type="text/javascript">
+    // $(".tablescrol").height($(window).height()-645);
+    </script>
+
+</html>

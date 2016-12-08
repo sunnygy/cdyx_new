@@ -1,0 +1,369 @@
+@font-face{
+	font-family:Hiragino; 
+	src:url('../fonts/Hiragino Sans GB W3.otf');
+}
+*{
+	font-family:Hiragino;
+}
+/*a,button,input{ 
+
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0);    
+
+   -webkit-user-modify: read-write-plaintext-only;
+   
+
+}*/
+.wrapper{
+	width: 100%;
+}
+ul{
+	list-style: none;
+}
+.sidebar{
+	width: 290px;
+	position: absolute;
+	top:0;
+	background: -webkit-linear-gradient(top, rgba(10, 116, 176, 1), rgba(49, 172, 188, 1));    /* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(top, rgba(10, 116, 176, 1), rgba(49, 172, 188, 1));    /* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(top, rgba(10, 116, 176, 1), rgba(49, 172, 188, 1));    /* Firefox 3.6 - 15 */
+	background: linear-gradient(top, rgba(10, 116, 176, 1), rgba(49, 172, 188, 1));
+	color: #fff;
+	z-index: 999;
+	/*overflow:auto;*/
+	/*min-height: 760px;*/
+	height: 100%;
+}
+.page-wrapper{
+	margin:0 0 0 290px;
+}
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px; 
+}
+i{
+	font-style: normal;
+}
+strong{
+	font-weight: normal;
+}
+/*图标*/
+.iconall{
+	background: url(../img/iconall.png) no-repeat 0 0;
+	display: inline-block;
+}
+.iconmenu1{
+	width: 27px;
+	height: 25px;
+	vertical-align:middle;
+}
+.iconmenu2{
+	background: url(../img/iconall.png) no-repeat 0px -25px;
+	width: 27px;
+	height: 25px;
+	vertical-align:middle;
+}
+.iconmenu3{
+	background: url(../img/iconall.png) no-repeat 0px -46px;
+	width: 26px;
+	height: 20px;
+	vertical-align:middle;
+}
+.iconmenu4{
+	background: url(../img/iconall.png) no-repeat 0px -67px;
+	width: 27px;
+	height: 29px;
+	vertical-align:middle;
+}
+.icontime{
+	background: url(../img/iconall.png) no-repeat -26px 0px;
+	width: 32px;
+	height: 32px;
+	vertical-align:middle;
+}
+.icontimeome{
+	background: url(../img/iconall.png) no-repeat -58px 0px;
+	width: 30px;
+	height: 30px;
+	vertical-align:middle;
+	margin-right: 12px;
+}
+.icontimetable{
+	background: url(../img/iconall.png) no-repeat -29px -33px;
+	width: 45px;
+	height: 45px;
+	vertical-align:middle;
+}
+.icon_delete{
+	background: url(../img/iconall.png) no-repeat -90px -20px;
+	width: 20px;
+	height: 20px;
+	vertical-align:middle;
+	margin:-3px 6px 0 -6px;
+}
+.icon_cancer{
+	background: url(../img/iconall.png) no-repeat -90px -40px;
+	width: 18px;
+	height: 18px;
+	vertical-align:middle;
+	margin:-3px 6px 0 -6px;
+}
+.icon_modify{
+	background: url(../img/iconall.png) no-repeat -90px 0px;
+	width:20px;
+	height: 19px;
+	vertical-align:middle;
+	margin:-3px 6px 0 -6px;
+}
+/*菜单*/
+.sidefooter{
+	/*position: absolute;*/
+	bottom: 8px;
+	color:#9befff;
+	left:20px;
+	padding-top: 30px;
+	text-align: center;
+}
+.badgecircle {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+    padding:0;
+    float: right;
+    margin-right: 42px;
+    margin-top: 18px;
+}
+.accordion-heading{
+	font-size: 16px;
+	line-height: 46px;
+	padding-left: 18px;
+}
+.accordion-heading strong{
+	margin-left: 26px;
+}
+.accordion-active {
+    background: #35bfec;
+}
+.photoperson strong{
+	display: block;
+	font-size: 20px;
+	font-weight: normal;
+	letter-spacing: 4px;
+	margin-bottom: 36px;
+}
+.photoperson{
+	text-align: center;
+	margin-top: 13px;
+}
+.photoperson img{
+	width: 23%;
+}
+.photoperson_le{
+	margin-top: 10px;
+    margin-bottom: 26px;
+}
+.photoperson span{
+    border-top: 4px solid #fff;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    display: inline-block;
+    margin: 1px 0 0 7px;
+    padding-top: -3px;
+    line-height: 28px;
+    vertical-align: middle;
+}
+.accordion-heading a{
+	color:#fff;
+}
+.accordion-body{
+	padding-left: 77px;	
+	padding-top: 4px;
+}
+.accordion-body a{
+	line-height: 44px;
+	color:#fff;
+	font-size: 15px;
+}
+.accordion{
+	cursor: pointer;	
+}
+.accordionbody-active{
+	background: #056496;
+}
+.badge{
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 17px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #fb9678;
+    border-radius: 8px;
+    float: right;
+    margin-right: 20px;
+    margin-top: 14px;
+}
+.accordion-group i.icon{
+	float: right;
+	margin-right: 14px;
+	color: #98e6f9;
+}
+.accordion2 .badgecircle{
+	margin-right: 21px;
+}
+.color_b{
+	background: #98e6f9;
+}
+.color_bf{
+	color:#48ecff;
+}
+.navbar h3{
+	font-size: 18px;
+	padding:8px 0 4px 18px;
+}
+a:hover{
+	text-decoration: none;
+}
+/*.accordion-groupcolor .accordion-heading{
+	background: #2da6bb;
+}*/
+.accordion-groupa .accordion-body a:hover{
+	color:#48ecff;	
+}
+/*菜单结束*/
+/*点餐*/
+.header-magement{
+    padding: 16px 25px;
+    margin-bottom: 0px;
+    list-style: none;
+    background-color: #fff;
+    border-radius: 0px;
+    border-bottom: 1px solid #ccc;	
+    padding-right: 10px;
+}
+.breadcrumb>li+li:before {
+    padding: 0px;
+    color: #ccc;
+    content: " ";
+}
+.breadcrumb>li {
+    font-size: 16px;
+}
+.breadcrumb>li a{
+	color:#999;
+}
+.breadcrumb>.active {
+    color:#6caaf7;
+}
+.breadcrumb{
+    padding: 0px;
+    margin-bottom: 0px;
+    list-style: none;
+    background-color: #fff;
+    border-radius: 0px;
+    float: left;
+}
+.divider {
+    font-size: 18px;
+}
+.header-magement .header-time{
+	float: left;
+	padding-top: 5px;
+	font-size: 16px;
+	margin-left: 9%;
+}
+.header-login{
+	float: right;
+	padding-top: 5px;
+	font-size: 16px;
+}
+li.breadname{
+	font-size: 20px;
+}
+li.breadname span{
+	color:#999;
+	padding:0 10px;
+} 
+.icon-home{
+	background: url(../img/icon-home.png) no-repeat;
+	height: 20px;
+	width: 20px;
+	display: inline-block;
+	margin-right: 6px;
+	position: absolute;
+	top:21px;
+}
+.mr_10{
+	margin-left:32px;
+}
+.pab_40{
+	padding-bottom: 44px;
+}
+.icon-circle{
+	background: url(../img/icon-circle.png) no-repeat;
+	height: 12px;
+	width: 12px;
+	display: inline-block;
+	margin-right: 6px;
+}
+.fontsize20{
+    color: #6caaf7;
+    background: #fff;
+    top: 2px;
+    font-size: 20px;
+    left: -7px;
+}
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: rgba(0, 0, 0, 0.3);	/*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);*/
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255, 0, 0, 0.4);
+}
+#buttonright {
+    background: none;
+    border: none;
+    /*display: none;*/
+}
+button:focus{
+	outline: none;
+}
+.btn-manage{
+    padding: 5px 18px;
+    font-size: 18px;
+    color: #fff;
+    background: #42a8ff;
+    border-radius: 7px;
+    margin-right: 9px;
+}
+.btn-priadd:hover{
+    color: #fff;
+    background: #3288d1;	
+}
+.btn-priadele{
+    color: #3b8cff;
+    background: none;
+    border: 1px solid #71b8f4;
+}
+.btn-priadele:hover{
+    color: #71b8f4;
+}
