@@ -10,6 +10,7 @@
     <meta name="format-detection" content="telephone=no">
     <link href="css/ionicons.min.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/csshake.css" rel="stylesheet" />
     <!--[if lte IE 8]>
           <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
         <![endif]-->
@@ -340,7 +341,7 @@
     <script type="text/javascript" src="js/jquery.tablesort.js"></script>
         <script>
         $(function(){
-            $(".table-responsive").height($(window).height()-257);
+            $(".table-responsive").height($(window).height());
             $('.table').tablesort().data('tablesort');
 
             $('thead th.number').data('sortBy', function(th, td, sorter) {
