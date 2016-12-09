@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.cdyx.common.util.DateUtil;
+import com.cdyx.common.util.GenerateOrderCode;
 import com.cdyx.entity.Order;
 
 public class mainTest {
@@ -20,6 +21,8 @@ public class mainTest {
 		
 		System.out.println(today.toString());
 		System.out.println(endDay.toString());*/
+
+		System.out.println(GenerateOrderCode.getOrderNo());
 		
 		
 		

@@ -3,9 +3,6 @@ package com.cdyx.controller;
 
 
 
-import java.util.List;
-
-import com.cdyx.model.OrderRquestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cdyx.common.util.PageResults;
 import com.cdyx.entity.Order;
-import com.cdyx.entity.OrderDetail;
 import com.cdyx.entity.TableList;
 import com.cdyx.model.PageRequestModel;
 import com.cdyx.model.TodayOrderModel;
@@ -38,15 +34,13 @@ public class OrderMangerController {
 
 	@RequestMapping(value = "/addNewOrder.json",method = RequestMethod.POST)
 	@ResponseBody
-	public Object addNewOrder(@RequestBody OrderRquestModel orderModel){
+	public Object addNewOrder(@RequestBody Order order){
 
 
-		
-		Integer orderId=orderService.saveNewOrder(orderModel.getOrder(), orderModel.getDetails(), orderModel.getTableId());
-		
+		Integer id=orderService.saveNewOrder(order);
 
 		
-	   return "aaaaaaaaaaaaaaaaaaaaaaaaaaa";
+	    return id;
 		
 	}
 	

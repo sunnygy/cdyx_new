@@ -1,9 +1,12 @@
 package com.cdyx.entity;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="table_list")
+@DynamicUpdate(true)
 public class TableList {
 	
 	private static final Integer hall_TYPE=1;

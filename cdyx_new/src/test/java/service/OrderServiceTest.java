@@ -2,12 +2,16 @@ package service;
 
 
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.cdyx.entity.OrderType;
+import com.cdyx.entity.TableList;
+import com.cdyx.service.TableService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,25 +30,46 @@ public class OrderServiceTest extends BaseTest{
 	
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private TableService tableService;
 	
 	@Test
 	public void  testsaveNewOrder(){	
 		
 		for(int j=0;j<10;++j){
 		
-		Order order=new Order();		
-		order.setCode("0888");
-		order.setCreateTimer(new Date());
-		order.setDescription("fhsdjhfjsdf");
-		order.setDiscount((short)110);		
-		List<OrderDetail>list=new ArrayList<OrderDetail>();
-		for(int i=0;i<2;++i){			
-			OrderDetail detail=new OrderDetail();			
-			detail.setNumbers((short)5);			
-			list.add(detail);
-		}
-		
-		Integer orderId=orderService.saveNewOrder(order,list , 10+j);
+			Order order=new Order();
+			order.setDescription("fhsdjhfjsdf");
+			order.setDiscount((short)110);
+			order.setPeopleNum(5);
+
+			List<OrderDetail>list=new ArrayList<OrderDetail>();
+			for(int i=0;i<2;++i){
+				OrderDetail detail=new OrderDetail();
+				detail.setNumbers((short)5);
+				list.add(detail);
+			}
+
+			order.setDetails(list);
+
+			TableList table=new TableList();
+			table.setId(11);
+			table.setStatus(true);
+
+			order.setTable(table);
+
+			OrderType type=new OrderType();
+
+			type.setId(4);
+
+			order.setOrderType(type);
+
+
+			Integer orderId=orderService.saveNewOrder(order);
+
+
+
 		
 		}
 		

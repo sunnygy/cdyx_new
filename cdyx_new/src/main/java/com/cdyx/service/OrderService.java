@@ -17,7 +17,7 @@ import com.cdyx.model.TodayOrderModel;
  */
 public interface OrderService {
 
-    Integer saveNewOrder(Order order, List<OrderDetail> orderDetails, Integer tableId);
+    Integer saveNewOrder(Order order);
 
 	void updateOrder(Order order,TableList table);
 

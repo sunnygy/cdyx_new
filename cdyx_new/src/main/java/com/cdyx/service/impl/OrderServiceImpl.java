@@ -7,13 +7,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.cdyx.common.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cdyx.common.util.DateUtil;
-import com.cdyx.common.util.JsonUtil;
-import com.cdyx.common.util.PageResults;
-import com.cdyx.common.util.UserPool;
 import com.cdyx.dao.OrderDao;
 import com.cdyx.dao.OrderDetailDao;
 import com.cdyx.dao.TableListDao;
@@ -31,7 +28,7 @@ import com.cdyx.websocket.MyWebSocket;
 public class OrderServiceImpl implements OrderService {
 
 
-    @Autowired
+	@Autowired
     private OrderDao orderDao;
 
     @Autowired
@@ -42,20 +39,26 @@ public class OrderServiceImpl implements OrderService {
 
 
     
-	public Integer saveNewOrder(Order order, List<OrderDetail> details, Integer tableId) {
-        TableList tableList=new TableList();
-        tableList.setId(tableId);
-        tableList.setStatus(true);
-        tableList.setCode("01");
-        tableListDao.update(tableList);
+	public Integer saveNewOrder(Order order) {
 
-        order.setTable(tableList);
-        order.setStatus(1);
-        order.setCode("aaaaa");//TODO
-        order.setCreateTimer(new Date());
-        order.setDetails(details);
-        
-        Integer id=(Integer) orderDao.save(order);        
+		String sql="UPDATE Table_list SET table_status=true WHERE table_id= ?";
+
+
+		tableListDao.querySql(sql,order.getTable().getId());
+
+
+
+
+		order.setStatus(1);
+		order.setCode(GenerateOrderCode.getOrderNo());
+		order.setCreateTimer(new Date());
+
+
+
+       Integer id= (Integer) orderDao.save(order);
+
+
+
         List<MyWebSocket> list= UserPool.getUserPool();        
         for (MyWebSocket myWebSocket : list) {        	
         	try {
@@ -64,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
 				e.printStackTrace();
 			}
 			
-		}     
+		}
         
         return  id;
     }

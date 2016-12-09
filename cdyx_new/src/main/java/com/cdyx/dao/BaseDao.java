@@ -153,6 +153,9 @@ public interface BaseDao <T, ID extends Serializable>{
      * @return PageResults的封装类，里面包含了页码的信息以及查询的数据List集合
      */
     public  PageResults<T> findPageByFetchedHql(String hql, String countHql, int pageNo, int pageSize, Object... values);
+
+
+    public Session getSession();
     
     
   

@@ -56,7 +56,7 @@ public class Order implements Serializable {
     @Column(name="people_type")
     private String peopleType="C";    
     
-    @ManyToOne( cascade = CascadeType.ALL, targetEntity=OrderType.class,fetch = FetchType.EAGER)
+    @ManyToOne( cascade = CascadeType.MERGE, targetEntity=OrderType.class,fetch = FetchType.EAGER)
     @JoinColumn(name = "order_type_id",unique = true)
     private OrderType orderType;
 
@@ -79,7 +79,7 @@ public class Order implements Serializable {
     @JoinColumn(name="order_id")
     private List<OrderDetail> details=new ArrayList<OrderDetail>();
     
-    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="table_id",unique=true)
     private TableList table;
 

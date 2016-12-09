@@ -82,16 +82,21 @@ public class TableServiceImpl implements TableService {
 
 
 
-	public Integer saveOrUpdateTable(TableList table) {
+	public void  updateTable(TableList table) {
 
-        //TODO update get Table Id
-        Integer tableId=null;
 
-        tableListDao.saveOrUpdate(table);
 
-        return tableId;
+        tableListDao.update(table);
+
+
     }
 
+	public Integer saveTable(TableList table) {
+
+		Integer id =(Integer)tableListDao.save(table);
+
+		return id;
+	}
 
 	public void deleteTable(Integer id) {
 

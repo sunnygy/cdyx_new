@@ -15,7 +15,9 @@ public interface TableService {
 
     TableList getTableById(Integer id);
 
-    Integer saveOrUpdateTable(TableList table);
+    void updateTable(TableList table);
+
+    Integer saveTable(TableList table);
 
     void deleteTable(Integer id);
 

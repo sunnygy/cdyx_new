@@ -22,7 +22,8 @@
             return parseInt(td.text(), 10);
         });
         
-        //=====================================================websocket define============================================================================= 
+        //=====================================================websocket define=============================================================================
+
         var websocket = null;
 
         //判断当前浏览器是否支持WebSocket
@@ -60,7 +61,20 @@
 
         //将消息显示在网页上
         function setMessageInnerHTML(data){
-            console.debug(data);
+
+            var dataObj=JSON.parse(data);
+
+
+            if(dataObj.status==1){//未结算
+
+
+
+            }else{//已结算
+
+
+
+            }
+            console.debug(dataObj);
         }
 
         //关闭连接
