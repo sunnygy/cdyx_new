@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.cdyx.common.util.*;
+import com.cdyx.dao.MenuDao;
+import com.cdyx.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import com.cdyx.entity.TableList;
 import com.cdyx.model.TodayOrderModel;
 import com.cdyx.service.OrderService;
 import com.cdyx.websocket.MyWebSocket;
+
+import javax.xml.soap.Detail;
 
 /**
  * Created by guyu on 2016/11/19.
@@ -38,31 +42,69 @@ public class OrderServiceImpl implements OrderService {
     private TableListDao tableListDao;
 
 
+	@Autowired
+	private MenuDao menuDao;
+
+
+
+
     
 	public Integer saveNewOrder(Order order) {
 
 		String sql="UPDATE Table_list SET table_status=true WHERE table_id= ?";
-
-
 		tableListDao.querySql(sql,order.getTable().getId());
-
-
-
 
 		order.setStatus(1);
 		order.setCode(GenerateOrderCode.getOrderNo());
 		order.setCreateTimer(new Date());
+		order.setDiscount((short)100);
+
+		List<OrderDetail>details=order.getDetails();
+
+		if(details.size()>0){
+
+			BigDecimal totalPrice=new BigDecimal(0);
+
+			for (OrderDetail detail :details) {
+
+				BigDecimal detailPrice=new BigDecimal(0);
+
+				Integer menuId=detail.getMenu().getId();
+
+				Menu menu=menuDao.get(menuId);
+
+				detailPrice=menu.getPrice().multiply(new BigDecimal(detail.getNumbers()));
+
+				totalPrice=totalPrice.add(detailPrice);
+				detail.setDetailPrice(detailPrice);
+				detail.setStatus(false);
+				detail.setStartTime(new Date());
 
 
+			}
+			order.setTotalPrice(totalPrice);
 
-       Integer id= (Integer) orderDao.save(order);
 
+		}
 
+        Integer id= (Integer) orderDao.save(order);
+
+		orderDao.getSession().evict(order);
+
+		if(details.size()>0){
+			for (OrderDetail detail :details) {
+
+				detail.setOrderId(id);
+				detailDao.save(detail);
+
+			}
+		}
 
         List<MyWebSocket> list= UserPool.getUserPool();        
         for (MyWebSocket myWebSocket : list) {        	
         	try {
-				myWebSocket.sendMessage(JsonUtil.toJson(order));
+
+				myWebSocket.sendMessage(JsonUtil.toJson(orderDao.get(id)));
 			} catch (IOException e) {				
 				e.printStackTrace();
 			}
@@ -207,4 +249,47 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 
+	public void closeOrder(Order order) {
+
+
+		List<OrderDetail>details=order.getDetails();
+
+		BigDecimal totalPrice=new BigDecimal(0);
+
+		for (OrderDetail detail :details) {
+
+			totalPrice=totalPrice.add(detail.getDetailPrice());
+
+		}
+
+		totalPrice=totalPrice.multiply(new BigDecimal((float)order.getDiscount()/100));
+
+
+		String sql="UPDATE table_list SET table_status=false WHERE table_id= ?";
+
+		tableListDao.querySql(sql,order.getTable().getId());
+
+
+		String sql2="UPDATE order_info SET end_time= ?,total_price= ?, order_status= ?  WHERE order_id= ?  ";
+
+		orderDao.querySql(sql2,new Date(),totalPrice,order.getStatus(),order.getId());
+
+
+		Order orderJson=orderDao.getByHQL("FROM Order WHERE id= ? ",order.getId());
+		orderJson.setDetails(null);
+
+
+		List<MyWebSocket> list= UserPool.getUserPool();
+		for (MyWebSocket myWebSocket : list) {
+			try {
+				myWebSocket.sendMessage(JsonUtil.toJson(orderJson));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+
+
+	}
 }

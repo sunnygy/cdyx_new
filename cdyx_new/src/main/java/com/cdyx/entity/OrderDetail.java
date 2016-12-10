@@ -21,6 +21,10 @@ public class OrderDetail {
     @JoinColumn(name = "menu_id",unique = true)
     private Menu menu;
 
+    @Column(name="start_time_detail")
+    private Date startTime;
+
+
     @Column(name="end_time_detail")
     private Date endTimer;
 
@@ -31,7 +35,7 @@ public class OrderDetail {
     private BigDecimal detailPrice;
     
     @Column(name="order_detail_status")
-    private Boolean status=false;
+    private Boolean status=false;//未做完
     
   
     @Column(name="order_id")
@@ -79,8 +83,14 @@ public class OrderDetail {
         this.numbers = numbers;
     }
 
-    public BigDecimal getDetailPrice() {
-        return detailPrice;
+    public BigDecimal getDetailPrice() {return detailPrice;}
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
     public void setDetailPrice(BigDecimal detailPrice) {

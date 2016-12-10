@@ -3,6 +3,7 @@ package com.cdyx.controller;
 
 
 
+import com.cdyx.model.NewOrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,6 +44,19 @@ public class OrderMangerController {
 	    return id;
 		
 	}
+
+	@RequestMapping(value = "/finishOrder.json",method = RequestMethod.POST)
+	@ResponseBody
+	public Object finnishOrder(@RequestBody Order order){
+
+		orderService.closeOrder(order);
+
+
+		return null;
+
+	}
+
+
 	
 	
 	@RequestMapping(value = "/updateOrder.htm",method = RequestMethod.POST)

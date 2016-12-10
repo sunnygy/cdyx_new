@@ -1,7 +1,9 @@
 package main;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.prefs.BackingStoreException;
 
 import com.cdyx.common.util.DateUtil;
 import com.cdyx.common.util.GenerateOrderCode;
@@ -22,7 +24,16 @@ public class mainTest {
 		System.out.println(today.toString());
 		System.out.println(endDay.toString());*/
 
-		System.out.println(GenerateOrderCode.getOrderNo());
+		//System.out.println(GenerateOrderCode.getOrderNo());
+
+
+		Short discount=90;
+
+		float a=(float)discount/100;
+
+
+
+		System.out.print(a);
 		
 		
 		

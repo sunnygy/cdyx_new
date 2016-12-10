@@ -8,7 +8,6 @@ import com.cdyx.common.util.PageResults;
 import com.cdyx.entity.Order;
 import com.cdyx.entity.OrderDetail;
 import com.cdyx.entity.TableList;
-import com.cdyx.model.OrderModel;
 import com.cdyx.model.TodayOrderModel;
 
 
@@ -30,6 +29,9 @@ public interface OrderService {
 	List<Order> getAllOrder();
 	
 	TodayOrderModel getTodayOrder();
+
+
+	void closeOrder(Order order);
 	
 	
 

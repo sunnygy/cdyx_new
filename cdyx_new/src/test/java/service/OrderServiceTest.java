@@ -9,16 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.cdyx.entity.OrderType;
-import com.cdyx.entity.TableList;
+import com.cdyx.entity.*;
 import com.cdyx.service.TableService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cdyx.common.util.JsonUtil;
 import com.cdyx.common.util.PageResults;
-import com.cdyx.entity.Order;
-import com.cdyx.entity.OrderDetail;
 import com.cdyx.model.TodayOrderModel;
 import com.cdyx.service.OrderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -45,9 +42,12 @@ public class OrderServiceTest extends BaseTest{
 			order.setPeopleNum(5);
 
 			List<OrderDetail>list=new ArrayList<OrderDetail>();
+			Menu menu=new Menu();
+			menu.setId(1);
 			for(int i=0;i<2;++i){
 				OrderDetail detail=new OrderDetail();
 				detail.setNumbers((short)5);
+				detail.setMenu(menu);
 				list.add(detail);
 			}
 

@@ -14,7 +14,7 @@ public class Menu {
     @Column(name="menu_id")
     private Integer id;
 
-    @ManyToOne( cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY,targetEntity= MenuType.class )  
+    @ManyToOne( cascade =CascadeType.PERSIST,fetch = FetchType.LAZY,targetEntity= MenuType.class )
     @JoinColumn(name="menu_type_id")
     private MenuType type;   
 

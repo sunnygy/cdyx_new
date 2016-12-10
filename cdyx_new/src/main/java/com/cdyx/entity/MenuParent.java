@@ -33,10 +33,7 @@ public class MenuParent {
     private String cnName;
 
     @Column(name="desc_menu_parent")
-    private String description;    
-    
-    @OneToMany(targetEntity =MenuType.class,cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)   
-    private List<MenuType> types=new ArrayList<MenuType>();
+    private String description;
 
 
     public Integer getId() {
@@ -71,12 +68,5 @@ public class MenuParent {
         this.description = description;
     }
 
-	public List<MenuType> getTypes() {
-		return types;
-	}
-
-	public void setTypes(List<MenuType> types) {
-		this.types = types;
-	}
     
 }

@@ -26,7 +26,7 @@ public class MenuParentServiceTest extends BaseTest{
 	public void  getAllMenuParents(){
 		
 		
-		List<MenuParent>parents=menuParentService.getAllMenuParent();
+		/*List<MenuParent>parents=menuParentService.getAllMenuParent();
 		
 		for (MenuParent menuParent : parents) {
 			
@@ -35,7 +35,7 @@ public class MenuParentServiceTest extends BaseTest{
 			System.out.println(types.size());
 			
 		}
-		
+		*/
 	
 		
 		

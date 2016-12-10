@@ -13,6 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <script type="text/javascript" src="<%=root %>/web/js/sort.js"></script>
     <script type="text/javascript" src="<%=root %>/web/js/jquery.tablesort.js"></script>
+    <script type="text/javascript" src="<%=root%>/web/js/dateFormat.js"></script>
     <script type="text/javascript">    
     $(function(){
         $(".table-responsive").height($(window).height()-297);
@@ -64,17 +65,87 @@
 
             var dataObj=JSON.parse(data);
 
+            console.debug(dataObj.createTimer);
 
             if(dataObj.status==1){//未结算
 
 
+                var tt=$("#home").find("tbody tr:last-child");
 
-            }else{//已结算
+                var str='<tr>'+
+                        '<td>'+dataObj.code+'</td>'+
+                        '<td>'+dataObj.table.code+'</td>'+
+                        '<td>'+getSmpFormatDateByLong(dataObj.createTimer.time,true)+'</td>'+
+                        '<td>'+dataObj.peopleNum+'</td>'+
+                        '<td>'+dataObj.peopleType+'</td>'+
+                        '<td>'+dataObj.orderType.typeName+'</td>'+
+                        '<td>'+dataObj.totalPrice+'</td>'+
+                        '<td>'+dataObj.discount+'%</td>'+
+                        '<td>未结算</td>'+
+                        '<td>'+dataObj.description+'</td>'+
+                        '</tr>'
+
+                if($(tt).length!=0){
+                    $(tt).after(str);
+                }else{
+                    $("#home").find("tbody").append(str);
+
+                }
+
+
+
+
+            }else if(dataObj.status==2){//已结算
+
+
+
+                var strFinished='<tr>'+
+                        '<td>'+dataObj.code+'</td>'+
+                        '<td>'+dataObj.table.code+'</td>'+
+                        '<td>'+getSmpFormatDateByLong(dataObj.createTimer.time,true)+'</td>'+
+                        '<td>'+dataObj.peopleNum+'</td>'+
+                        '<td>'+dataObj.peopleType+'</td>'+
+                        '<td>'+dataObj.orderType.typeName+'</td>'+
+                        '<td>'+dataObj.totalPrice+'</td>'+
+                        '<td>'+dataObj.discount+'%</td>'+
+                        '<td>已结算</td>'+
+                        '<td>'+dataObj.description+'</td>'+
+                        '</tr>'
+
+
+
+                var ttr=$("#profile").find("tbody tr:last-child");
+                var homeTr=$("#home").find("tbody tr");
+
+                $(homeTr).each(function(i,n){
+
+                    var code= $(n).find("td:first-child").text();
+
+                    if(code==dataObj.code){
+                        console.debug(code);
+                        $(n).remove();
+
+                    }
+
+                });
+
+
+                if($(ttr).length!=0) {
+                    $("#profile").find("tbody tr:last-child").after(strFinished);
+
+                }else{
+                    $("#profile").find("tbody").append(strFinished);
+
+                }
+
+
+
+
 
 
 
             }
-            console.debug(dataObj);
+
         }
 
         //关闭连接
@@ -238,7 +309,6 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="no-sort">序号</th>
                                             <th class="no-sort">餐单号</th>
                                             <th class="no-sort">桌号</th>
                                             <th>时间</th>
@@ -254,8 +324,7 @@
                                     <tbody>
 	                                     <c:if test="${orders!=null}">
 	                                    		<c:forEach items="${orders.processOrders}" var="order" varStatus="status">
-			                                        <tr>
-													<td><i class="tabl_colume">${status.index+1}</i></td>
+                                                    <tr>
 													<td>${order.code}</td>
 													<td>${order.table.code}</td>
 													<td><fmt:formatDate value="${order.createTimer}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
@@ -282,7 +351,6 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="no-sort">序号</th>
                                             <th class="no-sort">餐单号</th>
                                             <th class="no-sort">桌号</th>
                                             <th>时间</th>
@@ -299,7 +367,6 @@
                                         <c:if test="${orders!=null}">
 	                                    		<c:forEach items="${orders.finishedOrders}" var="order" varStatus="status">
 			                                        <tr>
-														<td><i class="tabl_colume">${status.index+1}</i></td>
 														<td>${order.code}</td>
 														<td>${order.table.code}</td>
 														<td><fmt:formatDate value="${order.createTimer}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>

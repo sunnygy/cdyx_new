@@ -27,7 +27,7 @@ public class MenuType {
     @Column(name="menu_type_id")
     private Integer id;
     
-    @ManyToOne(cascade =CascadeType.REFRESH,targetEntity =MenuParent.class)
+    @ManyToOne(cascade =CascadeType.REFRESH,targetEntity =MenuParent.class,fetch=FetchType.LAZY)
     @JoinColumn(name="menu_parent_id")
     private MenuParent  menuParent;
 
@@ -39,9 +39,6 @@ public class MenuType {
 
     @Column(name="desc_menu_type")
     private String description;
-    
-    @OneToMany(targetEntity=Menu.class,cascade =CascadeType.REFRESH,fetch = FetchType.LAZY)  
-    private List<Menu>menus=new ArrayList<Menu>();
 
 
     public Integer getId() {
@@ -76,12 +73,5 @@ public class MenuType {
         this.description = description;
     }
 
-	public List<Menu> getMenus() {
-		return menus;
-	}
-
-	public void setMenus(List<Menu> menus) {
-		this.menus = menus;
-	}
     
 }

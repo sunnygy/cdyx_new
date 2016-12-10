@@ -75,11 +75,11 @@ public class Order implements Serializable {
     @Column(name="order_status")
     private Integer status=1;
 
-    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade=CascadeType.REMOVE,fetch = FetchType.LAZY)
     @JoinColumn(name="order_id")
     private List<OrderDetail> details=new ArrayList<OrderDetail>();
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade=CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name="table_id",unique=true)
     private TableList table;
 
@@ -124,17 +124,9 @@ public class Order implements Serializable {
         this.discount = discount;
     }
 
-    public BigDecimal getTotalPrice() {
-    	
-    	BigDecimal price=new BigDecimal(0);
-    	
-    	
-        return price;
-    }
+    public BigDecimal getTotalPrice() { return totalPrice;}
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+    public void setTotalPrice(BigDecimal totalPrice) {this.totalPrice = totalPrice;}
 
     public String getDescription() {
         return description;
