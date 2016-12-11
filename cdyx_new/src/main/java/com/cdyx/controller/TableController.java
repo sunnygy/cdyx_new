@@ -30,7 +30,7 @@ public class TableController {
 	public ModelAndView goTableListPage(HttpServletRequest request, HttpServletResponse response){
 		
 		ModelAndView model=new ModelAndView("/table");		
-		List<TableListModel> tables=tableService.getAllTables();		
+		List<TableList> tables=tableService.getAllTables();
 		model.addObject("tables",tables);						
 		return model;		
 	}

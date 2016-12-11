@@ -27,13 +27,13 @@ public class TableServiceTest extends BaseTest{
 	public void  getAllTablesStatus(){
 		
 		
-		List<TableListModel>tables=tableService.getAllTables();
+	/*	List<TableList>tables=tableService.getAllTables();
 		
 		for (TableListModel tableListModel : tables) {
 			
 			System.out.println(tableListModel);
 		
-		}
+		}*/
 		
 		
 		

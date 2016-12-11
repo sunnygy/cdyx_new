@@ -3,7 +3,7 @@ package com.cdyx.controller;
 import com.cdyx.common.util.UserPool;
 import com.cdyx.entity.Employee;
 import com.cdyx.service.EmployService;
-import com.cdyx.websocket.MyWebSocket;
+import com.cdyx.websocket.OrderWebSocket;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,11 +25,11 @@ public class TestController {
     @RequestMapping(value = "/callback")
     public Object receiveMessage() {
 
-        List<MyWebSocket> list= UserPool.getUserPool();
+        List<OrderWebSocket> list= UserPool.getUserPool();
 
         for (int i = 0; i < list.size(); i++) {
 
-            MyWebSocket socket=list.get(i);
+            OrderWebSocket socket=list.get(i);
 
             String message="It's ok for all";
 

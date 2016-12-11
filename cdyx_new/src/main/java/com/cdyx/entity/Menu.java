@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name="menu")
 public class Menu {
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="menu_id")
@@ -16,7 +17,16 @@ public class Menu {
 
     @ManyToOne( cascade =CascadeType.PERSIST,fetch = FetchType.LAZY,targetEntity= MenuType.class )
     @JoinColumn(name="menu_type_id")
-    private MenuType type;   
+    private MenuType type;
+
+    @ManyToOne( cascade =CascadeType.PERSIST,fetch = FetchType.LAZY,targetEntity= MenuParent.class )
+    @JoinColumn(name="menu_parent_type_id")
+    private MenuParent parentType;
+
+    @Column(name="menu_code")
+    private String code;
+
+
 
     @Column(name="en_name_menu")
     private String enName;
@@ -90,5 +100,21 @@ public class Menu {
 
     public void setPicPath(String picPath) {
         this.picPath = picPath;
+    }
+
+    public MenuParent getParentType() {
+        return parentType;
+    }
+
+    public void setParentType(MenuParent parentType) {
+        this.parentType = parentType;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

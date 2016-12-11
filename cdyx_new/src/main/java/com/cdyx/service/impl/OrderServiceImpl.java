@@ -10,6 +10,7 @@ import java.util.List;
 import com.cdyx.common.util.*;
 import com.cdyx.dao.MenuDao;
 import com.cdyx.entity.Menu;
+import com.cdyx.websocket.OrderWebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +22,6 @@ import com.cdyx.entity.OrderDetail;
 import com.cdyx.entity.TableList;
 import com.cdyx.model.TodayOrderModel;
 import com.cdyx.service.OrderService;
-import com.cdyx.websocket.MyWebSocket;
-
-import javax.xml.soap.Detail;
 
 /**
  * Created by guyu on 2016/11/19.
@@ -100,11 +98,11 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 
-        List<MyWebSocket> list= UserPool.getUserPool();        
-        for (MyWebSocket myWebSocket : list) {        	
+        List<OrderWebSocket> list= UserPool.getUserPool();
+        for (OrderWebSocket orderWebSocket : list) {
         	try {
 
-				myWebSocket.sendMessage(JsonUtil.toJson(orderDao.get(id)));
+				orderWebSocket.sendMessage(JsonUtil.toJson(orderDao.get(id)));
 			} catch (IOException e) {				
 				e.printStackTrace();
 			}
@@ -145,12 +143,9 @@ public class OrderServiceImpl implements OrderService {
 	public Order getOrderByTableId(Integer tableId) {		
 		
 		String sql="SELECT a.* FROM order_info as a  LEFT JOIN table_list as b ON a.table_id=b.table_id " +
-				"WHERE b.table_status=true AND a.order_status=true AND b.table_id=? ";
+				"WHERE a.order_status=true AND b.table_id=? ";
 		
 		Order order=orderDao.getBySQL(sql, tableId);
-		
-		System.out.println(order.getTable().getId());
-		
 		
 		return order;
 	}
@@ -207,22 +202,25 @@ public class OrderServiceImpl implements OrderService {
 			
 			BigDecimal processBill=new BigDecimal(0);
 			
-			BigDecimal finishedBill=new BigDecimal(0);			
+			BigDecimal totalBill=new BigDecimal(0);
 			
 			for (Order order : orders) {
 				
 				if(order.getStatus().equals(1)){					
 					model.getProcessOrders().add(order);
 					processBill=processBill.add(order.getTotalPrice());
-				}else if(order.getStatus().equals(2)){					
-					model.getFinishedOrders().add(order);	
-					finishedBill=finishedBill.add(order.getTotalPrice());
-				}				
+				}else if(order.getStatus().equals(2)){
+
+                    model.getFinishedOrders().add(order);
+                }
+
+                totalBill=totalBill.add(order.getTotalPrice());
 				
 			}			
 			
-			model.setProcessBill(processBill);			
-			model.setFinishedBill(finishedBill);
+			model.setProcessBill(processBill);
+
+			model.setTotalBill(totalBill);
 			
 			
 			return model;
@@ -279,10 +277,10 @@ public class OrderServiceImpl implements OrderService {
 		orderJson.setDetails(null);
 
 
-		List<MyWebSocket> list= UserPool.getUserPool();
-		for (MyWebSocket myWebSocket : list) {
+		List<OrderWebSocket> list= UserPool.getUserPool();
+		for (OrderWebSocket orderWebSocket : list) {
 			try {
-				myWebSocket.sendMessage(JsonUtil.toJson(orderJson));
+				orderWebSocket.sendMessage(JsonUtil.toJson(orderJson));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

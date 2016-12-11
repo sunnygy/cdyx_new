@@ -1,6 +1,6 @@
 package com.cdyx.common.util;
 
-import com.cdyx.websocket.MyWebSocket;
+import com.cdyx.websocket.OrderWebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,19 +17,19 @@ public class UserPool {
 
     private static Logger LOG = LoggerFactory.getLogger(UserPool.class);
 
-    private static List<MyWebSocket> USER_POOL = new ArrayList<MyWebSocket>();
+    private static List<OrderWebSocket> USER_POOL = new ArrayList<OrderWebSocket>();
 
-    public static synchronized  void add(MyWebSocket socket) {
+    public static synchronized  void add(OrderWebSocket socket) {
         USER_POOL.add(socket);
         LOG.info("user [" + socket.getSession().getId() + "] connected");
     }
 
-    public static void remove(MyWebSocket socket) {
+    public static void remove(OrderWebSocket socket) {
         USER_POOL.remove(socket);
         LOG.info("user [" + socket.getSession().getId() + "] closed");
     }
 
-    public static synchronized List<MyWebSocket> getUserPool() {
+    public static synchronized List<OrderWebSocket> getUserPool() {
         return USER_POOL;
     }
 }

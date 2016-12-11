@@ -13,9 +13,11 @@ public class TodayOrderModel {
 	
 	private List<Order> finishedOrders=new ArrayList<Order>();	
 	
-	private BigDecimal processBill;	
+	private BigDecimal processBill;
+
+	private BigDecimal totalBill;
 	
-	private BigDecimal finishedBill;
+
 
 	public List<Order> getProcessOrders() {
 		return processOrders;
@@ -41,18 +43,11 @@ public class TodayOrderModel {
 		this.processBill = processBill;
 	}
 
-	public BigDecimal getFinishedBill() {
-		return finishedBill;
+	public BigDecimal getTotalBill() {
+		return totalBill;
 	}
 
-	public void setFinishedBill(BigDecimal finishedBill) {
-		this.finishedBill = finishedBill;
+	public void setTotalBill(BigDecimal totalBill) {
+		this.totalBill = totalBill;
 	}
-	
-	
-	
-	
-	
-	
-
 }

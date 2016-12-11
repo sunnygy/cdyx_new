@@ -20,11 +20,14 @@ $(document).ready(function() {
 	var addMenu;
 	$(".momule_list").find('li').click(function(event) {
 		var menuText = $(this).children('strong').children('i').html();
-		addMenu = "<strong>" + menuText + "<img src='./img/delete.png'/></strong>";
+		var addMenuCode=$(this).children('span').html();
+		addMenu = "<strong>" + menuText +addMenuCode+"份数:"+ "<img src='/web/img/delete.png'/></strong>";
+
 		$(".hselectmenu").append(addMenu);
 		$(".hselectmenu").find('img').click(function(event) {
 			$(this).parent().remove();
 		});
+
 	});
 	var i = 0;
 	$(".btn-sure").click(function(event) {
@@ -32,12 +35,11 @@ $(document).ready(function() {
 		var ztime = $("#timeget").html();
 		var mnum = $("#mnum").val();
 		var mselectf = $("#mselectf").find('select').val();
-		$(".toptable span").eq(0).children('i').html(znum);
+		/*$(".toptable span").eq(0).children('i').html(znum);
 		$(".toptable span").eq(1).children('i').html(ztime);
 		$(".toptable span").eq(2).children('i').html(mnum);
-		$(".toptable span").eq(3).children('i').html(mselectf);
+		$(".toptable span").eq(3).children('i').html(mselectf);*/
 		var tmenu = $("#ttnum").find('input').val();
-		console.log(tmenu);
 		var tmuentest = $(".hselectmenu").children('strong').html();
 		var arr = new Array();
 		arr = tmuentest.split('(');
@@ -66,12 +68,18 @@ $(document).ready(function() {
 	})
 	var scrTop;var momule_h;
 	momule_h = $('.momule_content').height();
-	console.log(momule_h);
-	$(".sidebar").height(momule_h+120);
-	$(".sidebar").height(winh+scrTop);
+
+	$(".sidebar").height(winh);
+	var momule_list = $(".momule_list").height();
+
+
+	
 	$(window).on('click',function(){
 		momule_h = $('.momule_content').height();
-		console.log(momule_h);
-		$(".sidebar").height(momule_h+120);
+		if(momule_h > momule_list){
+			// debugger;
+			$(".sidebar").height(momule_h+200);
+		}
 	})
+
 })

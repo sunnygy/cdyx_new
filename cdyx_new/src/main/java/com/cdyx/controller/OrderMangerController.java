@@ -3,21 +3,22 @@ package com.cdyx.controller;
 
 
 
+import com.cdyx.entity.*;
 import com.cdyx.model.NewOrderModel;
+import com.cdyx.service.MenuParentService;
+import com.cdyx.service.MenuService;
+import com.cdyx.service.OrderTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cdyx.common.util.PageResults;
-import com.cdyx.entity.Order;
-import com.cdyx.entity.TableList;
 import com.cdyx.model.PageRequestModel;
 import com.cdyx.model.TodayOrderModel;
 import com.cdyx.service.OrderService;
+
+import java.util.List;
 
 
 /**
@@ -30,6 +31,15 @@ public class OrderMangerController {
 	
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private MenuParentService menuParentService;
+
+	@Autowired
+	private MenuService menuService;
+
+	@Autowired
+	private OrderTypeService orderTypeService;
 
 
 
@@ -53,6 +63,20 @@ public class OrderMangerController {
 
 
 		return null;
+
+	}
+
+
+	@RequestMapping(value = "/getOrderPage.json",method = RequestMethod.POST)
+	@ResponseBody
+	public Object getOrderPage (@RequestBody PageRequestModel page){
+
+
+		PageResults<Order>result=orderService.getOrderByDate(page.getBeginDate(), page.getEndDate(),null,page.getCuurentPage());
+
+
+
+		return result;
 
 	}
 
@@ -112,19 +136,34 @@ public class OrderMangerController {
 	   return view;
 		
 	}
-	
-	@RequestMapping(value = "/getOrderPage.json",method = RequestMethod.POST)
-	@ResponseBody
-	public Object getOrderPage (@RequestBody PageRequestModel page){
-		
-		
-		PageResults<Order>result=orderService.getOrderByDate(page.getBeginDate(), page.getEndDate(),null,page.getCuurentPage());	
-		
-		
-		
-	   return result;
-		
+
+
+	@RequestMapping(value = "/goTableOrder.html")
+	public ModelAndView goTableOrder(@RequestParam Integer tableId){
+
+		ModelAndView view=new ModelAndView("/tableOrder");
+
+		List<MenuParent> menuParents=menuParentService.getAllMenuParent();
+		List<Menu>menus=menuService.getAllMenu();
+		Order order=orderService.getOrderByTableId(tableId);
+		List<OrderType>orderTypes=orderTypeService.getAllOrderTypes();
+
+
+
+
+		view.addObject("tableId",tableId);
+		view.addObject("order", order);
+		view.addObject("menuParents", menuParents);
+		view.addObject("menus",menus);
+		view.addObject("orderTypes",orderTypes);
+
+		return view;
+
 	}
+
+
+	
+
 	
 	
 	

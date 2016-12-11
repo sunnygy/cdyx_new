@@ -38,37 +38,16 @@ public class TableServiceImpl implements TableService {
     private OrderDao orderDao;
 
 
-	public List<TableListModel> getAllTables(){
-		
-		String hql="FROM TableList";
-		
-		List<TableList> tables=tableListDao.getListByHQL(hql);		
+	public List<TableList> getAllTables(){
 
-        String sql="SELECT t.table_id as id ,t.table_code as code,t.table_desc as description,t.table_status as status,t.table_type as type,o.order_id as orderId,o.order_status as orderStatus "
-        		+ "FROM table_list t LEFT JOIN order_info o ON t.table_id=o.table_id WHERE o.order_status=FALSE";  
-        
-		@SuppressWarnings("unchecked")
-		List<TableListModel> tablesHasOrder=tableListDao.findListBySql(sql, new TableListModelRowMap());
+
+		String hql=" FROM TableList WHERE show=true";
 		
-		List<TableListModel> result=new ArrayList<TableListModel>();
-		
-		for (TableList table : tables) {
-			TableListModel model=new TableListModel();
-			BeanUtils.copyProperties(table, model);			
-			for (TableListModel tableListModel : tablesHasOrder) {
-				if(table.getId().equals(tableListModel.getId())){
-					model.setOrderId(tableListModel.getId());
-				}
-				
-			}
-			result.add(model);
-		}
-		
-		
-		
+
+		List<TableList>  table=tableListDao.getListByHQL(hql);
 		
         
-        return result;    
+        return table;
 
     }
 

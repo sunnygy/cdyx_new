@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2016-12-07 21:44:14
+Date: 2016-12-11 15:41:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,10 +25,13 @@ CREATE TABLE `menu` (
   `en_name_menu` varchar(64) DEFAULT NULL,
   `cn_name_menu` varchar(64) DEFAULT NULL,
   `desc_menu` varchar(128) DEFAULT NULL,
-  `price_menu` decimal(5,0) DEFAULT NULL,
+  `price_menu` decimal(5,2) DEFAULT NULL,
   `path_menu_pic` varchar(255) NOT NULL,
+  `menu_parent_type_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`menu_id`),
   KEY `FK_Relationship_7` (`menu_type_id`),
+  KEY `menu_parent_type_id` (`menu_parent_type_id`),
+  CONSTRAINT `menu_ibfk_2` FOREIGN KEY (`menu_parent_type_id`) REFERENCES `menu_parent` (`menu_parent_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`menu_type_id`) REFERENCES `menu_type` (`menu_type_id`) ON DELETE SET NULL ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -50,13 +53,10 @@ CREATE TABLE `menu_parent` (
 DROP TABLE IF EXISTS `menu_type`;
 CREATE TABLE `menu_type` (
   `menu_type_id` int(11) NOT NULL AUTO_INCREMENT,
-  `menu_parent_id` int(11) DEFAULT NULL,
   `en_name_menu_type` varchar(64) DEFAULT NULL,
   `cn_name_nemu_type` varchar(64) DEFAULT NULL,
   `desc_menu_type` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`menu_type_id`),
-  KEY `menu_parent_id` (`menu_parent_id`),
-  CONSTRAINT `menu_type_ibfk_1` FOREIGN KEY (`menu_parent_id`) REFERENCES `menu_parent` (`menu_parent_id`) ON DELETE SET NULL ON UPDATE NO ACTION
+  PRIMARY KEY (`menu_type_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -67,6 +67,7 @@ CREATE TABLE `order_detail` (
   `order_detail_id` int(11) NOT NULL AUTO_INCREMENT,
   `menu_id` int(11) DEFAULT NULL,
   `order_id` int(11) DEFAULT NULL,
+  `start_time_detail` datetime DEFAULT NULL,
   `end_time_detail` datetime DEFAULT NULL,
   `order_detail_price` float(6,2) DEFAULT NULL,
   `order_detail_status` tinyint(1) DEFAULT NULL,
@@ -76,7 +77,7 @@ CREATE TABLE `order_detail` (
   KEY `FK_Relationship_5` (`menu_id`),
   CONSTRAINT `FK_Relationship_3` FOREIGN KEY (`order_id`) REFERENCES `order_info` (`order_id`),
   CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE SET NULL ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=713 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for order_info
@@ -100,7 +101,7 @@ CREATE TABLE `order_info` (
   KEY `order_type_id` (`order_type_id`),
   CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`table_id`) REFERENCES `table_list` (`table_id`),
   CONSTRAINT `order_info_ibfk_1` FOREIGN KEY (`order_type_id`) REFERENCES `order_type` (`order_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=350 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for order_type
@@ -134,9 +135,10 @@ CREATE TABLE `table_list` (
   `table_code` varchar(16) NOT NULL,
   `table_desc` varchar(16) DEFAULT NULL,
   `table_status` tinyint(1) DEFAULT NULL,
-  `table_type` tinyint(255) DEFAULT NULL,
+  `table_type` tinyint(2) DEFAULT NULL,
+  `table_show` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`table_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user

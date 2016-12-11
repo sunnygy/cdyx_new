@@ -11,7 +11,7 @@ import com.cdyx.model.TableListModel;
  */
 public interface TableService {
 
-    List<TableListModel> getAllTables();
+    List<TableList> getAllTables();
 
     TableList getTableById(Integer id);
 

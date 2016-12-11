@@ -30,7 +30,11 @@ public class TableList {
     private Boolean status=false;//false:empty true:full
     
     @Column(name="table_type")
-    private Integer type=0; 
+    private Integer type=0;
+
+
+    @Column(name="table_show")
+    private Boolean show=true;
     
   
 
@@ -74,11 +78,11 @@ public class TableList {
 		this.type = type;
 	}
 
-	
-    
-    
+    public Boolean getShow() {
+        return show;
+    }
 
-
-    
-    
+    public void setShow(Boolean show) {
+        this.show = show;
+    }
 }

@@ -26,10 +26,6 @@ public class MenuType {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="menu_type_id")
     private Integer id;
-    
-    @ManyToOne(cascade =CascadeType.REFRESH,targetEntity =MenuParent.class,fetch=FetchType.LAZY)
-    @JoinColumn(name="menu_parent_id")
-    private MenuParent  menuParent;
 
     @Column(name="en_name_menu_type")
     private String enName;

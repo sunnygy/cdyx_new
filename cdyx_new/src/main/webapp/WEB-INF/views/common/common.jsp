@@ -9,8 +9,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!doctype html>
 
+<lnk href="<%=root%>/web/css/ionicons.min.css" rel="stylesheet" />
 <link href="<%=root%>/web/css/bootstrap.min.css" rel="stylesheet" />
-<link href="<%=root%>/web/css/ionicons.min.css" rel="stylesheet" />
 <link href="<%=root%>/web/css/base.css"  rel="stylesheet" >
 <link href="<%=root%>/web/css/styletable.css" rel="stylesheet" />
 

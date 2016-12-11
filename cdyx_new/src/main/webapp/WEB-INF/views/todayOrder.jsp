@@ -343,7 +343,7 @@
                             </div>                           
                             <div class="showmany">
                                 <strong>未结算金额 :<span>${orders.processBill}</span></strong>
-                                <strong class="showmany_2">总金额共计Total:<span>${orders.finishedBill}</span></strong>
+                                <strong class="showmany_2">总金额共计Total:<span>${orders.totalBill}</span></strong>
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="profile">
@@ -385,7 +385,7 @@
                             </div>                          
                             <div class="showmany">
                                 <strong>未结算金额 :<span>${orders.processBill}</span></strong>
-                                <strong class="showmany_2">总金额共计Total:<span>${orders.finishedBill}</span></strong>
+                                <strong class="showmany_2">总金额共计Total:<span>${orders.totalBill}</span></strong>
                             </div>
                         </div>
                     </div>
