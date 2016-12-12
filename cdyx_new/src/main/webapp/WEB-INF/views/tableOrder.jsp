@@ -102,7 +102,14 @@
 
                                         <c:if test="${parents.id==menu.parentType.id}">
 
-                                           <li><strong><i>${menu.cnName}(${menu.enName})</i></strong><span>${menu.code}</span></li>
+                                           <li>
+                                               <strong>
+                                                   <i>${menu.cnName}(${menu.enName})</i>
+                                               </strong>
+                                               <span>${menu.code}</span>
+                                               <input type="hidden" class="menuId" value="${menu.id}">
+                                               <input type="hidden" class="menuPrice" value="${menu.price}">
+                                           </li>
 
                                         </c:if>
 
@@ -160,12 +167,10 @@
                                 </div>
                                 <div class="momule_selesingle">
                                     <i>份数:</i>
-                                    <input type="" name="" class="form-control form-controlB controlA" value="1">
+                                    <input id="menuNum" type="" name="" class="form-control form-controlB controlA" value="1">
                                 </div>
-                                <div class="hselect pull-left">
+                                <div id="choosed" class="hselect pull-left">
                                     <span class="pull-left">已选菜</span>
-                                    <div class="hselectmenu pull-right">
-                                    </div>
                                 </div>
                             </div>
 
@@ -176,14 +181,14 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="allmenu allmenusd">
+                        <div id="allmenu" class="allmenu allmenusd" style="cursor:pointer">
                             成都印象 ChengDuYinXiang
                             <i></i>
                         </div>
                         <div class="toptable">
-                            <c:set var="now" value="<%=new java.util.Date()%>" />
+                            <%--<c:set var="now" value="<%=new java.util.Date()%>" />--%>
                             <span>桌号/Table:<i>${tableId}</i></span>
-                            <span>时间/Time: <i><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${now}" /></i></span>
+                           <%-- <span>时间/Time: <i><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${now}" /></i></span>--%>
                             <span>人数/People:<i id="billPeopleNum">2</i></span>
                             <span>类型/Type:<i></i></span>
                         </div>
@@ -198,13 +203,7 @@
                             </tr>
                             </thead>
                             <tbody id="tshowtmenu" style="overflow: scroll;">
-                            <tr>
-                                <td class="cpr" id="tmenu">410</td>
-                                <td id="tname">海鲜炒面</td>
-                                <td id="tquantuty">1</td>
-                                <td>$6.50</td>
-                                <td><i class="iconall icontimetable"></i></td>
-                            </tr>
+
                             </tbody>
                         </table>
                         <div class="momutotal clearfix">

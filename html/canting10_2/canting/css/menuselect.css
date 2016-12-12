@@ -328,6 +328,16 @@ select, option {
 	cursor: pointer;
 	padding-left: 10px;
 }
+.hselectmenu li{
+	padding-left:3px;
+	padding-right:0px;
+	width: 100px;
+}
+.hselectmenu strong{
+	padding-left:0px;
+	padding-right:0px;
+	width:120px;
+}
 .table {
     width: 99%;
     max-width: 100%;

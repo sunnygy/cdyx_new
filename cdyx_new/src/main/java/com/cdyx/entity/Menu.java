@@ -26,8 +26,6 @@ public class Menu {
     @Column(name="menu_code")
     private String code;
 
-
-
     @Column(name="en_name_menu")
     private String enName;
 

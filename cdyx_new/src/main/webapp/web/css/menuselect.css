@@ -8,8 +8,8 @@
 	position: relative;
 }
 .momule_search .btn-group>.btn:first-child {
-    border-radius: 24px;
-    line-height: 24px;
+	border-radius: 24px;
+	line-height: 24px;
 }
 .momule_search .form-control {
 	height: 40px;
@@ -27,8 +27,8 @@
 	z-index: 4;
 }
 .momule_search .bootstrap-select.btn-group .dropdown-toggle .filter-option {
-    text-align: left;
-    padding-left: 43px;
+	text-align: left;
+	padding-left: 43px;
 }
 .momule_search .trangle {
 	right: 38px;
@@ -96,7 +96,7 @@ ul.momule_list {
 	margin-top: 17px;
 }
 .mat12{
-	 margin-top: -20px;
+	margin-top: -20px;
 }
 .momule_selesingle i {
 	position: absolute;
@@ -119,8 +119,8 @@ select, option {
 }
 .momule_selesingle .form-control {
 	height: 36px;
-	border-radius: 10px;   
-	 /*text-indent:55px;*/
+	border-radius: 10px;
+	/*text-indent:55px;*/
 	color: #6caaf7;
 }
 .momule_selesingle .form-controlA {
@@ -133,7 +133,7 @@ select, option {
 	margin-right: 20px;
 }
 .momule_selesingle .controlA{
-	text-indent:55px;	
+	text-indent:55px;
 }
 .btn-group>.btn:first-child:focus{
 	outline: 0;
@@ -156,12 +156,17 @@ select, option {
 }
 .hselect span {
 	float: left;
-	width: 150px;
+	width: 80px;
 	height: 100%;
 }
-.hselect strong {
+.hselect strong  {
 	color: #6caaf7;
-	display: block;
+	display:block;
+	width: 200px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
 }
 .line {
 	width: 100%;
@@ -308,14 +313,14 @@ select, option {
 	top: 14px;
 }
 .bootstrap-select.btn-group .dropdown-toggle .filter-option {
-    text-align: center;
-    padding-left: 34px;
+	text-align: center;
+	padding-left: 34px;
 }
 .momule_search span{
 	color: #b0b5bf;
 }
 .btn-group>.btn:first-child {
-    border-radius: 10px;
+	border-radius: 10px;
 }
 .hselectmenu img{
 	float: right;
@@ -323,10 +328,20 @@ select, option {
 	cursor: pointer;
 	padding-left: 10px;
 }
+.hselectmenu li{
+	padding-left:3px;
+	padding-right:0px;
+	width: 100px;
+}
+.hselectmenu strong{
+	padding-left:0px;
+	padding-right:0px;
+	width:120px;
+}
 .table {
-    width: 99%;
-    max-width: 100%;
-    margin-bottom: 20px;
+	width: 99%;
+	max-width: 100%;
+	margin-bottom: 20px;
 }
 @media screen and (max-width:1360px) {
 	.toptable span {
@@ -334,18 +349,18 @@ select, option {
 		margin-right: 10px;
 	}
 	.header-magement .header-time {
-	    margin-left: 5%;
+		margin-left: 5%;
 	}
 }
 @media screen and (max-width:1323px){
 	.header-magement .header-time {
-	    margin-left: 2%;
-	    font-size: 12px;
-	    padding-top: 8px;
+		margin-left: 2%;
+		font-size: 12px;
+		padding-top: 8px;
 	}
 	.header-login {
-	    font-size: 14px;
-	    margin-left: 12px;
+		font-size: 14px;
+		margin-left: 12px;
 	}
 }
 @media screen and (max-width:1200px) {
@@ -354,9 +369,9 @@ select, option {
 		overflow-x: scroll;
 	}
 	.header-magement .header-time {
-	    margin-left: 5%;
-	    font-size: 14px;
-    	padding-top: 6px;
+		margin-left: 5%;
+		font-size: 14px;
+		padding-top: 6px;
 	}
 	.sidebar {
 		display: none;
