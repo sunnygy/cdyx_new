@@ -36,18 +36,8 @@ $(document).ready(function() {
 	});
 	var i = 0;
 	$(".btn-sure").click(function(event) {
-		/*var znum = $(".momule_now").children('span').html();
-		var ztime = $("#timeget").html();
-		var mnum = $("#mnum").val();
-		var mselectf = $("#mselectf").find('select').val();
-		var tmenu = $("#ttnum").find('input').val();
-		var tmuentest = $(".hselectmenu").children('strong').html();
-		var arr = new Array();
-		arr = tmuentest.split('(');*/
 		$(".hselectmenu").each(function(i,n){
-
 			var inputChildren=$(n).children("input");
-
 			var currentMenuId=$(inputChildren[0]).val();
 			var currentMenuPrice=$(inputChildren[1]).val();
 			var currentMenuCode=$(inputChildren[2]).val();
@@ -60,12 +50,28 @@ $(document).ready(function() {
 
 		});
 
-
 		$("#tshowtmenu tr").each(function() {
 			$(this).children().children('.icontimetable').click(function() {
 				$(this).parent().parent().remove();
 			})
 		})
+
+		//POST request  order
+		/*
+		* {
+				 "description":"fhsdjhfjsdf",
+				 "peopleType":"E",
+				 "peopleNum":15,
+				 "table":{"id":11},
+				 "orderType":{"id":4},
+				 "status":1,
+				 "details":[
+							 {"numbers":5,"menu":{"id":1},"status":false},
+							 {"numbers":3,"menu":{"id":1},"status":false}
+				  ]
+		 }
+		* */
+
 	});
 	$("#allmenu").click(function() {
 
